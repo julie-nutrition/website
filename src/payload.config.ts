@@ -12,7 +12,7 @@ import { fr } from '@payloadcms/translations/languages/fr'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Offer } from './collections/Offer'
-
+import { Homepage } from './globals/Homepage'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -24,6 +24,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Offer],
+  globals: [Homepage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
