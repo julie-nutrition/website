@@ -1,3 +1,6 @@
+import clx from 'classnames'
+import { Open_Sans } from 'next/font/google'
+import localFont from 'next/font/local'
 import React from 'react'
 import './styles.css'
 
@@ -6,13 +9,22 @@ export const metadata = {
   title: 'Payload Blank Template',
 }
 
+const MarginFont = localFont({
+  src: '/assets/fonts/Margin-Regular.otf',
+})
+
+const OpenSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
+
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="fr">
+    <html lang="fr" className={clx(MarginFont.className, OpenSans.className)}>
       <body>
-        <main>{children}</main>
+        <main className="bg-white">{children}</main>
       </body>
     </html>
   )

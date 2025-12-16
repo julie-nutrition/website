@@ -1,164 +1,88 @@
-:root {
-  --font-mono: 'Roboto Mono', monospace;
+@import 'tailwindcss';
+
+@theme {
+  --spacing: 1px;
+  --color-jbn-light-yellow: #fef8e0;
+  --color-jbn-dark-green: #006738;
+  --color-jbn-dark-brown: #874f01;
+  --color-jbn-light-orange: #ffd273;
+  --color-jbn-dark-red: #982a2b;
+  --color-jbn-light-green: #c1ddb4;
+  --font-jbn-margin: 'MarginFont', serif;
+  --font-jbn-open-sans: 'Open Sans', sans-serif;
+  --animate-fade-in-right: fade-in-right 0.6s ease-in forwards;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 18px;
-  line-height: 32px;
-
-  background: rgb(0, 0, 0);
-  -webkit-font-smoothing: antialiased;
-}
-
-html,
-body,
-#app {
-  height: 100%;
-}
-
-body {
-  font-family: system-ui;
-  font-size: 18px;
-  line-height: 32px;
-
-  margin: 0;
-  color: rgb(1000, 1000, 1000);
-
-  @media (max-width: 1024px) {
-    font-size: 15px;
-    line-height: 24px;
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-h1 {
-  margin: 40px 0;
-  font-size: 64px;
-  line-height: 70px;
-  font-weight: bold;
-
-  @media (max-width: 1024px) {
-    margin: 24px 0;
-    font-size: 42px;
-    line-height: 42px;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 38px;
-    line-height: 38px;
-  }
-
-  @media (max-width: 400px) {
-    font-size: 32px;
-    line-height: 32px;
-  }
-}
-
-p {
-  margin: 24px 0;
-
-  @media (max-width: 1024px) {
-    margin: calc(var(--base) * 0.75) 0;
-  }
-}
-
-a {
-  color: currentColor;
-
-  &:focus {
-    opacity: 0.8;
-    outline: none;
-  }
-
-  &:active {
-    opacity: 0.7;
-    outline: none;
-  }
-}
-
-svg {
-  vertical-align: middle;
-}
-
-.home {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 100vh;
-  padding: 45px;
-  max-width: 1024px;
+.container {
+  max-width: 1280px;
   margin: 0 auto;
-  overflow: hidden;
+}
 
-  @media (max-width: 400px) {
-    padding: 24px;
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-
-    h1 {
-      text-align: center;
-    }
-  }
-
-  .links {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    a {
-      text-decoration: none;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-    }
-
-    .admin {
-      color: rgb(0, 0, 0);
-      background: rgb(1000, 1000, 1000);
-      border: 1px solid rgb(0, 0, 0);
-    }
-
-    .docs {
-      color: rgb(1000, 1000, 1000);
-      background: rgb(0, 0, 0);
-      border: 1px solid rgb(1000, 1000, 1000);
-    }
-  }
-
-  .footer {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    @media (max-width: 1024px) {
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    p {
-      margin: 0;
-    }
-
-    .codeLink {
-      text-decoration: none;
-      padding: 0 0.5rem;
-      background: rgb(60, 60, 60);
-      border-radius: 4px;
-    }
-  }
+.wave {
+  clip-path: polygon(
+    100% 0%,
+    0% 0%,
+    0% 50%,
+    2% 49.82%,
+    4% 49.3%,
+    6% 48.44%,
+    8% 47.29%,
+    10% 45.88%,
+    12% 44.26%,
+    14% 42.49%,
+    16% 40.63%,
+    18% 38.75%,
+    20% 36.91%,
+    22% 35.18%,
+    24% 33.63%,
+    26% 32.29%,
+    28% 31.24%,
+    30% 30.49%,
+    32% 30.08%,
+    34% 30.02%,
+    36% 30.31%,
+    38% 30.95%,
+    40% 31.91%,
+    42% 33.15%,
+    44% 34.64%,
+    46% 36.32%,
+    48% 38.13%,
+    50% 40%,
+    52% 41.87%,
+    54% 43.68%,
+    56% 45.36%,
+    58% 46.85%,
+    60% 48.09%,
+    62% 49.05%,
+    64% 49.69%,
+    66% 49.98%,
+    68% 49.92%,
+    70% 49.51%,
+    72% 48.76%,
+    74% 47.71%,
+    76% 46.37%,
+    78% 44.82%,
+    80% 43.09%,
+    82% 41.25%,
+    84% 39.37%,
+    86% 37.51%,
+    88% 35.74%,
+    90% 34.12%,
+    92% 32.71%,
+    94% 31.56%,
+    96% 30.7%,
+    98% 30.18%,
+    100% 30%
+  );
 }

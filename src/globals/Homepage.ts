@@ -19,6 +19,12 @@ export const Homepage: GlobalConfig = {
           required: true,
         },
         {
+          name: 'picture',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+        {
           type: 'blocks',
           name: 'buttons',
           blocks: [Button],

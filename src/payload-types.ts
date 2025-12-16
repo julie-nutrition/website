@@ -357,9 +357,12 @@ export interface Homepage {
   hero: {
     title: string;
     subtitle: string;
+    picture: number | Media;
     buttons?:
       | {
+          icon?: string | null;
           label: string;
+          variant: 'primary' | 'secondary';
           id?: string | null;
           blockName?: string | null;
           blockType: 'button';
@@ -379,13 +382,16 @@ export interface HomepageSelect<T extends boolean = true> {
     | {
         title?: T;
         subtitle?: T;
+        picture?: T;
         buttons?:
           | T
           | {
               button?:
                 | T
                 | {
+                    icon?: T;
                     label?: T;
+                    variant?: T;
                     id?: T;
                     blockName?: T;
                   };
