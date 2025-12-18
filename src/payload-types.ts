@@ -91,9 +91,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     homepage: Homepage;
+    footer: Footer;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: null;
   user: User & {
@@ -362,13 +364,64 @@ export interface Homepage {
       | {
           icon?: string | null;
           label: string;
-          variant: 'primary' | 'secondary';
+          variant: 'primary' | 'secondary' | 'inverse';
           id?: string | null;
           blockName?: string | null;
           blockType: 'button';
         }[]
       | null;
   };
+  services: {
+    title: string;
+    subtitle: string;
+    services?:
+      | {
+          icon: string;
+          title: string;
+          description: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'service-card';
+        }[]
+      | null;
+  };
+  approche: {
+    title: string;
+    subtitle: string;
+    features?:
+      | {
+          icon: string;
+          title: string;
+          description: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'feature-card';
+        }[]
+      | null;
+  };
+  contact?: {
+    title?: string | null;
+    subtitle?: string | null;
+    button?:
+      | {
+          icon?: string | null;
+          label: string;
+          variant: 'primary' | 'secondary' | 'inverse';
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'button';
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -397,6 +450,72 @@ export interface HomepageSelect<T extends boolean = true> {
                   };
             };
       };
+  services?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        services?:
+          | T
+          | {
+              'service-card'?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
+      };
+  approche?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        features?:
+          | T
+          | {
+              'feature-card'?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
+      };
+  contact?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        button?:
+          | T
+          | {
+              button?:
+                | T
+                | {
+                    icon?: T;
+                    label?: T;
+                    variant?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

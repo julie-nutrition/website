@@ -1,11 +1,11 @@
 import clx from 'classnames'
 import { Stethoscope } from 'lucide-react'
-import { HTMLAttributes } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 
 type ButtonProps = {
   icon?: string | null
-  variant: 'primary' | 'secondary'
-} & HTMLAttributes<HTMLButtonElement>
+  variant: 'primary' | 'secondary' | 'inverse'
+} & ComponentPropsWithoutRef<'button'>
 
 export default function Button(props: ButtonProps) {
   const { icon, children, variant, className, ...htmlProps } = props
@@ -15,6 +15,7 @@ export default function Button(props: ButtonProps) {
     className,
     {
       'bg-jbn-dark-green text-jbn-light-yellow': variant === 'primary',
+      'bg-white text-jbn-dark-green': variant === 'inverse',
       'bg-white text-jbn-dark-green border border-jbn-dark-green hover:bg-jbn-light-green':
         variant === 'secondary',
     },

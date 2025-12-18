@@ -24,6 +24,10 @@ export const Button: Block = {
           label: 'Secondary',
           value: 'secondary',
         },
+        {
+          label: 'Inverse',
+          value: 'inverse',
+        },
       ],
       defaultValue: 'primary',
       required: true,

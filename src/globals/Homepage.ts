@@ -1,4 +1,6 @@
 import { Button } from '@/blocks/Button'
+import { FeatureCard } from '@/blocks/FeatureCard'
+import { ServiceCard } from '@/blocks/ServiceCard'
 import { GlobalConfig } from 'payload'
 
 export const Homepage: GlobalConfig = {
@@ -27,6 +29,70 @@ export const Homepage: GlobalConfig = {
         {
           type: 'blocks',
           name: 'buttons',
+          blocks: [Button],
+        },
+      ],
+    },
+    {
+      name: 'services',
+      type: 'group',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'subtitle',
+          type: 'text',
+          required: true,
+        },
+        {
+          type: 'blocks',
+          name: 'services',
+          blocks: [ServiceCard],
+        },
+      ],
+    },
+    {
+      name: 'approche',
+      type: 'group',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'subtitle',
+          type: 'text',
+          required: true,
+        },
+
+        {
+          type: 'blocks',
+          name: 'features',
+          blocks: [FeatureCard],
+        },
+      ],
+    },
+    {
+      name: 'contact',
+      type: 'group',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+        },
+        {
+          name: 'subtitle',
+          type: 'text',
+        },
+
+        {
+          type: 'blocks',
+          name: 'button',
+          maxRows: 1,
           blocks: [Button],
         },
       ],

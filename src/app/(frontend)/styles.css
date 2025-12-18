@@ -11,6 +11,7 @@
   --font-jbn-margin: 'MarginFont', serif;
   --font-jbn-open-sans: 'Open Sans', sans-serif;
   --animate-fade-in-right: fade-in-right 0.6s ease-in forwards;
+  --pattern-leaves: url('./assets/graphical/leaves_dark.svg');
 }
 
 @keyframes fade-in-right {
