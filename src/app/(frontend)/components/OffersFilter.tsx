@@ -25,20 +25,12 @@ export default function OffersFilter(props: OffersFilterProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  if (!categories || categories.length === 0) {
-    return (
-      <p className="text-jbn-dark-green text-lg">
-        Aucune catégorie disponible.
-      </p>
-    )
-  }
-
   const categoryFromUrl = searchParams.get('category')
   // Default to 'individual' if it exists, otherwise fallback to first category
-  const individualCategory = categories.find((cat) => cat.value === 'individual')
-  const defaultCategory = individualCategory?.value || categories[0]?.value || ''
+  const individualCategory = categories?.find((cat) => cat.value === 'individual')
+  const defaultCategory = individualCategory?.value || categories?.[0]?.value || ''
   const initialCategory =
-    categoryFromUrl && categories.some((cat) => cat.value === categoryFromUrl)
+    categoryFromUrl && categories?.some((cat) => cat.value === categoryFromUrl)
       ? categoryFromUrl
       : defaultCategory
 
@@ -47,10 +39,18 @@ export default function OffersFilter(props: OffersFilterProps) {
   // Sync state with URL on mount and when URL changes
   useEffect(() => {
     const urlCategory = searchParams.get('category')
-    if (urlCategory && categories.some((cat) => cat.value === urlCategory)) {
+    if (urlCategory && categories?.some((cat) => cat.value === urlCategory)) {
       setActiveCategory(urlCategory)
     }
   }, [searchParams, categories])
+
+  if (!categories || categories.length === 0) {
+    return (
+      <p className="text-jbn-dark-green text-lg">
+        Aucune catégorie disponible.
+      </p>
+    )
+  }
 
   const currentCategory = categories.find((cat) => cat.value === activeCategory)
   const currentOffers = currentCategory?.offers

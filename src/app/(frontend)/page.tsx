@@ -1,6 +1,5 @@
 import { Media } from '@/payload-types'
 import config from '@/payload.config'
-import { headers as getHeaders } from 'next/headers.js'
 import Image from 'next/image'
 import { getPayload } from 'payload'
 import leaves from './assets/graphical/leaves_dark.svg'
@@ -11,10 +10,8 @@ import ServiceCard from './components/ServiceCard'
 import './styles.css'
 
 export default async function HomePage() {
-  const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
 
   const homepage = await payload.findGlobal({
     slug: 'homepage',
@@ -26,14 +23,21 @@ export default async function HomePage() {
       <section className="bg-jbn-light-yellow">
         <div className="container flex items-center gap-48 px-32 py-96">
           <div className="flex flex-col gap-24">
-            <h1 className="text-jbn-dark-green font-jbn-margin text-5xl lg:text-6xl">{homepage?.hero.title}</h1>
+            <h1 className="text-jbn-dark-green font-jbn-margin text-5xl lg:text-6xl">
+              {homepage?.hero.title}
+            </h1>
             <p className="text-jbn-dark-green text-lg">{homepage?.hero.subtitle}</p>
             {(homepage?.hero.buttons?.length ?? 0) > 0 && (
               <div className="flex flex-col items-start gap-16 md:flex-row">
                 {homepage?.hero.buttons
                   ?.filter((button) => button.href)
                   .map((button) => (
-                    <Button key={button.id} icon={button.icon} variant={button.variant} href={button.href!}>
+                    <Button
+                      key={button.id}
+                      icon={button.icon}
+                      variant={button.variant}
+                      href={button.href!}
+                    >
                       {button.label}
                     </Button>
                   ))}
@@ -68,7 +72,12 @@ export default async function HomePage() {
         <p className="text-jbn-dark-green text-lg">{homepage?.services?.subtitle}</p>
         <div className="flex flex-col gap-32 md:flex-row">
           {homepage?.services?.services?.map((service) => (
-            <ServiceCard key={service.id} title={service.title} icon={service.icon} href="/consultation">
+            <ServiceCard
+              key={service.id}
+              title={service.title}
+              icon={service.icon}
+              href="/consultation"
+            >
               {service.description}
             </ServiceCard>
           ))}
@@ -112,7 +121,12 @@ export default async function HomePage() {
               {homepage?.contact?.button
                 ?.filter((button) => button.href)
                 .map((button) => (
-                  <Button key={button.id} icon={button.icon} variant={button.variant} href={button.href!}>
+                  <Button
+                    key={button.id}
+                    icon={button.icon}
+                    variant={button.variant}
+                    href={button.href!}
+                  >
                     {button.label}
                   </Button>
                 ))}

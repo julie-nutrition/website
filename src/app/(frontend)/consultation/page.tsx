@@ -1,15 +1,11 @@
-import { Offer as OfferType } from '@/payload-types'
 import config from '@/payload.config'
-import { headers as getHeaders } from 'next/headers.js'
 import { getPayload } from 'payload'
 import Button from '../components/Button'
 import OffersFilter from '../components/OffersFilter'
 
 export default async function ConsultationPage() {
-  const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
 
   const consultation = await payload.findGlobal({
     slug: 'consultation',
@@ -24,9 +20,7 @@ export default async function ConsultationPage() {
           <h1 className="text-jbn-dark-green font-jbn-margin text-5xl lg:text-6xl">
             {consultation?.hero?.title}
           </h1>
-          <p className="text-jbn-dark-green max-w-3xl text-lg">
-            {consultation?.hero?.subtitle}
-          </p>
+          <p className="text-jbn-dark-green max-w-3xl text-lg">{consultation?.hero?.subtitle}</p>
         </div>
       </section>
 
@@ -49,12 +43,8 @@ export default async function ConsultationPage() {
       {/* CTA Section */}
       <section className="bg-jbn-dark-green">
         <div className="text-jbn-light-yellow container flex flex-col items-center gap-24 px-32 py-64 text-center">
-          <h2 className="font-jbn-margin text-4xl lg:text-5xl">
-            {consultation?.cta?.title}
-          </h2>
-          <p className="max-w-2xl text-lg">
-            {consultation?.cta?.subtitle}
-          </p>
+          <h2 className="font-jbn-margin text-4xl lg:text-5xl">{consultation?.cta?.title}</h2>
+          <p className="max-w-2xl text-lg">{consultation?.cta?.subtitle}</p>
           {(consultation?.cta?.button?.length ?? 0) > 0 && (
             <>
               {consultation?.cta?.button

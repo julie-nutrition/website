@@ -10,7 +10,7 @@ export default async function BatchcookingPage() {
   const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
+  const { user: _user } = await payload.auth({ headers })
 
   const batchcooking = await payload.findGlobal({
     slug: 'batchcooking',
