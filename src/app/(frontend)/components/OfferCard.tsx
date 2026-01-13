@@ -6,7 +6,7 @@ import Button from './Button'
 type OfferCardProps = {
   title: string
   description: string
-  features?: Array<{ feature: string; id: string }> | null
+  features?: Array<{ feature: string; id?: string | null }> | null
   price: number
   duration?: number | null
   bookingLink?: string | null
@@ -30,7 +30,7 @@ export default function OfferCard(props: OfferCardProps) {
           <h3 className="text-jbn-dark-green font-jbn-margin text-2xl font-bold">{title}</h3>
           <div className="flex items-baseline gap-8">
             <span className="text-jbn-dark-green text-4xl font-bold">{price}€</span>
-            {duration && <span className="text-gray-600 text-base">/ {duration} min</span>}
+            {duration && <span className="text-base text-gray-600">/ {duration} min</span>}
           </div>
         </div>
 
@@ -42,7 +42,10 @@ export default function OfferCard(props: OfferCardProps) {
           <ul className="flex flex-col gap-12">
             {features.map((item) => (
               <li key={item.id} className="flex items-start gap-12">
-                <Check className="text-jbn-dark-green mt-2 h-20 w-20 flex-shrink-0" strokeWidth={3} />
+                <Check
+                  className="text-jbn-dark-green mt-2 h-20 w-20 flex-shrink-0"
+                  strokeWidth={3}
+                />
                 <span className="text-jbn-dark-green text-base">{item.feature}</span>
               </li>
             ))}
