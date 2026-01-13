@@ -14,7 +14,7 @@ export default function FeatureCard(props: FeatureCardProps) {
     <div
       {...htmlProps}
       className={clx(
-        'border-jbn-light-green flex flex-col items-center gap-8 rounded-xl border bg-white px-20 py-16',
+        'border-jbn-light-green flex flex-col items-center gap-16 rounded-xl border bg-white px-24 py-24',
         className,
       )}
     >
@@ -24,7 +24,7 @@ export default function FeatureCard(props: FeatureCardProps) {
         </div>
       )}
       <h4 className="text-jbn-dark-green text-xl font-bold">{title}</h4>
-      <p className="text-jbn-dark-green text-center">{children}</p>
+      <p className="text-jbn-dark-green text-center text-base leading-relaxed">{children}</p>
     </div>
   )
 }

@@ -12,7 +12,10 @@ import { fr } from '@payloadcms/translations/languages/fr'
 import { Media } from './collections/Media'
 import { Offer } from './collections/Offer'
 import { Users } from './collections/Users'
+import { Batchcooking } from './globals/Batchcooking'
+import { Consultation } from './globals/Consultation'
 import { Footer } from './globals/Footer'
+import { Header } from './globals/Header'
 import { Homepage } from './globals/Homepage'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,7 +28,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Offer],
-  globals: [Homepage, Footer],
+  globals: [Homepage, Header, Footer, Consultation, Batchcooking],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

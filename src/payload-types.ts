@@ -91,11 +91,17 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     homepage: Homepage;
+    header: Header;
     footer: Footer;
+    consultation: Consultation;
+    batchcooking: Batchcooking;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
+    header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    consultation: ConsultationSelect<false> | ConsultationSelect<true>;
+    batchcooking: BatchcookingSelect<false> | BatchcookingSelect<true>;
   };
   locale: null;
   user: User & {
@@ -175,8 +181,16 @@ export interface Offer {
   id: number;
   title: string;
   description: string;
+  features: {
+    feature: string;
+    id?: string | null;
+  }[];
   price: number;
   duration?: number | null;
+  /**
+   * URL externe pour réserver cette offre (ex: lien Calendly)
+   */
+  bookingLink?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -305,8 +319,15 @@ export interface MediaSelect<T extends boolean = true> {
 export interface OfferSelect<T extends boolean = true> {
   title?: T;
   description?: T;
+  features?:
+    | T
+    | {
+        feature?: T;
+        id?: T;
+      };
   price?: T;
   duration?: T;
+  bookingLink?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -364,6 +385,10 @@ export interface Homepage {
       | {
           icon?: string | null;
           label: string;
+          /**
+           * URL de destination (ex: /contact ou https://calendly.com/...)
+           */
+          href?: string | null;
           variant: 'primary' | 'secondary' | 'inverse';
           id?: string | null;
           blockName?: string | null;
@@ -406,6 +431,10 @@ export interface Homepage {
       | {
           icon?: string | null;
           label: string;
+          /**
+           * URL de destination (ex: /contact ou https://calendly.com/...)
+           */
+          href?: string | null;
           variant: 'primary' | 'secondary' | 'inverse';
           id?: string | null;
           blockName?: string | null;
@@ -418,10 +447,150 @@ export interface Homepage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: number;
+  logo: number | Media;
+  navigation?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  ctaButton?: {
+    label?: string | null;
+    url?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer".
  */
 export interface Footer {
   id: number;
+  logo?: (number | null) | Media;
+  slogan?: string | null;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              url: string;
+              icon?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "consultation".
+ */
+export interface Consultation {
+  id: number;
+  hero: {
+    title: string;
+    subtitle: string;
+  };
+  offersSection: {
+    title: string;
+    subtitle: string;
+    categories: {
+      label: string;
+      /**
+       * Ex: student, individual, couple
+       */
+      value: string;
+      offers?:
+        | {
+            offer: number | Offer;
+            id?: string | null;
+          }[]
+        | null;
+      id?: string | null;
+    }[];
+  };
+  cta: {
+    title: string;
+    subtitle: string;
+    button?:
+      | {
+          icon?: string | null;
+          label: string;
+          /**
+           * URL de destination (ex: /contact ou https://calendly.com/...)
+           */
+          href?: string | null;
+          variant: 'primary' | 'secondary' | 'inverse';
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'button';
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "batchcooking".
+ */
+export interface Batchcooking {
+  id: number;
+  hero: {
+    title: string;
+    subtitle: string;
+  };
+  contentSection: {
+    title: string;
+    subtitle: string;
+    features?:
+      | {
+          title: string;
+          description: string;
+          /**
+           * Nom de l'icône lucide-react
+           */
+          icon?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  offerSection: {
+    title: string;
+    description: string;
+    /**
+     * L'offre de batchcooking à afficher
+     */
+    offer?: (number | null) | Offer;
+  };
+  cta: {
+    title: string;
+    subtitle: string;
+    button?:
+      | {
+          icon?: string | null;
+          label: string;
+          /**
+           * URL de destination (ex: /contact ou https://calendly.com/...)
+           */
+          href?: string | null;
+          variant: 'primary' | 'secondary' | 'inverse';
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'button';
+        }[]
+      | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -444,6 +613,7 @@ export interface HomepageSelect<T extends boolean = true> {
                 | {
                     icon?: T;
                     label?: T;
+                    href?: T;
                     variant?: T;
                     id?: T;
                     blockName?: T;
@@ -501,6 +671,7 @@ export interface HomepageSelect<T extends boolean = true> {
                 | {
                     icon?: T;
                     label?: T;
+                    href?: T;
                     variant?: T;
                     id?: T;
                     blockName?: T;
@@ -513,9 +684,158 @@ export interface HomepageSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  logo?: T;
+  navigation?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  ctaButton?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  logo?: T;
+  slogan?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              icon?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "consultation_select".
+ */
+export interface ConsultationSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+      };
+  offersSection?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        categories?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              offers?:
+                | T
+                | {
+                    offer?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  cta?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        button?:
+          | T
+          | {
+              button?:
+                | T
+                | {
+                    icon?: T;
+                    label?: T;
+                    href?: T;
+                    variant?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "batchcooking_select".
+ */
+export interface BatchcookingSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+      };
+  contentSection?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        features?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              icon?: T;
+              id?: T;
+            };
+      };
+  offerSection?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        offer?: T;
+      };
+  cta?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        button?:
+          | T
+          | {
+              button?:
+                | T
+                | {
+                    icon?: T;
+                    label?: T;
+                    href?: T;
+                    variant?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

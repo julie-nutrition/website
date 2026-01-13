@@ -24,17 +24,19 @@ export default async function HomePage() {
   return (
     <>
       <section className="bg-jbn-light-yellow">
-        <div className="container flex items-center gap-32 px-32 py-80">
-          <div className="flex flex-col gap-20">
-            <h1 className="text-jbn-dark-green font-jbn-margin text-6xl">{homepage?.hero.title}</h1>
-            <p className="text-jbn-dark-green text-xl">{homepage?.hero.subtitle}</p>
+        <div className="container flex items-center gap-48 px-32 py-96">
+          <div className="flex flex-col gap-24">
+            <h1 className="text-jbn-dark-green font-jbn-margin text-5xl lg:text-6xl">{homepage?.hero.title}</h1>
+            <p className="text-jbn-dark-green text-lg">{homepage?.hero.subtitle}</p>
             {(homepage?.hero.buttons?.length ?? 0) > 0 && (
               <div className="flex flex-col items-start gap-16 md:flex-row">
-                {homepage?.hero.buttons?.map((button) => (
-                  <Button key={button.id} icon={button.icon} variant={button.variant}>
-                    {button.label}
-                  </Button>
-                ))}
+                {homepage?.hero.buttons
+                  ?.filter((button) => button.href)
+                  .map((button) => (
+                    <Button key={button.id} icon={button.icon} variant={button.variant} href={button.href!}>
+                      {button.label}
+                    </Button>
+                  ))}
               </div>
             )}
           </div>
@@ -59,14 +61,14 @@ export default async function HomePage() {
         </div>
       </section>
       <hr className="wave bg-jbn-light-yellow h-50 w-full border-0" />
-      <section className="container flex flex-col items-center gap-24 px-32 py-48">
-        <h2 className="text-jbn-dark-green font-jbn-margin text-5xl">
+      <section className="container flex flex-col items-center gap-24 px-32 py-64">
+        <h2 className="text-jbn-dark-green font-jbn-margin text-4xl lg:text-5xl">
           {homepage?.services?.title}
         </h2>
-        <p className="text-jbn-dark-green text-xl">{homepage?.services?.subtitle}</p>
-        <div className="flex flex-col gap-24 md:flex-row">
+        <p className="text-jbn-dark-green text-lg">{homepage?.services?.subtitle}</p>
+        <div className="flex flex-col gap-32 md:flex-row">
           {homepage?.services?.services?.map((service) => (
-            <ServiceCard key={service.id} title={service.title} icon={service.icon} href="#">
+            <ServiceCard key={service.id} title={service.title} icon={service.icon} href="/consultation">
               {service.description}
             </ServiceCard>
           ))}
@@ -87,12 +89,12 @@ export default async function HomePage() {
           height={200}
           className="absolute -top-50 -left-80 opacity-20"
         />
-        <div className="relative z-10 container flex flex-col items-center gap-24 px-32 py-48">
-          <h2 className="text-jbn-dark-green font-jbn-margin text-5xl">
+        <div className="relative z-10 container flex flex-col items-center gap-24 px-32 py-64">
+          <h2 className="text-jbn-dark-green font-jbn-margin text-4xl lg:text-5xl">
             {homepage?.approche?.title}
           </h2>
-          <p className="text-jbn-dark-green text-xl">{homepage?.approche?.subtitle}</p>
-          <div className="grid grid-cols-1 gap-20 md:grid-cols-2 lg:grid-cols-4">
+          <p className="text-jbn-dark-green text-lg">{homepage?.approche?.subtitle}</p>
+          <div className="grid grid-cols-1 gap-24 md:grid-cols-2 lg:grid-cols-4">
             {homepage?.approche?.features?.map((feature) => (
               <FeatureCard key={feature.id} title={feature.title} icon={feature.icon}>
                 {feature.description}
@@ -102,16 +104,18 @@ export default async function HomePage() {
         </div>
       </section>
       <section className="bg-jbn-dark-green">
-        <div className="text-jbn-light-yellow container flex flex-col items-center gap-24 px-32 py-48 text-center md:items-start md:text-left">
-          <h2 className="font-jbn-margin text-5xl">{homepage?.contact?.title}</h2>
-          <p className="text-xl">{homepage?.contact?.subtitle}</p>
+        <div className="text-jbn-light-yellow container flex flex-col items-center gap-24 px-32 py-64 text-center md:items-start md:text-left">
+          <h2 className="font-jbn-margin text-4xl lg:text-5xl">{homepage?.contact?.title}</h2>
+          <p className="text-lg">{homepage?.contact?.subtitle}</p>
           {(homepage?.contact?.button?.length ?? 0) > 0 && (
             <>
-              {homepage?.contact?.button?.map((button) => (
-                <Button key={button.id} icon={button.icon} variant={button.variant}>
-                  {button.label}
-                </Button>
-              ))}
+              {homepage?.contact?.button
+                ?.filter((button) => button.href)
+                .map((button) => (
+                  <Button key={button.id} icon={button.icon} variant={button.variant} href={button.href!}>
+                    {button.label}
+                  </Button>
+                ))}
             </>
           )}
         </div>

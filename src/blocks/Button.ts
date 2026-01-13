@@ -13,6 +13,15 @@ export const Button: Block = {
       required: true,
     },
     {
+      name: 'href',
+      type: 'text',
+      label: 'Lien URL',
+      required: false,
+      admin: {
+        description: 'URL de destination (ex: /contact ou https://calendly.com/...)',
+      },
+    },
+    {
       name: 'variant',
       type: 'select',
       options: [
