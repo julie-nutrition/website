@@ -1,5 +1,6 @@
 import config from '@/payload.config'
 import { getPayload } from 'payload'
+import { Suspense } from 'react'
 import Button from '../components/Button'
 import OffersFilter from '../components/OffersFilter'
 
@@ -13,7 +14,7 @@ export default async function ConsultationPage() {
   })
 
   return (
-    <>
+    <Suspense>
       {/* Hero Section */}
       <section className="bg-jbn-light-yellow">
         <div className="container flex flex-col items-center gap-24 px-32 py-96 text-center">
@@ -63,6 +64,6 @@ export default async function ConsultationPage() {
           )}
         </div>
       </section>
-    </>
+    </Suspense>
   )
 }
