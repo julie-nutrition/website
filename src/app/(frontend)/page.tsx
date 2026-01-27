@@ -9,6 +9,10 @@ import FeatureCard from './components/FeatureCard'
 import ServiceCard from './components/ServiceCard'
 import './styles.css'
 
+export const metadata = {
+  title: 'Julie BAUZA - Nutritionniste | Accueil',
+}
+
 export default async function HomePage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })

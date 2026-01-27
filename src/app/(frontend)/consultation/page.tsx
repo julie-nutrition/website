@@ -4,6 +4,10 @@ import { Suspense } from 'react'
 import Button from '../components/Button'
 import OffersFilter from '../components/OffersFilter'
 
+export const metadata = {
+  title: 'Julie BAUZA - Nutritionniste | Consultation',
+}
+
 export default async function ConsultationPage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })

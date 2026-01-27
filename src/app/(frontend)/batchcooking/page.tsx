@@ -6,6 +6,10 @@ import Button from '../components/Button'
 import FeatureCard from '../components/FeatureCard'
 import OfferCard from '../components/OfferCard'
 
+export const metadata = {
+  title: 'Julie BAUZA - Nutritionniste | Batch Cooking',
+}
+
 export default async function BatchcookingPage() {
   const headers = await getHeaders()
   const payloadConfig = await config
@@ -28,9 +32,7 @@ export default async function BatchcookingPage() {
           <h1 className="text-jbn-dark-green font-jbn-margin text-5xl lg:text-6xl">
             {batchcooking?.hero?.title}
           </h1>
-          <p className="text-jbn-dark-green max-w-3xl text-lg">
-            {batchcooking?.hero?.subtitle}
-          </p>
+          <p className="text-jbn-dark-green max-w-3xl text-lg">{batchcooking?.hero?.subtitle}</p>
         </div>
       </section>
 
@@ -51,11 +53,7 @@ export default async function BatchcookingPage() {
           batchcooking.contentSection.features.length > 0 && (
             <div className="grid w-full grid-cols-1 gap-24 md:grid-cols-2">
               {batchcooking.contentSection.features.map((feature) => (
-                <FeatureCard
-                  key={feature.id}
-                  title={feature.title}
-                  icon={feature.icon}
-                >
+                <FeatureCard key={feature.id} title={feature.title} icon={feature.icon}>
                   {feature.description}
                 </FeatureCard>
               ))}
@@ -92,9 +90,7 @@ export default async function BatchcookingPage() {
               />
             </div>
           ) : (
-            <p className="text-jbn-dark-green text-lg">
-              Aucune offre configurée pour le moment.
-            </p>
+            <p className="text-jbn-dark-green text-lg">Aucune offre configurée pour le moment.</p>
           )}
         </div>
       </section>
@@ -103,14 +99,10 @@ export default async function BatchcookingPage() {
       <section className="bg-jbn-dark-green">
         <div className="text-jbn-light-yellow container flex flex-col items-center gap-24 px-32 py-64 text-center">
           {batchcooking?.cta?.title && (
-            <h2 className="font-jbn-margin text-4xl lg:text-5xl">
-              {batchcooking.cta.title}
-            </h2>
+            <h2 className="font-jbn-margin text-4xl lg:text-5xl">{batchcooking.cta.title}</h2>
           )}
           {batchcooking?.cta?.subtitle && (
-            <p className="max-w-2xl text-lg">
-              {batchcooking.cta.subtitle}
-            </p>
+            <p className="max-w-2xl text-lg">{batchcooking.cta.subtitle}</p>
           )}
           {batchcooking?.cta?.button && batchcooking.cta.button.length > 0 ? (
             <>
