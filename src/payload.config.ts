@@ -1,6 +1,6 @@
-// storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
 import path from 'path'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
@@ -20,6 +20,16 @@ import { Homepage } from './globals/Homepage'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const databaseUri = process.env.DATABASE_URI
+const payloadSecret = process.env.PAYLOAD_SECRET
+const uploadthingToken = process.env.UPLOADTHING_TOKEN
+
+if (!databaseUri || !payloadSecret || !uploadthingToken) {
+  throw new Error(
+    'Missing required environment variables: DATABASE_URI, PAYLOAD_SECRET, or UPLOADTHING_TOKEN',
+  )
+}
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -30,13 +40,13 @@ export default buildConfig({
   collections: [Users, Media, Offer],
   globals: [Homepage, Header, Footer, Consultation, Batchcooking],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: payloadSecret,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      connectionString: databaseUri,
     },
   }),
   sharp,
@@ -45,6 +55,14 @@ export default buildConfig({
     supportedLanguages: { fr, en },
   },
   plugins: [
-    // storage-adapter-placeholder
+    uploadthingStorage({
+      collections: {
+        media: true,
+      },
+      options: {
+        token: uploadthingToken,
+        acl: 'public-read',
+      },
+    }),
   ],
 })
