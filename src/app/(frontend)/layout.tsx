@@ -1,16 +1,20 @@
+import config from '@/payload.config'
 import clx from 'classnames'
 import { Open_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
-import React from 'react'
-import config from '@/payload.config'
 import { getPayload } from 'payload'
+import React from 'react'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import './styles.css'
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description:
+    'Découvrez les services de Julie BAUZA, nutritionniste. Consultations en ligne personnalisées et cuisine à domicile pour optimiser votre santé et bien-être.',
+  title: 'Julie BAUZA - Nutritionniste',
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 const MarginFont = localFont({

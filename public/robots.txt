@@ -1,0 +1,11 @@
+# Allow all robots to crawl and index the site
+User-agent: *
+Allow: /
+
+# Disallow admin and internal paths if needed
+Disallow: /_next/
+Disallow: /api/
+Disallow: /admin/
+
+# Sitemap (if you generate one)
+# Sitemap: https://julie-nutrition.com/sitemap.xml
