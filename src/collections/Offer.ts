@@ -1,51 +1,64 @@
-import { CollectionConfig } from "payload";
+import { CollectionConfig } from 'payload'
 
 export const Offer: CollectionConfig = {
-    slug: 'offer',
-    fields: [
+  slug: 'offers',
+  labels: {
+    singular: 'Offre',
+    plural: 'Offres',
+  },
+  admin: {
+    useAsTitle: 'title',
+  },
+  fields: [
+    {
+      name: 'title',
+      label: "Titre de l'offre",
+      type: 'text',
+      required: true,
+    },
+    {
+      type: 'row',
+      fields: [
         {
-            name: 'title',
-            type: 'text',
-            required: true,
+          name: 'price',
+          label: 'Prix (en €)',
+          type: 'number',
+          required: true,
         },
         {
-            name: 'description',
-            type: 'textarea',
-            required: true,
-            label: 'Description courte',
+          name: 'quantity',
+          label: 'Quantité (ex: "séance", "1h", etc.)',
+          type: 'text',
         },
+      ],
+    },
+    {
+      name: 'description',
+      label: 'Description courte',
+      type: 'textarea',
+      required: true,
+    },
+    {
+      name: 'features',
+      label: 'Fonctionnalités / Avantages',
+      type: 'array',
+      required: true,
+      fields: [
         {
-            name: 'features',
-            type: 'array',
-            label: 'Ce qui est inclus',
-            required: true,
-            fields: [
-                {
-                    name: 'feature',
-                    type: 'text',
-                    required: true,
-                }
-            ],
+          name: 'feature',
+          label: 'Fonctionnalité / Avantage',
+          type: 'text',
+          required: true,
         },
-        {
-            name: 'price',
-            type: 'number',
-            required: true,
-        },
-        {
-            name: 'duration',
-            type: 'number',
-        },
-        {
-            name: 'bookingLink',
-            type: 'text',
-            label: 'Lien de réservation',
-            admin: {
-                description: 'URL externe pour réserver cette offre (ex: lien Calendly)',
-            },
-        },
-    ],
-    admin: {
-        useAsTitle: 'title',
-    }
+      ],
+    },
+    {
+      name: 'bookingLink',
+      type: 'text',
+      label: 'Lien de réservation',
+      admin: {
+        description: 'URL externe pour réserver cette offre (ex: lien Calendly)',
+      },
+    },
+  ],
 }
