@@ -5,10 +5,12 @@ export const Button: Block = {
   fields: [
     {
       name: 'icon',
+      label: 'Icône',
       type: 'text',
     },
     {
       name: 'label',
+      label: 'Texte du bouton',
       type: 'text',
       required: true,
     },
@@ -18,12 +20,13 @@ export const Button: Block = {
       label: 'Lien URL',
       required: false,
       admin: {
-        description: 'URL de destination (ex: /contact ou https://calendly.com/...)',
+        description: 'URL de destination (ex: /consultations ou https://calendly.com/...)',
       },
     },
     {
       name: 'variant',
-      type: 'select',
+      label: 'Variante',
+      type: 'radio',
       options: [
         {
           label: 'Primary',

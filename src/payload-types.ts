@@ -7,6 +7,11 @@
  */
 
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BackgroundColor".
+ */
+export type BackgroundColor = 'white' | 'light-yellow' | 'dark-green';
+/**
  * Supported timezones in IANA format.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -69,7 +74,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    offer: Offer;
+    pages: Page;
+    offers: Offer;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -79,7 +85,8 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    offer: OfferSelect<false> | OfferSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    offers: OffersSelect<false> | OffersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -90,18 +97,12 @@ export interface Config {
   };
   fallbackLocale: null;
   globals: {
-    homepage: Homepage;
     header: Header;
     footer: Footer;
-    consultation: Consultation;
-    batchcooking: Batchcooking;
   };
   globalsSelect: {
-    homepage: HomepageSelect<false> | HomepageSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
-    consultation: ConsultationSelect<false> | ConsultationSelect<true>;
-    batchcooking: BatchcookingSelect<false> | BatchcookingSelect<true>;
   };
   locale: null;
   user: User & {
@@ -176,18 +177,148 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "offer".
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  name: string;
+  slug?: string | null;
+  /**
+   * Description utilisée pour le SEO (balise meta description)
+   */
+  description?: string | null;
+  sections?:
+    | (
+        | HeroSection
+        | {
+            title: string;
+            content?: string | null;
+            textAlign?: ('left' | 'center') | null;
+            features?:
+              | {
+                  icon?: string | null;
+                  title: string;
+                  description: string;
+                  link?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            background: BackgroundColor;
+            pattern: boolean;
+            wave: boolean;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'feature-section';
+          }
+        | {
+            /**
+             * Texte principal incitant l’utilisateur à agir, souvent une question
+             */
+            title: string;
+            content?: string | null;
+            actions: {
+              icon?: string | null;
+              label: string;
+              /**
+               * URL de destination (ex: /consultations ou https://calendly.com/...)
+               */
+              href?: string | null;
+              variant: 'primary' | 'secondary' | 'inverse';
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'button';
+            }[];
+            background: BackgroundColor;
+            pattern: boolean;
+            wave: boolean;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta-section';
+          }
+        | {
+            title: string;
+            content?: string | null;
+            background: BackgroundColor;
+            pattern: boolean;
+            wave: boolean;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'information-section';
+          }
+        | {
+            title: string;
+            content?: string | null;
+            offers: (number | Offer)[];
+            background: BackgroundColor;
+            pattern: boolean;
+            wave: boolean;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'offers-section';
+          }
+        | {
+            title: string;
+            content?: string | null;
+            groupedOffers: {
+              title: string;
+              offers: (number | Offer)[];
+              id?: string | null;
+            }[];
+            background: BackgroundColor;
+            pattern: boolean;
+            wave: boolean;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'grouped-offers-section';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroSection".
+ */
+export interface HeroSection {
+  title: string;
+  content: string;
+  picture?: (number | null) | Media;
+  actions?:
+    | {
+        icon?: string | null;
+        label: string;
+        /**
+         * URL de destination (ex: /consultations ou https://calendly.com/...)
+         */
+        href?: string | null;
+        variant: 'primary' | 'secondary' | 'inverse';
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'button';
+      }[]
+    | null;
+  background: BackgroundColor;
+  pattern: boolean;
+  wave: boolean;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers".
  */
 export interface Offer {
   id: number;
   title: string;
+  price: number;
+  quantity?: string | null;
   description: string;
   features: {
     feature: string;
     id?: string | null;
   }[];
-  price: number;
-  duration?: number | null;
   /**
    * URL externe pour réserver cette offre (ex: lien Calendly)
    */
@@ -228,7 +359,11 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'offer';
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'offers';
         value: number | Offer;
       } | null);
   globalSlug?: string | null;
@@ -316,10 +451,143 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "offer_select".
+ * via the `definition` "pages_select".
  */
-export interface OfferSelect<T extends boolean = true> {
+export interface PagesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  description?: T;
+  sections?:
+    | T
+    | {
+        'hero-section'?: T | HeroSectionSelect<T>;
+        'feature-section'?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              textAlign?: T;
+              features?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    description?: T;
+                    link?: T;
+                    id?: T;
+                  };
+              background?: T;
+              pattern?: T;
+              wave?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'cta-section'?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              actions?:
+                | T
+                | {
+                    button?:
+                      | T
+                      | {
+                          icon?: T;
+                          label?: T;
+                          href?: T;
+                          variant?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              background?: T;
+              pattern?: T;
+              wave?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'information-section'?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              background?: T;
+              pattern?: T;
+              wave?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'offers-section'?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              offers?: T;
+              background?: T;
+              pattern?: T;
+              wave?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'grouped-offers-section'?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              groupedOffers?:
+                | T
+                | {
+                    title?: T;
+                    offers?: T;
+                    id?: T;
+                  };
+              background?: T;
+              pattern?: T;
+              wave?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroSection_select".
+ */
+export interface HeroSectionSelect<T extends boolean = true> {
   title?: T;
+  content?: T;
+  picture?: T;
+  actions?:
+    | T
+    | {
+        button?:
+          | T
+          | {
+              icon?: T;
+              label?: T;
+              href?: T;
+              variant?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  background?: T;
+  pattern?: T;
+  wave?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers_select".
+ */
+export interface OffersSelect<T extends boolean = true> {
+  title?: T;
+  price?: T;
+  quantity?: T;
   description?: T;
   features?:
     | T
@@ -327,8 +595,6 @@ export interface OfferSelect<T extends boolean = true> {
         feature?: T;
         id?: T;
       };
-  price?: T;
-  duration?: T;
   bookingLink?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -372,80 +638,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "homepage".
- */
-export interface Homepage {
-  id: number;
-  hero: {
-    title: string;
-    subtitle: string;
-    picture: number | Media;
-    buttons?:
-      | {
-          icon?: string | null;
-          label: string;
-          /**
-           * URL de destination (ex: /contact ou https://calendly.com/...)
-           */
-          href?: string | null;
-          variant: 'primary' | 'secondary' | 'inverse';
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'button';
-        }[]
-      | null;
-  };
-  services: {
-    title: string;
-    subtitle: string;
-    services?:
-      | {
-          icon: string;
-          title: string;
-          description: string;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'service-card';
-        }[]
-      | null;
-  };
-  approche: {
-    title: string;
-    subtitle: string;
-    features?:
-      | {
-          icon: string;
-          title: string;
-          description: string;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'feature-card';
-        }[]
-      | null;
-  };
-  contact?: {
-    title?: string | null;
-    subtitle?: string | null;
-    button?:
-      | {
-          icon?: string | null;
-          label: string;
-          /**
-           * URL de destination (ex: /contact ou https://calendly.com/...)
-           */
-          href?: string | null;
-          variant: 'primary' | 'secondary' | 'inverse';
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'button';
-        }[]
-      | null;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -495,197 +687,6 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "consultation".
- */
-export interface Consultation {
-  id: number;
-  hero: {
-    title: string;
-    subtitle: string;
-  };
-  offersSection: {
-    title: string;
-    subtitle: string;
-    categories: {
-      label: string;
-      /**
-       * Ex: student, individual, couple
-       */
-      value: string;
-      offers?:
-        | {
-            offer: number | Offer;
-            id?: string | null;
-          }[]
-        | null;
-      id?: string | null;
-    }[];
-  };
-  cta: {
-    title: string;
-    subtitle: string;
-    button?:
-      | {
-          icon?: string | null;
-          label: string;
-          /**
-           * URL de destination (ex: /contact ou https://calendly.com/...)
-           */
-          href?: string | null;
-          variant: 'primary' | 'secondary' | 'inverse';
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'button';
-        }[]
-      | null;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "batchcooking".
- */
-export interface Batchcooking {
-  id: number;
-  hero: {
-    title: string;
-    subtitle: string;
-  };
-  contentSection: {
-    title: string;
-    subtitle: string;
-    features?:
-      | {
-          title: string;
-          description: string;
-          /**
-           * Nom de l'icône lucide-react
-           */
-          icon?: string | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  offerSection: {
-    title: string;
-    description: string;
-    /**
-     * L'offre de batchcooking à afficher
-     */
-    offer?: (number | null) | Offer;
-  };
-  cta: {
-    title: string;
-    subtitle: string;
-    button?:
-      | {
-          icon?: string | null;
-          label: string;
-          /**
-           * URL de destination (ex: /contact ou https://calendly.com/...)
-           */
-          href?: string | null;
-          variant: 'primary' | 'secondary' | 'inverse';
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'button';
-        }[]
-      | null;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "homepage_select".
- */
-export interface HomepageSelect<T extends boolean = true> {
-  hero?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        picture?: T;
-        buttons?:
-          | T
-          | {
-              button?:
-                | T
-                | {
-                    icon?: T;
-                    label?: T;
-                    href?: T;
-                    variant?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-            };
-      };
-  services?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        services?:
-          | T
-          | {
-              'service-card'?:
-                | T
-                | {
-                    icon?: T;
-                    title?: T;
-                    description?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-            };
-      };
-  approche?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        features?:
-          | T
-          | {
-              'feature-card'?:
-                | T
-                | {
-                    icon?: T;
-                    title?: T;
-                    description?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-            };
-      };
-  contact?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        button?:
-          | T
-          | {
-              button?:
-                | T
-                | {
-                    icon?: T;
-                    label?: T;
-                    href?: T;
-                    variant?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -727,116 +728,6 @@ export interface FooterSelect<T extends boolean = true> {
               id?: T;
             };
         id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "consultation_select".
- */
-export interface ConsultationSelect<T extends boolean = true> {
-  hero?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-      };
-  offersSection?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        categories?:
-          | T
-          | {
-              label?: T;
-              value?: T;
-              offers?:
-                | T
-                | {
-                    offer?: T;
-                    id?: T;
-                  };
-              id?: T;
-            };
-      };
-  cta?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        button?:
-          | T
-          | {
-              button?:
-                | T
-                | {
-                    icon?: T;
-                    label?: T;
-                    href?: T;
-                    variant?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "batchcooking_select".
- */
-export interface BatchcookingSelect<T extends boolean = true> {
-  hero?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-      };
-  contentSection?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        features?:
-          | T
-          | {
-              title?: T;
-              description?: T;
-              icon?: T;
-              id?: T;
-            };
-      };
-  offerSection?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        offer?: T;
-      };
-  cta?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        button?:
-          | T
-          | {
-              button?:
-                | T
-                | {
-                    icon?: T;
-                    label?: T;
-                    href?: T;
-                    variant?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-            };
       };
   updatedAt?: T;
   createdAt?: T;

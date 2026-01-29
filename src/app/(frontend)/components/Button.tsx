@@ -1,7 +1,8 @@
 import clx from 'classnames'
-import { Stethoscope } from 'lucide-react'
+import type { IconName } from 'lucide-react/dynamic'
 import Link from 'next/link'
 import { ComponentPropsWithoutRef } from 'react'
+import { Icon } from './Icon'
 
 type BaseButtonProps = {
   icon?: string | null
@@ -10,7 +11,7 @@ type BaseButtonProps = {
 
 type ButtonAsButton = BaseButtonProps &
   ComponentPropsWithoutRef<'button'> & {
-    href?: never
+    href?: never | null
   }
 
 type ButtonAsLink = BaseButtonProps &
@@ -46,7 +47,7 @@ export default function Button(props: ButtonProps) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {icon && <Stethoscope />}
+          {icon && <Icon iconName={icon as IconName} />}
           {children}
         </a>
       )
@@ -54,7 +55,7 @@ export default function Button(props: ButtonProps) {
 
     return (
       <Link {...(htmlProps as ComponentPropsWithoutRef<'a'>)} href={href} className={classes}>
-        {icon && <Stethoscope />}
+        {icon && <Icon iconName={icon as IconName} />}
         {children}
       </Link>
     )
@@ -62,8 +63,7 @@ export default function Button(props: ButtonProps) {
 
   return (
     <button {...(htmlProps as ComponentPropsWithoutRef<'button'>)} className={classes}>
-      {icon && <Stethoscope />}
-      {/* {icon && <DynamicIcon name={icon as IconName} />} */}
+      {icon && <Icon iconName={icon as IconName} />}
       {children}
     </button>
   )

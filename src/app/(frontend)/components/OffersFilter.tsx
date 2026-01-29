@@ -45,17 +45,14 @@ export default function OffersFilter(props: OffersFilterProps) {
   }, [searchParams, categories])
 
   if (!categories || categories.length === 0) {
-    return (
-      <p className="text-jbn-dark-green text-lg">
-        Aucune catégorie disponible.
-      </p>
-    )
+    return <p className="text-jbn-dark-green text-lg">Aucune catégorie disponible.</p>
   }
 
   const currentCategory = categories.find((cat) => cat.value === activeCategory)
-  const currentOffers = currentCategory?.offers
-    ?.map((item) => (typeof item.offer === 'object' ? item.offer : null))
-    .filter((offer): offer is Offer => offer !== null) || []
+  const currentOffers =
+    currentCategory?.offers
+      ?.map((item) => (typeof item.offer === 'object' ? item.offer : null))
+      .filter((offer): offer is Offer => offer !== null) || []
 
   const handleCategoryChange = (categoryValue: string) => {
     setActiveCategory(categoryValue)
@@ -73,13 +70,11 @@ export default function OffersFilter(props: OffersFilterProps) {
           <button
             key={category.value}
             onClick={() => handleCategoryChange(category.value)}
-            className={clx(
-              'rounded-lg px-24 py-8 text-base font-medium transition-all',
-              {
-                'bg-jbn-dark-green text-jbn-light-yellow shadow-md': activeCategory === category.value,
-                'text-jbn-dark-green hover:bg-jbn-dark-green/10': activeCategory !== category.value,
-              },
-            )}
+            className={clx('rounded-lg px-24 py-8 text-base font-medium transition-all', {
+              'bg-jbn-dark-green text-jbn-light-yellow shadow-md':
+                activeCategory === category.value,
+              'text-jbn-dark-green hover:bg-jbn-dark-green/10': activeCategory !== category.value,
+            })}
           >
             {category.label}
           </button>
@@ -96,16 +91,14 @@ export default function OffersFilter(props: OffersFilterProps) {
               description={offer.description}
               features={offer.features}
               price={offer.price}
-              duration={offer.duration}
+              quantity={offer.quantity}
               bookingLink={offer.bookingLink}
               className="w-full md:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)]"
             />
           ))}
         </div>
       ) : (
-        <p className="text-jbn-dark-green text-lg">
-          Aucune offre disponible pour cette catégorie.
-        </p>
+        <p className="text-jbn-dark-green text-lg">Aucune offre disponible pour cette catégorie.</p>
       )}
     </>
   )

@@ -11,12 +11,10 @@ import { fr } from '@payloadcms/translations/languages/fr'
 
 import { Media } from './collections/Media'
 import { Offer } from './collections/Offer'
+import { Page } from './collections/Page'
 import { Users } from './collections/Users'
-import { Batchcooking } from './globals/Batchcooking'
-import { Consultation } from './globals/Consultation'
 import { Footer } from './globals/Footer'
 import { Header } from './globals/Header'
-import { Homepage } from './globals/Homepage'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -37,8 +35,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Offer],
-  globals: [Homepage, Header, Footer, Consultation, Batchcooking],
+  collections: [Users, Media, Page, Offer],
+  globals: [Header, Footer],
   editor: lexicalEditor(),
   secret: payloadSecret,
   typescript: {
