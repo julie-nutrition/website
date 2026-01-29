@@ -1,0 +1,78 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    groups:
+      - IDENTIFIER: 'payloadcms-ecosystem'
+        dependency-type: 'all'
+        patterns:
+          - '@payloadcms/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      - IDENTIFIER: 'react-ecosystem'
+        dependency-type: 'all'
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      - IDENTIFIER: 'nextjs-ecosystem'
+        dependency-type: 'all'
+        patterns:
+          - 'next'
+          - 'eslint-config-next'
+        update-types:
+          - 'minor'
+          - 'patch'
+      - IDENTIFIER: 'testing-ecosystem'
+        dependency-type: 'all'
+        patterns:
+          - '@playwright/*'
+          - 'playwright*'
+          - 'vitest'
+          - '@testing-library/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      - IDENTIFIER: 'tailwind-ecosystem'
+        dependency-type: 'all'
+        patterns:
+          - 'tailwindcss'
+          - '@tailwindcss/*'
+          - 'postcss'
+          - 'prettier-plugin-tailwindcss'
+        update-types:
+          - 'minor'
+          - 'patch'
+      - IDENTIFIER: 'type-definitions'
+        dependency-type: 'all'
+        patterns:
+          - '@types/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      - IDENTIFIER: 'linting-formatting'
+        dependency-type: 'all'
+        patterns:
+          - 'eslint*'
+          - 'prettier*'
+        update-types:
+          - 'minor'
+          - 'patch'
+  - package-ecosystem: 'docker'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    update-types:
+      - 'minor'
+      - 'patch'
