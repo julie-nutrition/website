@@ -1,0 +1,37 @@
+name: Lint and Build
+
+on:
+  push:
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+    environment: dev
+
+    env:
+      DATABASE_URI: ${{ secrets.DATABASE_URI }}
+      PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+      UPLOADTHING_TOKEN: ${{ secrets.UPLOADTHING_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
+          cache: true
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Build
+        run: pnpm run build
