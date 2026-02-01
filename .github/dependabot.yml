@@ -10,15 +10,13 @@ updates:
     schedule:
       interval: 'weekly'
     groups:
-      - IDENTIFIER: 'payloadcms-ecosystem'
-        dependency-type: 'all'
+      payloadcms-ecosystem:
         patterns:
           - '@payloadcms/*'
         update-types:
           - 'minor'
           - 'patch'
-      - IDENTIFIER: 'react-ecosystem'
-        dependency-type: 'all'
+      react-ecosystem:
         patterns:
           - 'react'
           - 'react-dom'
@@ -26,16 +24,14 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
-      - IDENTIFIER: 'nextjs-ecosystem'
-        dependency-type: 'all'
+      nextjs-ecosystem:
         patterns:
           - 'next'
           - 'eslint-config-next'
         update-types:
           - 'minor'
           - 'patch'
-      - IDENTIFIER: 'testing-ecosystem'
-        dependency-type: 'all'
+      testing-ecosystem:
         patterns:
           - '@playwright/*'
           - 'playwright*'
@@ -44,8 +40,7 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
-      - IDENTIFIER: 'tailwind-ecosystem'
-        dependency-type: 'all'
+      tailwind-ecosystem:
         patterns:
           - 'tailwindcss'
           - '@tailwindcss/*'
@@ -54,15 +49,13 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
-      - IDENTIFIER: 'type-definitions'
-        dependency-type: 'all'
+      type-definitions:
         patterns:
           - '@types/*'
         update-types:
           - 'minor'
           - 'patch'
-      - IDENTIFIER: 'linting-formatting'
-        dependency-type: 'all'
+      linting-formatting:
         patterns:
           - 'eslint*'
           - 'prettier*'
@@ -73,6 +66,3 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
-    update-types:
-      - 'minor'
-      - 'patch'
