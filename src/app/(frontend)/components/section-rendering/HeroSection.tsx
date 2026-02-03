@@ -1,27 +1,18 @@
 import { type HeroSection as HeroSectionProps } from '@/payload-types'
 import clx from 'classnames'
 import Image from 'next/image'
-import { textColorForBackground } from '../../utils/color.helper'
+import tada from '../../assets/mascots/tada.svg'
 import { isMedia } from '../../utils/payload-type.helper'
 import Button from '../Button'
 
 export default function HeroSection(props: HeroSectionProps) {
   return (
     <>
-      <section className={`bg-jbn-${props.background}`}>
+      <section className={`section-${props.background}`}>
         <div className="container flex items-center gap-48 px-32 py-96">
           <div className="flex flex-col gap-24">
-            <h1
-              className={clx(
-                textColorForBackground(props.background),
-                'font-jbn-margin text-5xl lg:text-6xl',
-              )}
-            >
-              {props.title}
-            </h1>
-            <p className={clx(textColorForBackground(props.background), 'text-lg')}>
-              {props.content}
-            </p>
+            <h1 className="font-jbn-margin text-5xl lg:text-6xl">{props.title}</h1>
+            <p className="text-lg">{props.content}</p>
             {(props.actions?.length ?? 0) > 0 && (
               <div className="flex flex-col items-start gap-16 md:flex-row">
                 {props.actions?.map((action) => (
@@ -44,14 +35,23 @@ export default function HeroSection(props: HeroSectionProps) {
                 alt={props.picture.alt}
                 width={600}
                 height={400}
-                className="-z-10 rounded-xl shadow-xl"
+                className="-z-10 rounded-lg shadow-xl"
+              />
+              <Image
+                src={tada}
+                alt="Tada mascot"
+                width={100}
+                height={100}
+                className="absolute -right-20 -bottom-30"
               />
             </div>
           )}
         </div>
       </section>
       {props.wave && (
-        <hr className={clx(`bg-jbn-${props.background}`, 'wave h-50 w-full border-0')} />
+        <hr
+          className={clx(`bg-jbn-${props.background}`, 'wave h-50 w-full -translate-y-1 border-0')}
+        />
       )}
     </>
   )

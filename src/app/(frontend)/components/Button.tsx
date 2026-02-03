@@ -25,13 +25,11 @@ export default function Button(props: ButtonProps) {
   const { icon, children, variant, className, href, ...htmlProps } = props
 
   const classes = clx(
-    'rounded-xl py-8 px-24 flex gap-12 text-base font-medium transition delay-100 ease-out hover:scale-102',
     className,
+    'rounded-xl py-6 px-20 flex gap-12 text-base font-medium transition delay-50 ease-out hover:scale-102',
     {
-      'bg-jbn-dark-green text-jbn-light-yellow': variant === 'primary',
-      'bg-white text-jbn-dark-green': variant === 'inverse',
-      'bg-white text-jbn-dark-green border border-jbn-dark-green hover:bg-jbn-light-green':
-        variant === 'secondary',
+      [`button-${variant}`]: variant,
+      border: variant === 'secondary',
     },
   )
 

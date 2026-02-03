@@ -1,3 +1,4 @@
+import { Button } from '@/blocks/Button'
 import { GlobalConfig } from 'payload'
 
 export const Header: GlobalConfig = {
@@ -11,36 +12,11 @@ export const Header: GlobalConfig = {
       required: true,
     },
     {
-      name: 'navigation',
-      type: 'array',
-      label: 'Navigation Links',
-      fields: [
-        {
-          name: 'label',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'url',
-          type: 'text',
-          required: true,
-        },
-      ],
-    },
-    {
-      name: 'ctaButton',
-      type: 'group',
-      label: 'CTA Button',
-      fields: [
-        {
-          name: 'label',
-          type: 'text',
-        },
-        {
-          name: 'url',
-          type: 'text',
-        },
-      ],
+      type: 'blocks',
+      name: 'actions',
+      label: 'Actions',
+      required: false,
+      blocks: [Button],
     },
   ],
 }

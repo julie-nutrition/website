@@ -32,6 +32,14 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
+  const pages = await payload.find({
+    collection: 'pages',
+    limit: 0,
+    depth: 0,
+  })
+
+  const pageLinks = pages.docs.map((page) => ({ label: page.name, url: `/${page.slug}` }))
+
   const header = await payload.findGlobal({
     slug: 'header',
   })
@@ -43,9 +51,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={clx(MarginFont.className, OpenSans.className)}>
       <body>
-        <Header data={header} />
+        <Header data={header} items={pageLinks} />
         <main className="bg-white">{children}</main>
-        <Footer data={footer} />
+        <Footer data={footer} navigationItems={pageLinks} />
       </body>
     </html>
   )
