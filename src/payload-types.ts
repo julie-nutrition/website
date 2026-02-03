@@ -70,7 +70,9 @@ export interface Config {
   auth: {
     users: UserAuthOperations;
   };
-  blocks: {};
+  blocks: {
+    'hero-section': HeroSection;
+  };
   collections: {
     users: User;
     media: Media;
@@ -133,6 +135,55 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero-section".
+ */
+export interface HeroSection {
+  title: string;
+  content: string;
+  picture?: (number | null) | Media;
+  actions?:
+    | {
+        icon?: string | null;
+        label: string;
+        /**
+         * URL de destination (ex: /consultations ou https://calendly.com/...)
+         */
+        href?: string | null;
+        variant: 'primary' | 'secondary';
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'button';
+      }[]
+    | null;
+  background: BackgroundColor;
+  pattern: boolean;
+  wave: boolean;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  _key?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -157,26 +208,6 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  _key?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
@@ -189,7 +220,31 @@ export interface Page {
   description?: string | null;
   sections?:
     | (
-        | HeroSection
+        | {
+            title: string;
+            content: string;
+            picture?: (number | null) | Media;
+            actions?:
+              | {
+                  icon?: string | null;
+                  label: string;
+                  /**
+                   * URL de destination (ex: /consultations ou https://calendly.com/...)
+                   */
+                  href?: string | null;
+                  variant: 'primary' | 'secondary';
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'button';
+                }[]
+              | null;
+            background: BackgroundColor;
+            pattern: boolean;
+            wave: boolean;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero-section';
+          }
         | {
             title: string;
             content?: string | null;
@@ -223,7 +278,7 @@ export interface Page {
                * URL de destination (ex: /consultations ou https://calendly.com/...)
                */
               href?: string | null;
-              variant: 'primary' | 'secondary' | 'inverse';
+              variant: 'primary' | 'secondary';
               id?: string | null;
               blockName?: string | null;
               blockType: 'button';
@@ -275,35 +330,6 @@ export interface Page {
     | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HeroSection".
- */
-export interface HeroSection {
-  title: string;
-  content: string;
-  picture?: (number | null) | Media;
-  actions?:
-    | {
-        icon?: string | null;
-        label: string;
-        /**
-         * URL de destination (ex: /consultations ou https://calendly.com/...)
-         */
-        href?: string | null;
-        variant: 'primary' | 'secondary' | 'inverse';
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'button';
-      }[]
-    | null;
-  background: BackgroundColor;
-  pattern: boolean;
-  wave: boolean;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -460,7 +486,32 @@ export interface PagesSelect<T extends boolean = true> {
   sections?:
     | T
     | {
-        'hero-section'?: T | HeroSectionSelect<T>;
+        'hero-section'?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              picture?: T;
+              actions?:
+                | T
+                | {
+                    button?:
+                      | T
+                      | {
+                          icon?: T;
+                          label?: T;
+                          href?: T;
+                          variant?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              background?: T;
+              pattern?: T;
+              wave?: T;
+              id?: T;
+              blockName?: T;
+            };
         'feature-section'?:
           | T
           | {
@@ -554,34 +605,6 @@ export interface PagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HeroSection_select".
- */
-export interface HeroSectionSelect<T extends boolean = true> {
-  title?: T;
-  content?: T;
-  picture?: T;
-  actions?:
-    | T
-    | {
-        button?:
-          | T
-          | {
-              icon?: T;
-              label?: T;
-              href?: T;
-              variant?: T;
-              id?: T;
-              blockName?: T;
-            };
-      };
-  background?: T;
-  pattern?: T;
-  wave?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "offers_select".
  */
 export interface OffersSelect<T extends boolean = true> {
@@ -646,17 +669,20 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Header {
   id: number;
   logo: number | Media;
-  navigation?:
+  actions?:
     | {
+        icon?: string | null;
         label: string;
-        url: string;
+        /**
+         * URL de destination (ex: /consultations ou https://calendly.com/...)
+         */
+        href?: string | null;
+        variant: 'primary' | 'secondary';
         id?: string | null;
+        blockName?: string | null;
+        blockType: 'button';
       }[]
     | null;
-  ctaButton?: {
-    label?: string | null;
-    url?: string | null;
-  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -668,6 +694,8 @@ export interface Footer {
   id: number;
   logo?: (number | null) | Media;
   slogan?: string | null;
+  'navigation-label'?: string | null;
+  copyright?: string | null;
   columns?:
     | {
         title: string;
@@ -691,18 +719,19 @@ export interface Footer {
  */
 export interface HeaderSelect<T extends boolean = true> {
   logo?: T;
-  navigation?:
+  actions?:
     | T
     | {
-        label?: T;
-        url?: T;
-        id?: T;
-      };
-  ctaButton?:
-    | T
-    | {
-        label?: T;
-        url?: T;
+        button?:
+          | T
+          | {
+              icon?: T;
+              label?: T;
+              href?: T;
+              variant?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -715,6 +744,8 @@ export interface HeaderSelect<T extends boolean = true> {
 export interface FooterSelect<T extends boolean = true> {
   logo?: T;
   slogan?: T;
+  'navigation-label'?: T;
+  copyright?: T;
   columns?:
     | T
     | {

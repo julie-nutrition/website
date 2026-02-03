@@ -4,7 +4,6 @@ import { Button } from '../Button'
 
 export const HeroSection: Block = {
   slug: 'hero-section',
-  interfaceName: 'HeroSection',
   labels: {
     singular: "Section d'accueil",
     plural: "Sections d'accueil",
