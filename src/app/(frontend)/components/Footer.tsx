@@ -12,7 +12,7 @@ type FooterProps = {
 } & ComponentPropsWithoutRef<'footer'>
 
 export default function Footer(props: FooterProps) {
-  const { data, className, ...footerProps } = props
+  const { data, navigationItems, className, ...footerProps } = props
   const logo = data.logo as Media | null
 
   return (
@@ -36,7 +36,7 @@ export default function Footer(props: FooterProps) {
           </div>
 
           {data['navigation-label'] && (
-            <LinkColumn label={data['navigation-label']} links={props.navigationItems} />
+            <LinkColumn label={data['navigation-label']} links={navigationItems} />
           )}
 
           {data.columns && data.columns.length > 0 && (
@@ -74,7 +74,7 @@ function LinkColumn(props: LinkColumnProps) {
       {props.links && props.links.length > 0 && (
         <ul className="flex flex-col gap-12">
           {props.links.map((link) => (
-            <li key={link.id}>
+            <li key={link.id ?? link.label}>
               <Link
                 href={link.url}
                 className="flex items-center gap-8 text-base opacity-90 transition-opacity hover:opacity-100"

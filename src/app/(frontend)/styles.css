@@ -111,6 +111,10 @@
       --button-secondary-bg-hover: var(--color-jbn-light-green);
       --button-secondary-color: var(--color-jbn-dark-green);
     }
+
+    .wave {
+      background-color: var(--color-white);
+    }
   }
 
   .section-light-yellow {
@@ -127,6 +131,10 @@
       --button-secondary-bg-hover: var(--color-jbn-light-green);
       --button-secondary-color: var(--color-jbn-dark-green);
     }
+
+    .wave {
+      background-color: var(--color-jbn-light-yellow);
+    }
   }
 
   .section-dark-green {
@@ -142,6 +150,10 @@
       --button-secondary-bg: transparent;
       --button-secondary-bg-hover: transparent;
       --button-secondary-color: var(--color-white);
+    }
+
+    .wave {
+      background-color: var(--color-jbn-dark-green);
     }
   }
 
