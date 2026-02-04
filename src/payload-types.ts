@@ -72,6 +72,7 @@ export interface Config {
   };
   blocks: {
     'hero-section': HeroSection;
+    'feature-section': FeatureSection;
   };
   collections: {
     users: User;
@@ -181,6 +182,30 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feature-section".
+ */
+export interface FeatureSection {
+  title: string;
+  content?: string | null;
+  textAlign?: ('left' | 'center') | null;
+  features?:
+    | {
+        icon?: string | null;
+        title: string;
+        description: string;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  background: BackgroundColor;
+  pattern: boolean;
+  wave: boolean;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'feature-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
