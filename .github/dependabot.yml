@@ -16,16 +16,11 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
-      react-ecosystem:
+      framework-ecosystem:
         patterns:
           - 'react'
           - 'react-dom'
           - '@types/react*'
-        update-types:
-          - 'minor'
-          - 'patch'
-      nextjs-ecosystem:
-        patterns:
           - 'next'
           - 'eslint-config-next'
         update-types:
