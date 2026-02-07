@@ -10,19 +10,20 @@ updates:
     schedule:
       interval: 'weekly'
     groups:
-      payloadcms-ecosystem:
-        patterns:
-          - '@payloadcms/*'
-        update-types:
-          - 'minor'
-          - 'patch'
       framework-ecosystem:
         patterns:
           - 'react'
           - 'react-dom'
           - '@types/react*'
+          - '@types/node'
           - 'next'
           - 'eslint-config-next'
+          - '@payloadcms/*'
+          - 'cross-env'
+          - 'dotenv'
+          - 'graphql'
+          - 'sharp'
+          - 'typescript'
         update-types:
           - 'minor'
           - 'patch'
@@ -32,15 +33,27 @@ updates:
           - 'playwright*'
           - 'vitest'
           - '@testing-library/*'
+          - '@vitejs/plugin-react'
+          - 'jsdom'
+          - 'vite-tsconfig-paths'
         update-types:
           - 'minor'
           - 'patch'
-      tailwind-ecosystem:
+      styling-ecosystem:
         patterns:
           - 'tailwindcss'
           - '@tailwindcss/*'
           - 'postcss'
           - 'prettier-plugin-tailwindcss'
+          - 'classnames'
+        update-types:
+          - 'minor'
+          - 'patch'
+      linting-formatting:
+        patterns:
+          - '@eslint/*'
+          - 'eslint*'
+          - 'prettier*'
         update-types:
           - 'minor'
           - 'patch'
@@ -50,10 +63,9 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
-      linting-formatting:
+      component-libraries:
         patterns:
-          - 'eslint*'
-          - 'prettier*'
+          - 'lucide-react'
         update-types:
           - 'minor'
           - 'patch'
@@ -61,3 +73,7 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - 'version-update:semver-major'
