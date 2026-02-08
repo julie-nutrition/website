@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url'
 import { en } from '@payloadcms/translations/languages/en'
 import { fr } from '@payloadcms/translations/languages/fr'
 
+import { CTASection } from './blocks/sections/CTASection'
 import { FeatureSection } from './blocks/sections/FeatureSection'
 import { HeroSection } from './blocks/sections/HeroSection'
 import { Media } from './collections/Media'
@@ -39,7 +40,7 @@ export default buildConfig({
   },
   collections: [Users, Media, Page, Offer],
   globals: [Header, Footer],
-  blocks: [HeroSection, FeatureSection],
+  blocks: [HeroSection, FeatureSection, CTASection],
   editor: lexicalEditor(),
   secret: payloadSecret,
   typescript: {

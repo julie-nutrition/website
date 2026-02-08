@@ -18,7 +18,7 @@ export default function Footer(props: FooterProps) {
   return (
     <footer {...footerProps} className={clx('bg-jbn-dark-green text-jbn-light-yellow', className)}>
       <div className="container px-32 py-64">
-        <div className="grid grid-cols-1 gap-48 lg:grid-cols-[1fr_auto_auto_auto]">
+        <div className="grid grid-cols-1 gap-48 lg:grid-cols-[1fr_auto_auto]">
           {/* Logo and Slogan Section */}
           <div className="flex flex-col gap-20">
             {logo && logo.url ? (

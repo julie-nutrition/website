@@ -7,8 +7,13 @@ import Section from './Section'
 
 export default function HeroSection(props: HeroSectionProps) {
   return (
-    <Section background={props.background} wave={props.wave}>
-      <div className="container flex items-center gap-48 px-32 py-96">
+    <Section
+      background={props.background}
+      wave={props.wave}
+      pattern={props.pattern}
+      className="py-96"
+    >
+      <div className="flex items-center gap-48">
         <div className="flex flex-col gap-24">
           <h1 className="font-jbn-margin text-5xl lg:text-6xl">{props.title}</h1>
           <p className="text-lg">{props.content}</p>
