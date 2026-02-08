@@ -73,6 +73,7 @@ export interface Config {
   blocks: {
     'hero-section': HeroSection;
     'feature-section': FeatureSection;
+    'cta-section': CtaSection;
   };
   collections: {
     users: User;
@@ -206,6 +207,35 @@ export interface FeatureSection {
   id?: string | null;
   blockName?: string | null;
   blockType: 'feature-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cta-section".
+ */
+export interface CtaSection {
+  /**
+   * Texte principal incitant l’utilisateur à agir, souvent une question
+   */
+  title: string;
+  content?: string | null;
+  actions: {
+    icon?: string | null;
+    label: string;
+    /**
+     * URL de destination (ex: /consultations ou https://calendly.com/...)
+     */
+    href?: string | null;
+    variant: 'primary' | 'secondary';
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'button';
+  }[];
+  background: BackgroundColor;
+  pattern: boolean;
+  wave: boolean;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

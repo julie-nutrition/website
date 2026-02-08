@@ -19,8 +19,12 @@ export default function FeatureCard(props: FeatureCardProps) {
   )
 
   if (!!link) {
+    const cardClassName = clx(
+      rootClassName,
+      'transition delay-100 ease-out hover:scale-102 hover:bg-neutral-50',
+    )
     return (
-      <Link href={link} className={rootClassName} {...htmlProps}>
+      <Link href={link} className={cardClassName} {...htmlProps}>
         <CardContent title={title} icon={icon}>
           {children}
         </CardContent>

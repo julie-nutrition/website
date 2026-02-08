@@ -1,4 +1,5 @@
 import { Page } from '@/payload-types'
+import CTASection from './CTASection'
 import FeatureSection from './FeatureSection'
 import HeroSection from './HeroSection'
 
@@ -13,6 +14,9 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
 
     case 'feature-section':
       return <FeatureSection {...section} />
+
+    case 'cta-section':
+      return <CTASection {...section} />
 
     default:
       return null

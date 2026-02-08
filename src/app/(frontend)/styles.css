@@ -97,6 +97,10 @@
     );
   }
 
+  .leave {
+    opacity: 0.2;
+  }
+
   .section-white {
     background-color: var(--color-white);
     color: var(--color-jbn-dark-green);
@@ -114,6 +118,10 @@
 
     .wave {
       background-color: var(--color-white);
+    }
+
+    .leave {
+      fill: var(--color-jbn-dark-green);
     }
   }
 
@@ -135,6 +143,10 @@
     .wave {
       background-color: var(--color-jbn-light-yellow);
     }
+
+    .leave {
+      fill: var(--color-jbn-dark-green);
+    }
   }
 
   .section-dark-green {
@@ -154,6 +166,10 @@
 
     .wave {
       background-color: var(--color-jbn-dark-green);
+    }
+
+    .leave {
+      fill: var(--color-jbn-light-yellow);
     }
   }
 
