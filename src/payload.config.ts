@@ -1,6 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import path from 'path'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
@@ -23,11 +23,11 @@ const dirname = path.dirname(filename)
 
 const databaseUri = process.env.DATABASE_URI
 const payloadSecret = process.env.PAYLOAD_SECRET
-const uploadthingToken = process.env.UPLOADTHING_TOKEN
+const vercelBlobToken = process.env.BLOB_READ_WRITE_TOKEN
 
-if (!databaseUri || !payloadSecret || !uploadthingToken) {
+if (!databaseUri || !payloadSecret || !vercelBlobToken) {
   throw new Error(
-    'Missing required environment variables: DATABASE_URI, PAYLOAD_SECRET, or UPLOADTHING_TOKEN',
+    'Missing required environment variables: DATABASE_URI, PAYLOAD_SECRET, or BLOB_READ_WRITE_TOKEN',
   )
 }
 
@@ -57,14 +57,12 @@ export default buildConfig({
     supportedLanguages: { fr, en },
   },
   plugins: [
-    uploadthingStorage({
+    vercelBlobStorage({
+      enabled: true,
       collections: {
         media: true,
       },
-      options: {
-        token: uploadthingToken,
-        acl: 'public-read',
-      },
+      token: vercelBlobToken,
     }),
   ],
 })

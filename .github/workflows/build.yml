@@ -11,7 +11,7 @@ jobs:
     env:
       DATABASE_URI: ${{ secrets.DATABASE_URI }}
       PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
-      UPLOADTHING_TOKEN: ${{ secrets.UPLOADTHING_TOKEN }}
+      BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
 
     steps:
       - uses: actions/checkout@v3
