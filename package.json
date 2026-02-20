@@ -29,7 +29,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.6.1",
     "graphql": "^16.12.0",
-    "lucide-react": "^0.563.0",
+    "lucide-react": "^0.575.0",
     "next": "^15.5.12",
     "payload": "^3.77.0",
     "postcss": "^8.5.6",
