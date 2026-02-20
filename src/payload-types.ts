@@ -74,6 +74,8 @@ export interface Config {
     'hero-section': HeroSection;
     'feature-section': FeatureSection;
     'cta-section': CtaSection;
+    'information-section': InformationSection;
+    'grouped-offers-section': GroupedOffersSection;
   };
   collections: {
     users: User;
@@ -236,6 +238,64 @@ export interface CtaSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "information-section".
+ */
+export interface InformationSection {
+  title: string;
+  content?: string | null;
+  background: BackgroundColor;
+  pattern: boolean;
+  wave: boolean;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'information-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "grouped-offers-section".
+ */
+export interface GroupedOffersSection {
+  title: string;
+  content?: string | null;
+  groupedOffers: {
+    title: string;
+    offers: (number | Offer)[];
+    id?: string | null;
+  }[];
+  background: BackgroundColor;
+  pattern: boolean;
+  wave: boolean;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'grouped-offers-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers".
+ */
+export interface Offer {
+  id: number;
+  title: string;
+  price: number;
+  quantity?: string | null;
+  description: string;
+  /**
+   * Texte affiché en bas de la carte d'offre pour les offres moins mises en avant. Laissez vide si non utilisé.
+   */
+  disclaimer?: string | null;
+  features: {
+    feature: string;
+    id?: string | null;
+  }[];
+  /**
+   * URL externe pour réserver cette offre (ex: lien Calendly)
+   */
+  bookingLink?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -381,27 +441,6 @@ export interface Page {
           }
       )[]
     | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "offers".
- */
-export interface Offer {
-  id: number;
-  title: string;
-  price: number;
-  quantity?: string | null;
-  description: string;
-  features: {
-    feature: string;
-    id?: string | null;
-  }[];
-  /**
-   * URL externe pour réserver cette offre (ex: lien Calendly)
-   */
-  bookingLink?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -664,6 +703,7 @@ export interface OffersSelect<T extends boolean = true> {
   price?: T;
   quantity?: T;
   description?: T;
+  disclaimer?: T;
   features?:
     | T
     | {
@@ -721,6 +761,13 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Header {
   id: number;
   logo: number | Media;
+  navigation?:
+    | {
+        page: number | Page;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   actions?:
     | {
         icon?: string | null;
@@ -771,6 +818,13 @@ export interface Footer {
  */
 export interface HeaderSelect<T extends boolean = true> {
   logo?: T;
+  navigation?:
+    | T
+    | {
+        page?: T;
+        label?: T;
+        id?: T;
+      };
   actions?:
     | T
     | {

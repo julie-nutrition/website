@@ -17,7 +17,7 @@ export type AsChild<DefaultProps = Record<string, unknown>> =
  * @returns Wether or not we are using the default component.
  */
 
-export function isDefaultComponent<T extends Record<string, any>>(
+export function isDefaultComponent<T extends Record<string, unknown>>(
   discriminant: boolean | undefined,
   props: {} | T,
 ): props is T {
