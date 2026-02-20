@@ -16,9 +16,9 @@ export type AsChild<DefaultProps = Record<string, unknown>> =
  * @param props The rest of the destructured props intersection. All common props must be extracted from this object.
  * @returns Wether or not we are using the default component.
  */
-
 export function isDefaultComponent<T extends Record<string, unknown>>(
   discriminant: boolean | undefined,
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   props: {} | T,
 ): props is T {
   return discriminant !== true
