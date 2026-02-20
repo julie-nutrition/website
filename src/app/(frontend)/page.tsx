@@ -1,10 +1,11 @@
 import config from '@/payload.config'
+import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 import PageBuilder from './components/PageBuilder'
 
 export const revalidate = 60 // ISR - revalidate every 60 seconds
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   try {
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig })

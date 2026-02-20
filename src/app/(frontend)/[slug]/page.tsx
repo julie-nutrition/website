@@ -1,8 +1,14 @@
 import config from '@/payload.config'
+import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 import PageBuilder from '../components/PageBuilder'
 
 export const revalidate = 60 // ISR - revalidate every 60 seconds
+export const dynamicParams = false // Only allow params from generateStaticParams
+
+type Props = {
+  params: Promise<{ slug: string }>
+}
 
 export async function generateStaticParams() {
   try {
@@ -24,7 +30,7 @@ export async function generateStaticParams() {
   }
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { slug } = await params
     const payloadConfig = await config
@@ -54,7 +60,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Page({ params }: Props) {
   const { slug } = await params
   return <PageBuilder slug={slug} />
 }

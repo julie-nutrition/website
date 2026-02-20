@@ -1,5 +1,6 @@
 import config from '@/payload.config'
 import clx from 'classnames'
+import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
 import { getPayload } from 'payload'
@@ -8,7 +9,9 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import './styles.css'
 
-export const metadata = {
+export const revalidate = 3600 // Revalidate every hour
+
+export const metadata: Metadata = {
   description:
     'Découvrez les services de Julie BAUZA, nutritionniste. Consultations en ligne personnalisées et cuisine à domicile pour optimiser votre santé et bien-être.',
   title: 'Julie BAUZA - Nutritionniste',
