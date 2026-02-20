@@ -38,11 +38,24 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     depth: 0,
   })
 
-  const pageLinks = pages.docs.map((page) => ({ label: page.name, url: `/${page.slug}` }))
-
   const header = await payload.findGlobal({
     slug: 'header',
+    depth: 1,
   })
+
+  let pageLinks = pages.docs.map((page) => ({ label: page.name, url: `/${page.slug}` }))
+
+  if (header && Array.isArray(header.navigation) && header.navigation.length > 0) {
+    pageLinks = header.navigation.map((nav) => {
+      const page = nav.page
+      if (!page || typeof page === 'number') {
+        return { label: nav.label || 'Page non trouvée', url: '/' }
+      }
+      const label = nav.label || page.name
+      const url = page.slug ? `/${page.slug}` : '/'
+      return { label, url }
+    })
+  }
 
   const footer = await payload.findGlobal({
     slug: 'footer',

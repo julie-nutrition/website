@@ -39,6 +39,16 @@ export const Offer: CollectionConfig = {
       required: true,
     },
     {
+      name: 'disclaimer',
+      label: 'Texte de disclaimer (optionnel)',
+      type: 'textarea',
+      required: false,
+      admin: {
+        description:
+          "Texte affiché en bas de la carte d'offre pour les offres moins mises en avant. Laissez vide si non utilisé.",
+      },
+    },
+    {
       name: 'features',
       label: 'Fonctionnalités / Avantages',
       type: 'array',

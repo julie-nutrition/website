@@ -11,7 +11,9 @@ import { fr } from '@payloadcms/translations/languages/fr'
 
 import { CTASection } from './blocks/sections/CTASection'
 import { FeatureSection } from './blocks/sections/FeatureSection'
+import { GroupedOffersSection } from './blocks/sections/GroupedOffersSection'
 import { HeroSection } from './blocks/sections/HeroSection'
+import { InformationSection } from './blocks/sections/InformationSection'
 import { Media } from './collections/Media'
 import { Offer } from './collections/Offer'
 import { Page } from './collections/Page'
@@ -40,7 +42,7 @@ export default buildConfig({
   },
   collections: [Users, Media, Page, Offer],
   globals: [Header, Footer],
-  blocks: [HeroSection, FeatureSection, CTASection],
+  blocks: [HeroSection, FeatureSection, CTASection, InformationSection, GroupedOffersSection],
   editor: lexicalEditor(),
   secret: payloadSecret,
   typescript: {
