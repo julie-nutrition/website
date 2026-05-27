@@ -20,6 +20,8 @@ import { Page } from './collections/Page'
 import { Users } from './collections/Users'
 import { Footer } from './globals/Footer'
 import { Header } from './globals/Header'
+import { Homepage } from './globals/Homepage'
+import { Batchcooking } from './globals/Batchcooking'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -41,7 +43,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Page, Offer],
-  globals: [Header, Footer],
+  globals: [Header, Homepage, Batchcooking, Footer],
   blocks: [HeroSection, FeatureSection, CTASection, InformationSection, GroupedOffersSection],
   editor: lexicalEditor(),
   secret: payloadSecret,

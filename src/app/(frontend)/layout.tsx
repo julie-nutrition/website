@@ -5,7 +5,6 @@ import { Open_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
 import { getPayload } from 'payload'
 import React from 'react'
-import Footer from './components/Footer'
 import Header from './components/Header'
 import './styles.css'
 
@@ -66,10 +65,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="fr" className={clx(MarginFont.className, OpenSans.className)}>
-      <body>
+      <body className="grid h-screen grid-rows-[auto_minmax(0,1fr)] overflow-hidden">
         <Header data={header} items={pageLinks} />
-        <main className="bg-white">{children}</main>
-        <Footer data={footer} navigationItems={pageLinks} />
+        <main className="content-grid bg-jbn-ginfizz-50 overflow-auto">{children}</main>
       </body>
     </html>
   )

@@ -104,10 +104,14 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     header: Header;
+    homepage: Homepage;
+    batchcooking: Batchcooking;
     footer: Footer;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
+    batchcooking: BatchcookingSelect<false> | BatchcookingSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: null;
@@ -790,6 +794,52 @@ export interface Header {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: number;
+  'batchcooking-image'?: (number | null) | Media;
+  'batchcooking-title'?: string | null;
+  'batchcooking-description'?: string | null;
+  'nutrition-image'?: (number | null) | Media;
+  'nutrition-title'?: string | null;
+  'nutrition-description'?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "batchcooking".
+ */
+export interface Batchcooking {
+  id: number;
+  'hero-image'?: (number | null) | Media;
+  'hero-title'?: string | null;
+  'hero-description'?: string | null;
+  'principe-image-1'?: (number | null) | Media;
+  'principe-image-2'?: (number | null) | Media;
+  'principe-image-3'?: (number | null) | Media;
+  'principe-title'?: string | null;
+  'principe-description'?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer".
  */
 export interface Footer {
@@ -842,6 +892,38 @@ export interface HeaderSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  'batchcooking-image'?: T;
+  'batchcooking-title'?: T;
+  'batchcooking-description'?: T;
+  'nutrition-image'?: T;
+  'nutrition-title'?: T;
+  'nutrition-description'?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "batchcooking_select".
+ */
+export interface BatchcookingSelect<T extends boolean = true> {
+  'hero-image'?: T;
+  'hero-title'?: T;
+  'hero-description'?: T;
+  'principe-image-1'?: T;
+  'principe-image-2'?: T;
+  'principe-image-3'?: T;
+  'principe-title'?: T;
+  'principe-description'?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

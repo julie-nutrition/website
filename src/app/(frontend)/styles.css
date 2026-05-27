@@ -8,6 +8,17 @@
   --color-jbn-light-orange: #ffd273;
   --color-jbn-dark-red: #982a2b;
   --color-jbn-light-green: #c1ddb4;
+
+  --color-jbn-ginfizz-50: #fef8e0;
+  --color-jbn-ginfizz-200: #ffe489;
+
+  --color-jbn-jewel-900: #006738;
+  --color-jbn-jewel-950: #003b21;
+
+  --color-jbn-golden-400: #ffa620;
+
+  --color-jbn-sprout-950: #15240f;
+
   --font-jbn-margin: 'MarginFont', serif;
   --font-jbn-open-sans: 'Open Sans', sans-serif;
   --animate-fade-in-right: fade-in-right 0.6s ease-in forwards;
@@ -33,158 +44,25 @@
   }
 }
 
-@layer components {
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-  }
+.content-grid {
+  --padding-inline: 1rem;
+  --content-max-width: 1500px;
 
-  .wave {
-    clip-path: polygon(
-      100% 0%,
-      0% 0%,
-      0% 50%,
-      2% 49.82%,
-      4% 49.3%,
-      6% 48.44%,
-      8% 47.29%,
-      10% 45.88%,
-      12% 44.26%,
-      14% 42.49%,
-      16% 40.63%,
-      18% 38.75%,
-      20% 36.91%,
-      22% 35.18%,
-      24% 33.63%,
-      26% 32.29%,
-      28% 31.24%,
-      30% 30.49%,
-      32% 30.08%,
-      34% 30.02%,
-      36% 30.31%,
-      38% 30.95%,
-      40% 31.91%,
-      42% 33.15%,
-      44% 34.64%,
-      46% 36.32%,
-      48% 38.13%,
-      50% 40%,
-      52% 41.87%,
-      54% 43.68%,
-      56% 45.36%,
-      58% 46.85%,
-      60% 48.09%,
-      62% 49.05%,
-      64% 49.69%,
-      66% 49.98%,
-      68% 49.92%,
-      70% 49.51%,
-      72% 48.76%,
-      74% 47.71%,
-      76% 46.37%,
-      78% 44.82%,
-      80% 43.09%,
-      82% 41.25%,
-      84% 39.37%,
-      86% 37.51%,
-      88% 35.74%,
-      90% 34.12%,
-      92% 32.71%,
-      94% 31.56%,
-      96% 30.7%,
-      98% 30.18%,
-      100% 30%
-    );
-  }
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--padding-inline), 1fr)
+    [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end]
+    minmax(var(--padding-inline), 1fr) [full-end];
+}
 
-  .leave {
-    opacity: 0.2;
-  }
+.content-grid > :not(.full-width),
+.full-width > :not(.full-width) {
+  grid-column: content;
+}
 
-  .section-white {
-    background-color: var(--color-white);
-    color: var(--color-jbn-dark-green);
+.content-grid > .full-width {
+  grid-column: full;
 
-    .button-primary {
-      --button-primary-bg: var(--color-jbn-dark-green);
-      --button-primary-color: var(--color-jbn-light-yellow);
-    }
-
-    .button-secondary {
-      --button-secondary-bg: var(--color-white);
-      --button-secondary-bg-hover: var(--color-jbn-light-green);
-      --button-secondary-color: var(--color-jbn-dark-green);
-    }
-
-    .wave {
-      background-color: var(--color-white);
-    }
-
-    .leave {
-      fill: var(--color-jbn-dark-green);
-    }
-  }
-
-  .section-light-yellow {
-    background-color: var(--color-jbn-light-yellow);
-    color: var(--color-jbn-dark-green);
-
-    .button-primary {
-      --button-primary-bg: var(--color-jbn-dark-green);
-      --button-primary-color: var(--color-jbn-light-yellow);
-    }
-
-    .button-secondary {
-      --button-secondary-bg: var(--color-white);
-      --button-secondary-bg-hover: var(--color-jbn-light-green);
-      --button-secondary-color: var(--color-jbn-dark-green);
-    }
-
-    .wave {
-      background-color: var(--color-jbn-light-yellow);
-    }
-
-    .leave {
-      fill: var(--color-jbn-dark-green);
-    }
-  }
-
-  .section-dark-green {
-    background-color: var(--color-jbn-dark-green);
-    color: var(--color-jbn-light-yellow);
-
-    .button-primary {
-      --button-primary-bg: var(--color-white);
-      --button-primary-color: var(--color-jbn-dark-green);
-    }
-
-    .button-secondary {
-      --button-secondary-bg: transparent;
-      --button-secondary-bg-hover: transparent;
-      --button-secondary-color: var(--color-white);
-    }
-
-    .wave {
-      background-color: var(--color-jbn-dark-green);
-    }
-
-    .leave {
-      fill: var(--color-jbn-light-yellow);
-    }
-  }
-
-  .button-primary {
-    background-color: var(--button-primary-bg);
-    color: var(--button-primary-color);
-  }
-
-  .button-secondary {
-    background-color: var(--button-secondary-bg);
-    color: var(--button-secondary-color);
-    border-color: var(--button-secondary-color);
-
-    @variant hover {
-      background-color: var(--button-secondary-bg-hover);
-    }
-  }
+  display: grid;
+  grid-template-columns: inherit;
 }
