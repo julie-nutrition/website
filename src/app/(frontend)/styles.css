@@ -18,6 +18,23 @@
   --color-jbn-golden-400: #ffa620;
 
   --color-jbn-sprout-950: #15240f;
+  --color-jbn-sprout-200: #d4e8ca;
+
+  --color-text-dark: var(--color-jbn-jewel-900);
+  --color-text-light: var(--color-jbn-ginfizz-50);
+
+  --color-background-card: var(--color-jbn-sprout-200);
+  --color-background-dark: var(--color-jbn-jewel-900);
+  --color-background-light: var(--color-jbn-ginfizz-50);
+
+  --color-hover-light: var(--color-jbn-ginfizz-200);
+  --color-hover-dark: var(--color-jbn-jewel-950);
+
+  --color-pressed-light: var(--color-jbn-golden-400);
+  --color-pressed-dark: var(--color-jbn-sprout-950);
+
+  --color-focus-light: var(--color-jbn-ginfizz-50);
+  --color-focus-dark: var(--color-jbn-jewel-900);
 
   --font-jbn-margin: 'MarginFont', serif;
   --font-jbn-open-sans: 'Open Sans', sans-serif;
@@ -44,6 +61,45 @@
   }
 }
 
+.stepper-step {
+  position: relative;
+  isolation: isolate;
+
+  .stepper-step-indicator {
+    &::after,
+    &::before {
+      content: '';
+      z-index: -1;
+      position: absolute;
+      top: 63px;
+      height: 2px;
+      background-color: var(--color-jbn-dark-green);
+    }
+
+    &::after {
+      left: 50%;
+      right: 0;
+    }
+
+    &::before {
+      left: 0;
+      right: 50%;
+    }
+  }
+
+  &:first-of-type {
+    .stepper-step-indicator::before {
+      display: none;
+    }
+  }
+
+  &:last-of-type {
+    .stepper-step-indicator::after {
+      display: none;
+    }
+  }
+}
+
 .content-grid {
   --padding-inline: 1rem;
   --content-max-width: 1500px;
@@ -65,4 +121,51 @@
 
   display: grid;
   grid-template-columns: inherit;
+}
+
+h1,
+.text-h1 {
+  font-family: var(--font-jbn-margin);
+  font-size: 4rem;
+  line-height: 3.125rem;
+}
+
+h2,
+.text-h2 {
+  font-family: var(--font-jbn-open-sans);
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 700;
+}
+
+h3,
+.text-h3 {
+  font-family: var(--font-jbn-open-sans);
+  font-size: 1.5rem;
+  line-height: auto;
+  font-weight: 700;
+}
+
+h4,
+.text-h4 {
+  font-family: var(--font-jbn-open-sans);
+  font-size: 1.25rem;
+  line-height: auto;
+  font-weight: 700;
+}
+
+p,
+.paragraph {
+  font-family: var(--font-jbn-open-sans);
+  font-size: 1rem;
+  line-height: auto;
+  font-weight: 300;
+}
+
+small,
+.text-precision {
+  font-family: var(--font-jbn-open-sans);
+  font-size: 0.625rem;
+  line-height: auto;
+  font-weight: 300;
 }

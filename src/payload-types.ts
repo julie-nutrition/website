@@ -835,6 +835,55 @@ export interface Batchcooking {
     };
     [k: string]: unknown;
   } | null;
+  'issues-title'?: string | null;
+  issues?:
+    | {
+        'issue-title'?: string | null;
+        'issue-description'?: string | null;
+        'issue-emoticon'?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  'solution-title'?: string | null;
+  'solution-description'?: string | null;
+  'approach-title'?: string | null;
+  'approach-description'?: string | null;
+  'approach-steps'?:
+    | {
+        'step-title'?: string | null;
+        'step-icon'?: string | null;
+        'step-description'?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  'formules-title'?: string | null;
+  'formules-description'?: string | null;
+  formules?:
+    | {
+        'formule-title'?: string | null;
+        'formule-description'?: string | null;
+        'formule-key-points'?:
+          | {
+              'key-point'?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        'formule-price'?: number | null;
+        'formule-final-price'?: number | null;
+        'formule-link'?: string | null;
+        'formule-spotlight'?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  'feedbacks-title'?: string | null;
+  feedbacks?:
+    | {
+        'feedback-author'?: string | null;
+        'feedback-service-type'?: string | null;
+        'feedback-content'?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -924,6 +973,55 @@ export interface BatchcookingSelect<T extends boolean = true> {
   'principe-image-3'?: T;
   'principe-title'?: T;
   'principe-description'?: T;
+  'issues-title'?: T;
+  issues?:
+    | T
+    | {
+        'issue-title'?: T;
+        'issue-description'?: T;
+        'issue-emoticon'?: T;
+        id?: T;
+      };
+  'solution-title'?: T;
+  'solution-description'?: T;
+  'approach-title'?: T;
+  'approach-description'?: T;
+  'approach-steps'?:
+    | T
+    | {
+        'step-title'?: T;
+        'step-icon'?: T;
+        'step-description'?: T;
+        id?: T;
+      };
+  'formules-title'?: T;
+  'formules-description'?: T;
+  formules?:
+    | T
+    | {
+        'formule-title'?: T;
+        'formule-description'?: T;
+        'formule-key-points'?:
+          | T
+          | {
+              'key-point'?: T;
+              id?: T;
+            };
+        'formule-price'?: T;
+        'formule-final-price'?: T;
+        'formule-link'?: T;
+        'formule-spotlight'?: T;
+        id?: T;
+      };
+  'feedbacks-title'?: T;
+  feedbacks?:
+    | T
+    | {
+        'feedback-author'?: T;
+        'feedback-service-type'?: T;
+        'feedback-content'?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
