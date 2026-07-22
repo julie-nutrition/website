@@ -1,9 +1,7 @@
-import config from '@/payload.config'
 import clx from 'classnames'
 import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
-import { getPayload } from 'payload'
 import React from 'react'
 import Header from './components/Header'
 import './styles.css'
@@ -25,48 +23,16 @@ const MarginFont = localFont({
 
 const OpenSans = Open_Sans({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['300', '400', '700'],
 })
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-
-  const pages = await payload.find({
-    collection: 'pages',
-    limit: 0,
-    depth: 0,
-  })
-
-  const header = await payload.findGlobal({
-    slug: 'header',
-    depth: 1,
-  })
-
-  let pageLinks = pages.docs.map((page) => ({ label: page.name, url: `/${page.slug}` }))
-
-  if (header && Array.isArray(header.navigation) && header.navigation.length > 0) {
-    pageLinks = header.navigation.map((nav) => {
-      const page = nav.page
-      if (!page || typeof page === 'number') {
-        return { label: nav.label || 'Page non trouvée', url: '/' }
-      }
-      const label = nav.label || page.name
-      const url = page.slug ? `/${page.slug}` : '/'
-      return { label, url }
-    })
-  }
-
-  const footerData = await payload.findGlobal({
-    slug: 'footer',
-  })
-
   return (
     <html lang="fr" className={clx(MarginFont.className, OpenSans.className)}>
       <body className="grid h-screen grid-rows-[auto_minmax(0,1fr)] overflow-hidden">
-        <Header data={header} items={pageLinks} />
+        <Header />
         <main className="content-grid bg-background-light overflow-auto">{children}</main>
       </body>
     </html>

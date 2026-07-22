@@ -167,7 +167,7 @@ export default async function Batchcooking() {
         </section>
       )}
       <section className="full-width text-text-dark bg-background-card py-100 text-center">
-        <h3>Je suis agréée "Service à la personne"</h3>
+        <h3>Je suis agréée &quot;Service à la personne&quot;</h3>
         <p className="mt-10">
           Ce qui vous permet de bénéficier de l’avance immédiate de crédit d’impôts, soit -50% sur
           la prestation !
@@ -196,7 +196,7 @@ export default async function Batchcooking() {
                     {feedback['feedback-service-type']}
                   </span>
                 </div>
-                <p>"{feedback['feedback-content']}"</p>
+                <p>&quot;{feedback['feedback-content']}&quot;</p>
               </div>
             ))}
           </div>

@@ -48,7 +48,7 @@ export function Formule(props: FormuleProps) {
         </ul>
       </div>
       <div>
-        <small>* Éligible au crédit d'impôt service à la personne (50 %)</small>
+        <small>{"* Éligible au crédit d'impôt service à la personne (50 %)"}</small>
         {formule['formule-link'] && (
           <JBNLink
             variant="dark"

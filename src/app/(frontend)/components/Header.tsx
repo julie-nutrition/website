@@ -1,18 +1,15 @@
 'use client'
 
-import { Header as HeaderType } from '@/payload-types'
+import Image from 'next/image'
 import clx from 'classnames'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentProps } from 'react'
 
-type HeaderProps = {
-  data: HeaderType
-  items: { label: string; url: string }[]
-} & ComponentPropsWithoutRef<'header'>
+type HeaderProps = ComponentProps<'header'>
 
 export default function Header(props: HeaderProps) {
-  const { data, items, className, ...headerProps } = props
+  const { className, ...headerProps } = props
   const pathname = usePathname()
 
   return (
@@ -25,7 +22,13 @@ export default function Header(props: HeaderProps) {
     >
       <div className="flex items-center justify-between py-12">
         <Link href="/" className="transition-opacity hover:opacity-80">
-          <img className="h-35" src={'./assets/logo-green.svg'} alt="Logo Julie Bauza" />
+          <Image
+            className="h-35"
+            height={35}
+            width={208}
+            src={'./assets/logo-green.svg'}
+            alt="Logo Julie Bauza"
+          />
         </Link>
 
         <nav className="hidden list-none items-center justify-start gap-40 md:flex">
