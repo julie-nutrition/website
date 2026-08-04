@@ -101,7 +101,7 @@
 }
 
 .content-grid {
-  --padding-inline: 1rem;
+  --padding-inline: 20px;
   --content-max-width: 1500px;
 
   display: grid;
@@ -126,6 +126,7 @@
 h1,
 .text-h1 {
   font-family: var(--font-jbn-margin);
+  font-variant-ligatures: none;
   font-size: 4rem;
   line-height: 3.125rem;
 }
@@ -168,4 +169,13 @@ small,
   font-size: 0.625rem;
   line-height: auto;
   font-weight: 300;
+}
+
+.sub-title-sm {
+  font-family: var(--font-jbn-open-sans);
+  font-size: 0.75rem;
+  line-height: auto;
+  font-weight: 300;
+  letter-spacing: 0.1875em;
+  text-transform: uppercase;
 }

@@ -1,14 +1,13 @@
-import { CookingPot, UserStar } from 'lucide-react'
-import { getPayload } from 'payload'
 import config from '@/payload.config'
-import { JBNLink } from '../components/JBNLink'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { Icon } from '../components/Icon'
-import { IconName } from 'lucide-react/dynamic'
 import classnames from 'classnames'
-import { Formule } from './components/Formule'
+import { IconName } from 'lucide-react/dynamic'
 import Image from 'next/image'
+import { getPayload } from 'payload'
 import Footer from '../components/Footer'
+import { Icon } from '../components/Icon'
+import { HeroSection } from '../components/sections/HeroSection'
+import { Formule } from './components/Formule'
 
 export default async function Batchcooking() {
   const payloadConfig = await config
@@ -16,6 +15,20 @@ export default async function Batchcooking() {
   const page = await payload.findGlobal({
     slug: 'batchcooking',
   })
+
+  let heroImage
+
+  if (
+    page['hero-image'] &&
+    typeof page['hero-image'] !== 'number' &&
+    typeof page['hero-image'].url === 'string' &&
+    typeof page['hero-image'].alt === 'string'
+  ) {
+    heroImage = {
+      src: page['hero-image'].url,
+      alt: page['hero-image'].alt,
+    }
+  }
 
   const stepIndicatorClass = (hasIcon: boolean) => {
     return classnames(
@@ -28,34 +41,21 @@ export default async function Batchcooking() {
   }
   return (
     <>
-      <section className="bg-jbn-jewel-900 text-jbn-ginfizz-50 full-width">
-        <div className="flex items-center justify-between gap-100 py-100">
-          <div className="flex flex-col items-start gap-40">
-            <span className="flex items-center gap-12 text-xs uppercase">
-              <CookingPot size={12} />
-              Cuisine à domicile
-              <UserStar size={12} />
-              Personalisée
-            </span>
-            <div className="flex flex-col items-start gap-20">
-              <h1 className="font-jbn-margin text-6xl">{page['hero-title']}</h1>
-              <p className="text-md">{page['hero-description']}</p>
-            </div>
-
-            <JBNLink href="#formules">Voir les formules</JBNLink>
-          </div>
-          {page['hero-image'] &&
-            typeof page['hero-image'] !== 'number' &&
-            typeof page['hero-image'].url === 'string' &&
-            typeof page['hero-image'].alt === 'string' && (
-              <img
-                src={page['hero-image'].url}
-                alt={page['hero-image'].alt}
-                className="w-400 rounded-2xl max-sm:hidden"
-              />
-            )}
-        </div>
-      </section>
+      <HeroSection
+        image={heroImage}
+        tags={[
+          { label: 'Cuisine à domicile', icon: 'cooking-pot' },
+          { label: 'Personnalisé', icon: 'user-star' },
+        ]}
+        title={page['hero-title']!}
+        description={page['hero-description']!}
+        actions={[
+          {
+            label: 'Voir les formules',
+            href: '#formules',
+          },
+        ]}
+      />
       <section className="flex items-center gap-80 py-100">
         <div className="grid grid-cols-2 gap-20">
           {page['principe-image-1'] &&
@@ -151,7 +151,7 @@ export default async function Batchcooking() {
         </section>
       )}
       {page['formules'] && page.formules.length && (
-        <section className="full-width text-text-dark bg-white py-100 text-center">
+        <section id="formules" className="full-width text-text-dark bg-white py-100 text-center">
           <span className="font-light tracking-[0.1875rem] uppercase">Les formules</span>
           <h3>{page['formules-title']}</h3>
           <p className="mt-10">{page['formules-description']}</p>
