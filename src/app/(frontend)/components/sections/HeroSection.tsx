@@ -10,7 +10,7 @@ type Props = ComponentProps<'section'> & {
   description?: string
   tags?: Array<{
     label: string
-    icon: IconName
+    icon?: IconName
   }>
   image?: {
     src: string
@@ -34,7 +34,7 @@ export function HeroSection(props: Props) {
             <div className="flex flex-wrap gap-10">
               {tags.map((tag, index) => (
                 <p key={index} className="sub-title-sm inline-flex items-center gap-10">
-                  <Icon iconName={tag.icon} className="h-16 w-16" />
+                  {tag.icon && <Icon iconName={tag.icon} className="h-16 w-16" />}
                   {tag.label}
                 </p>
               ))}

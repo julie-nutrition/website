@@ -1,9 +1,11 @@
+import { SectionsBlocks } from '@/fields/SectionsBlocks'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { GlobalConfig } from 'payload'
 
 export const Batchcooking: GlobalConfig = {
   slug: 'batchcooking',
   fields: [
+    SectionsBlocks,
     {
       type: 'group',
       label: 'Hero',

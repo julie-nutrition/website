@@ -5,23 +5,17 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
+import { HeroSection } from './blocks/HeroSection'
+import { Media } from './collections/Media'
+import { Offer } from './collections/Offer'
+import { Users } from './collections/Users'
+import { Batchcooking } from './globals/Batchcooking'
+import { Homepage } from './globals/Homepage'
+import { Nutrition } from './globals/Nutrition'
 
 import { en } from '@payloadcms/translations/languages/en'
 import { fr } from '@payloadcms/translations/languages/fr'
 
-import { CTASection } from './blocks/sections/CTASection'
-import { FeatureSection } from './blocks/sections/FeatureSection'
-import { GroupedOffersSection } from './blocks/sections/GroupedOffersSection'
-import { HeroSection } from './blocks/sections/HeroSection'
-import { InformationSection } from './blocks/sections/InformationSection'
-import { Media } from './collections/Media'
-import { Offer } from './collections/Offer'
-import { Page } from './collections/Page'
-import { Users } from './collections/Users'
-import { Footer } from './globals/Footer'
-import { Header } from './globals/Header'
-import { Homepage } from './globals/Homepage'
-import { Batchcooking } from './globals/Batchcooking'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -42,9 +36,9 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Page, Offer],
-  globals: [Header, Homepage, Batchcooking, Footer],
-  blocks: [HeroSection, FeatureSection, CTASection, InformationSection, GroupedOffersSection],
+  collections: [Users, Media, Offer],
+  globals: [Homepage, Batchcooking, Nutrition],
+  blocks: [HeroSection],
   editor: lexicalEditor(),
   secret: payloadSecret,
   typescript: {
