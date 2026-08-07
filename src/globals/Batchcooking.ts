@@ -8,28 +8,6 @@ export const Batchcooking: GlobalConfig = {
     SectionsBlocks,
     {
       type: 'group',
-      label: 'Hero',
-      fields: [
-        {
-          name: 'hero-image',
-          type: 'upload',
-          relationTo: 'media',
-          label: 'Image de la section Hero',
-        },
-        {
-          name: 'hero-title',
-          type: 'text',
-          label: 'Titre de la section Hero',
-        },
-        {
-          name: 'hero-description',
-          type: 'textarea',
-          label: 'Description de la section Hero',
-        },
-      ],
-    },
-    {
-      type: 'group',
       label: 'Principe',
       fields: [
         {
@@ -57,8 +35,8 @@ export const Batchcooking: GlobalConfig = {
         },
         {
           name: 'principe-description',
-          type: 'richText',
           label: 'Description de la section Principe',
+          type: 'richText',
           editor: lexicalEditor(),
         },
       ],

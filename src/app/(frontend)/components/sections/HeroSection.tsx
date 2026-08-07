@@ -1,3 +1,5 @@
+import type { HeroSection as HeroSectionType } from '@/payload-types'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 import classNames from 'classnames'
 import type { IconName } from 'lucide-react/dynamic'
 import Image from 'next/image'
@@ -7,7 +9,7 @@ import { JBNLink } from '../JBNLink'
 
 type Props = ComponentProps<'section'> & {
   title: string
-  description?: string
+  description?: HeroSectionType['description']
   tags?: Array<{
     label: string
     icon?: IconName
@@ -41,7 +43,7 @@ export function HeroSection(props: Props) {
             </div>
           )}
           <h1 className="">{title}</h1>
-          {description && <p>{description}</p>}
+          {description && <RichText data={description} />}
           {actions.length > 0 && (
             <div className="flex w-full items-stretch gap-10 max-md:flex-col">
               {actions.map((action, index) => (

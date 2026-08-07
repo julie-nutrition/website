@@ -142,7 +142,21 @@ export interface HeroSection {
       }[]
     | null;
   header?: string | null;
-  description?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   image?: (number | null) | Media;
   actions?:
     | {
@@ -433,7 +447,21 @@ export interface Batchcooking {
             }[]
           | null;
         header?: string | null;
-        description?: string | null;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         image?: (number | null) | Media;
         actions?:
           | {
@@ -447,9 +475,6 @@ export interface Batchcooking {
         blockType: 'hero-section';
       }[]
     | null;
-  'hero-image'?: (number | null) | Media;
-  'hero-title'?: string | null;
-  'hero-description'?: string | null;
   'principe-image-1'?: (number | null) | Media;
   'principe-image-2'?: (number | null) | Media;
   'principe-image-3'?: (number | null) | Media;
@@ -537,7 +562,21 @@ export interface Nutrition {
             }[]
           | null;
         header?: string | null;
-        description?: string | null;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         image?: (number | null) | Media;
         actions?:
           | {
@@ -601,9 +640,6 @@ export interface BatchcookingSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
-  'hero-image'?: T;
-  'hero-title'?: T;
-  'hero-description'?: T;
   'principe-image-1'?: T;
   'principe-image-2'?: T;
   'principe-image-3'?: T;

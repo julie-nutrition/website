@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { getPayload } from 'payload'
 import Footer from '../components/Footer'
 import { Icon } from '../components/Icon'
-import { HeroSection } from '../components/sections/HeroSection'
+import SectionRenderer from '../components/sections/SectionRenderer'
 import { Formule } from './components/Formule'
 
 export default async function Batchcooking() {
@@ -41,21 +41,9 @@ export default async function Batchcooking() {
   }
   return (
     <>
-      <HeroSection
-        image={heroImage}
-        tags={[
-          { label: 'Cuisine à domicile', icon: 'cooking-pot' },
-          { label: 'Personnalisé', icon: 'user-star' },
-        ]}
-        title={page['hero-title']!}
-        description={page['hero-description']!}
-        actions={[
-          {
-            label: 'Voir les formules',
-            href: '#formules',
-          },
-        ]}
-      />
+      {page.sections?.map((section, index) => (
+        <SectionRenderer key={index} section={section} />
+      ))}
       <section className="flex items-center gap-80 py-100">
         <div className="grid grid-cols-2 gap-20">
           {page['principe-image-1'] &&

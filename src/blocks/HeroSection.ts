@@ -1,3 +1,4 @@
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { Block } from 'payload'
 
 export const HeroSection: Block = {
@@ -35,8 +36,16 @@ export const HeroSection: Block = {
     },
     {
       name: 'description',
-      type: 'textarea',
       label: 'Description de la section',
+      type: 'richText',
+      editor: lexicalEditor({
+        admin: {
+          hideAddBlockButton: true,
+          hideGutter: true,
+          hideDraggableBlockElement: true,
+          hideInsertParagraphAtEnd: true,
+        },
+      }),
     },
     {
       name: 'image',
