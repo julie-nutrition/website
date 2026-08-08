@@ -1,89 +1,10 @@
 import { SectionsBlocks } from '@/fields/SectionsBlocks'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { GlobalConfig } from 'payload'
 
 export const Batchcooking: GlobalConfig = {
   slug: 'batchcooking',
   fields: [
     SectionsBlocks,
-    {
-      type: 'group',
-      label: 'Principe',
-      fields: [
-        {
-          name: 'principe-image-1',
-          type: 'upload',
-          relationTo: 'media',
-          label: 'Image de la section Principe - 1',
-        },
-        {
-          name: 'principe-image-2',
-          type: 'upload',
-          relationTo: 'media',
-          label: 'Image de la section Principe - 2',
-        },
-        {
-          name: 'principe-image-3',
-          type: 'upload',
-          relationTo: 'media',
-          label: 'Image de la section Principe - 3',
-        },
-        {
-          name: 'principe-title',
-          type: 'text',
-          label: 'Titre de la section Principe',
-        },
-        {
-          name: 'principe-description',
-          label: 'Description de la section Principe',
-          type: 'richText',
-          editor: lexicalEditor(),
-        },
-      ],
-    },
-    {
-      type: 'group',
-      label: 'Problematique',
-      fields: [
-        {
-          name: 'issues-title',
-          type: 'text',
-          label: 'Titre de la section Problematique',
-        },
-        {
-          name: 'issues',
-          type: 'array',
-          label: 'Liste des problématiques',
-          fields: [
-            {
-              name: 'issue-title',
-              type: 'text',
-              label: 'Problématique',
-            },
-            {
-              name: 'issue-description',
-              type: 'textarea',
-              label: 'Description de la problématique',
-            },
-            {
-              name: 'issue-emoticon',
-              type: 'text',
-              label: 'Émoticône de la problématique',
-            },
-          ],
-        },
-        {
-          name: 'solution-title',
-          type: 'text',
-          label: 'Titre de la section Solution',
-        },
-        {
-          name: 'solution-description',
-          type: 'textarea',
-          label: 'Description de la section Solution',
-        },
-      ],
-    },
     {
       type: 'group',
       label: 'Approche',

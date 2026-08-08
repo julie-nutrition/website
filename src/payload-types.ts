@@ -68,6 +68,7 @@ export interface Config {
   blocks: {
     'hero-section': HeroSection;
     'overview-section': OverviewSection;
+    'issues-section': IssuesSection;
   };
   collections: {
     users: User;
@@ -215,6 +216,26 @@ export interface OverviewSection {
   id?: string | null;
   blockName?: string | null;
   blockType: 'overview-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "issues-section".
+ */
+export interface IssuesSection {
+  header?: string | null;
+  issues?:
+    | {
+        icon?: string | null;
+        issue?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  'solution-title'?: string | null;
+  'solution-content'?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'issues-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -526,38 +547,24 @@ export interface Batchcooking {
             blockName?: string | null;
             blockType: 'overview-section';
           }
+        | {
+            header?: string | null;
+            issues?:
+              | {
+                  icon?: string | null;
+                  issue?: string | null;
+                  description?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            'solution-title'?: string | null;
+            'solution-content'?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'issues-section';
+          }
       )[]
     | null;
-  'principe-image-1'?: (number | null) | Media;
-  'principe-image-2'?: (number | null) | Media;
-  'principe-image-3'?: (number | null) | Media;
-  'principe-title'?: string | null;
-  'principe-description'?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  'issues-title'?: string | null;
-  issues?:
-    | {
-        'issue-title'?: string | null;
-        'issue-description'?: string | null;
-        'issue-emoticon'?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  'solution-title'?: string | null;
-  'solution-description'?: string | null;
   'approach-title'?: string | null;
   'approach-description'?: string | null;
   'approach-steps'?:
@@ -666,6 +673,22 @@ export interface Nutrition {
             blockName?: string | null;
             blockType: 'overview-section';
           }
+        | {
+            header?: string | null;
+            issues?:
+              | {
+                  icon?: string | null;
+                  issue?: string | null;
+                  description?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            'solution-title'?: string | null;
+            'solution-content'?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'issues-section';
+          }
       )[]
     | null;
   updatedAt?: string | null;
@@ -727,23 +750,24 @@ export interface BatchcookingSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'issues-section'?:
+          | T
+          | {
+              header?: T;
+              issues?:
+                | T
+                | {
+                    icon?: T;
+                    issue?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              'solution-title'?: T;
+              'solution-content'?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
-  'principe-image-1'?: T;
-  'principe-image-2'?: T;
-  'principe-image-3'?: T;
-  'principe-title'?: T;
-  'principe-description'?: T;
-  'issues-title'?: T;
-  issues?:
-    | T
-    | {
-        'issue-title'?: T;
-        'issue-description'?: T;
-        'issue-emoticon'?: T;
-        id?: T;
-      };
-  'solution-title'?: T;
-  'solution-description'?: T;
   'approach-title'?: T;
   'approach-description'?: T;
   'approach-steps'?:
@@ -824,6 +848,23 @@ export interface NutritionSelect<T extends boolean = true> {
               header?: T;
               description?: T;
               images?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'issues-section'?:
+          | T
+          | {
+              header?: T;
+              issues?:
+                | T
+                | {
+                    icon?: T;
+                    issue?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              'solution-title'?: T;
+              'solution-content'?: T;
               id?: T;
               blockName?: T;
             };

@@ -6,6 +6,7 @@ import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 import { HeroSection } from './blocks/HeroSection'
+import { IssuesSection } from './blocks/IssuesSection'
 import { Media } from './collections/Media'
 import { Offer } from './collections/Offer'
 import { Users } from './collections/Users'
@@ -39,7 +40,7 @@ export default buildConfig({
   },
   collections: [Users, Media, Offer],
   globals: [Homepage, Batchcooking, Nutrition],
-  blocks: [HeroSection, OverviewSection],
+  blocks: [HeroSection, OverviewSection, IssuesSection],
   editor: lexicalEditor(),
   secret: payloadSecret,
   typescript: {

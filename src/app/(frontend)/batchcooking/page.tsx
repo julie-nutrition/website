@@ -29,32 +29,6 @@ export default async function Batchcooking() {
       {page.sections?.map((section, index) => (
         <SectionRenderer key={index} section={section} />
       ))}
-      {page.issues && page.issues.length && (
-        <section className="bg-jbn-jewel-900 text-jbn-ginfizz-50 full-width items-center py-100">
-          <div className="m-auto flex max-w-728 flex-col items-center gap-80">
-            <h3 className="text-h3">{page['issues-title']}</h3>
-            <div className="flex flex-col gap-10">
-              {page.issues.map((issue, index) => (
-                <div
-                  key={index}
-                  className="bg-jbn-sprout-200 text-text-dark flex items-center gap-20 rounded-2xl p-40"
-                >
-                  <p>{issue['issue-emoticon']}</p>
-                  <div className="flex flex-col gap-10">
-                    <h4 className="text-h4">{issue['issue-title']}</h4>
-                    <p className="paragraph">{issue['issue-description']}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col items-center gap-10">
-              <h3>{page['solution-title']}</h3>
-              <p>{page['solution-description']}</p>
-            </div>
-          </div>
-        </section>
-      )}
-
       {page['approach-steps'] && page['approach-steps'].length && (
         <section className="bg-background-card text-text-dark full-width py-100 text-center">
           <span className="font-light tracking-[0.1875rem] uppercase">La démarche</span>
