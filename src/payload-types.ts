@@ -67,6 +67,7 @@ export interface Config {
   };
   blocks: {
     'hero-section': HeroSection;
+    'overview-section': OverviewSection;
   };
   collections: {
     users: User;
@@ -187,6 +188,33 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "overview-section".
+ */
+export interface OverviewSection {
+  'meta-title'?: string | null;
+  header?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  images?: (number | Media)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'overview-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -438,42 +466,67 @@ export interface Homepage {
 export interface Batchcooking {
   id: number;
   sections?:
-    | {
-        tags?:
-          | {
-              label: string;
-              icon?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        header?: string | null;
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
+    | (
+        | {
+            tags?:
+              | {
+                  label: string;
+                  icon?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            header?: string | null;
+            description?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
               [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        image?: (number | null) | Media;
-        actions?:
-          | {
-              label: string;
-              href: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'hero-section';
-      }[]
+            } | null;
+            image?: (number | null) | Media;
+            actions?:
+              | {
+                  label: string;
+                  href: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero-section';
+          }
+        | {
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            images?: (number | Media)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'overview-section';
+          }
+      )[]
     | null;
   'principe-image-1'?: (number | null) | Media;
   'principe-image-2'?: (number | null) | Media;
@@ -553,42 +606,67 @@ export interface Batchcooking {
 export interface Nutrition {
   id: number;
   sections?:
-    | {
-        tags?:
-          | {
-              label: string;
-              icon?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        header?: string | null;
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
+    | (
+        | {
+            tags?:
+              | {
+                  label: string;
+                  icon?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            header?: string | null;
+            description?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
               [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        image?: (number | null) | Media;
-        actions?:
-          | {
-              label: string;
-              href: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'hero-section';
-      }[]
+            } | null;
+            image?: (number | null) | Media;
+            actions?:
+              | {
+                  label: string;
+                  href: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero-section';
+          }
+        | {
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            images?: (number | Media)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'overview-section';
+          }
+      )[]
     | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -636,6 +714,16 @@ export interface BatchcookingSelect<T extends boolean = true> {
                     href?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'overview-section'?:
+          | T
+          | {
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              images?: T;
               id?: T;
               blockName?: T;
             };
@@ -726,6 +814,16 @@ export interface NutritionSelect<T extends boolean = true> {
                     href?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'overview-section'?:
+          | T
+          | {
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              images?: T;
               id?: T;
               blockName?: T;
             };

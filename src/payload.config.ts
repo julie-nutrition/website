@@ -15,6 +15,7 @@ import { Nutrition } from './globals/Nutrition'
 
 import { en } from '@payloadcms/translations/languages/en'
 import { fr } from '@payloadcms/translations/languages/fr'
+import { OverviewSection } from './blocks/OverviewSection'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -38,7 +39,7 @@ export default buildConfig({
   },
   collections: [Users, Media, Offer],
   globals: [Homepage, Batchcooking, Nutrition],
-  blocks: [HeroSection],
+  blocks: [HeroSection, OverviewSection],
   editor: lexicalEditor(),
   secret: payloadSecret,
   typescript: {

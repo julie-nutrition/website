@@ -1,9 +1,13 @@
-import type { HeroSection as HeroSectionType } from '@/payload-types'
+import type {
+  HeroSection as HeroSectionType,
+  OverviewSection as OverviewSectionType,
+} from '@/payload-types'
 import { IconName } from 'lucide-react/dynamic'
 import { HeroSection } from './HeroSection'
+import { OverviewSection } from './OverviewSection'
 
 type SectionRendererProps = {
-  section: HeroSectionType
+  section: HeroSectionType | OverviewSectionType
 }
 
 export default function SectionRenderer({ section }: SectionRendererProps) {
@@ -42,10 +46,13 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
           title={section.header}
           image={image}
           tags={tags}
-          description={section.description ?? undefined}
+          description={section.description}
           actions={actions}
         />
       )
+
+    case 'overview-section':
+      return <OverviewSection section={section} />
 
     default:
       return null

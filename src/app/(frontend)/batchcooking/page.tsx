@@ -1,5 +1,4 @@
 import config from '@/payload.config'
-import { RichText } from '@payloadcms/richtext-lexical/react'
 import classnames from 'classnames'
 import { IconName } from 'lucide-react/dynamic'
 import Image from 'next/image'
@@ -16,20 +15,6 @@ export default async function Batchcooking() {
     slug: 'batchcooking',
   })
 
-  let heroImage
-
-  if (
-    page['hero-image'] &&
-    typeof page['hero-image'] !== 'number' &&
-    typeof page['hero-image'].url === 'string' &&
-    typeof page['hero-image'].alt === 'string'
-  ) {
-    heroImage = {
-      src: page['hero-image'].url,
-      alt: page['hero-image'].alt,
-    }
-  }
-
   const stepIndicatorClass = (hasIcon: boolean) => {
     return classnames(
       'stepper-step-indicator border-text-dark bg-background-card grid h-48 w-48 place-items-center rounded-full border',
@@ -44,49 +29,6 @@ export default async function Batchcooking() {
       {page.sections?.map((section, index) => (
         <SectionRenderer key={index} section={section} />
       ))}
-      <section className="flex items-center gap-80 py-100">
-        <div className="grid grid-cols-2 gap-20">
-          {page['principe-image-1'] &&
-            typeof page['principe-image-1'] !== 'number' &&
-            typeof page['principe-image-1'].url === 'string' &&
-            typeof page['principe-image-1'].alt === 'string' && (
-              <img
-                src={page['principe-image-1'].url}
-                alt={page['principe-image-1'].alt}
-                className="row-span-2 row-start-1 h-300 w-265 rounded-2xl object-cover"
-              />
-            )}
-
-          {page['principe-image-2'] &&
-            typeof page['principe-image-2'] !== 'number' &&
-            typeof page['principe-image-2'].url === 'string' &&
-            typeof page['principe-image-2'].alt === 'string' && (
-              <img
-                src={page['principe-image-2'].url}
-                alt={page['principe-image-2'].alt}
-                className="row-span-2 row-start-2 h-300 w-265 rounded-2xl object-cover"
-              />
-            )}
-
-          {page['principe-image-3'] &&
-            typeof page['principe-image-3'] !== 'number' &&
-            typeof page['principe-image-3'].url === 'string' &&
-            typeof page['principe-image-3'].alt === 'string' && (
-              <img
-                src={page['principe-image-3'].url}
-                alt={page['principe-image-3'].alt}
-                className="row-span-2 row-start-3 h-300 w-265 rounded-2xl object-cover"
-              />
-            )}
-        </div>
-        <div className="text-jbn-jewel-900 flex flex-1 flex-col gap-20 p-100">
-          <div className="flex flex-col">
-            <span className="font-light tracking-[0.1875rem] uppercase">Le principe</span>
-            <h3>{page['principe-title']}</h3>
-          </div>
-          {page['principe-description'] && <RichText data={page['principe-description']} />}
-        </div>
-      </section>
       {page.issues && page.issues.length && (
         <section className="bg-jbn-jewel-900 text-jbn-ginfizz-50 full-width items-center py-100">
           <div className="m-auto flex max-w-728 flex-col items-center gap-80">
