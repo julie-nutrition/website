@@ -69,6 +69,7 @@ export interface Config {
     'hero-section': HeroSection;
     'overview-section': OverviewSection;
     'issues-section': IssuesSection;
+    'stepper-section': StepperSection;
   };
   collections: {
     users: User;
@@ -236,6 +237,26 @@ export interface IssuesSection {
   id?: string | null;
   blockName?: string | null;
   blockType: 'issues-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stepper-section".
+ */
+export interface StepperSection {
+  'meta-title'?: string | null;
+  header?: string | null;
+  description?: string | null;
+  steps?:
+    | {
+        title?: string | null;
+        icon?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stepper-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -563,6 +584,22 @@ export interface Batchcooking {
             blockName?: string | null;
             blockType: 'issues-section';
           }
+        | {
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: string | null;
+            steps?:
+              | {
+                  title?: string | null;
+                  icon?: string | null;
+                  description?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stepper-section';
+          }
       )[]
     | null;
   'approach-title'?: string | null;
@@ -689,6 +726,22 @@ export interface Nutrition {
             blockName?: string | null;
             blockType: 'issues-section';
           }
+        | {
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: string | null;
+            steps?:
+              | {
+                  title?: string | null;
+                  icon?: string | null;
+                  description?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stepper-section';
+          }
       )[]
     | null;
   updatedAt?: string | null;
@@ -764,6 +817,23 @@ export interface BatchcookingSelect<T extends boolean = true> {
                   };
               'solution-title'?: T;
               'solution-content'?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'stepper-section'?:
+          | T
+          | {
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              steps?:
+                | T
+                | {
+                    title?: T;
+                    icon?: T;
+                    description?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -865,6 +935,23 @@ export interface NutritionSelect<T extends boolean = true> {
                   };
               'solution-title'?: T;
               'solution-content'?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'stepper-section'?:
+          | T
+          | {
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              steps?:
+                | T
+                | {
+                    title?: T;
+                    icon?: T;
+                    description?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

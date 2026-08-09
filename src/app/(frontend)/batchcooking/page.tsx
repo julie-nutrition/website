@@ -1,10 +1,8 @@
 import config from '@/payload.config'
 import classnames from 'classnames'
-import { IconName } from 'lucide-react/dynamic'
 import Image from 'next/image'
 import { getPayload } from 'payload'
 import Footer from '../components/Footer'
-import { Icon } from '../components/Icon'
 import SectionRenderer from '../components/sections/SectionRenderer'
 import { Formule } from './components/Formule'
 
@@ -29,31 +27,7 @@ export default async function Batchcooking() {
       {page.sections?.map((section, index) => (
         <SectionRenderer key={index} section={section} />
       ))}
-      {page['approach-steps'] && page['approach-steps'].length && (
-        <section className="bg-background-card text-text-dark full-width py-100 text-center">
-          <span className="font-light tracking-[0.1875rem] uppercase">La démarche</span>
-          <h3>{page['approach-title']}</h3>
-          <p className="mt-10">{page['approach-description']}</p>
-          <div className="mt-80 flex justify-between">
-            {page['approach-steps'].map((step, index) => (
-              <div
-                key={index}
-                className="stepper-step flex flex-col items-center gap-10 rounded-2xl p-40"
-              >
-                <span className={stepIndicatorClass(!!step['step-icon'])}>
-                  {step['step-icon'] ? (
-                    <Icon iconName={step['step-icon'] as IconName} />
-                  ) : (
-                    index + 1
-                  )}
-                </span>
-                <h4 className="text-h4">{step['step-title']}</h4>
-                <p className="paragraph">{step['step-description']}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+
       {page['formules'] && page.formules.length && (
         <section id="formules" className="full-width text-text-dark bg-white py-100 text-center">
           <span className="font-light tracking-[0.1875rem] uppercase">Les formules</span>

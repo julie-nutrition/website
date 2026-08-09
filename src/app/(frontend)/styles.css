@@ -66,6 +66,8 @@
   isolation: isolate;
 
   .stepper-step-indicator {
+    anchor-name: --stepper-step-indicator;
+
     &::after,
     &::before {
       content: '';
@@ -84,6 +86,27 @@
     &::before {
       left: 0;
       right: 50%;
+    }
+  }
+
+  @media (width < 64rem) {
+    .stepper-step-indicator {
+      &::after,
+      &::before {
+        left: 63px;
+        width: 2px;
+        height: initial;
+      }
+
+      &::before {
+        top: 0;
+        bottom: anchor(--stepper-step-indicator top);
+      }
+
+      &::after {
+        top: anchor(--stepper-step-indicator bottom);
+        bottom: 0;
+      }
     }
   }
 

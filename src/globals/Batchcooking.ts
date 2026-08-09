@@ -7,44 +7,6 @@ export const Batchcooking: GlobalConfig = {
     SectionsBlocks,
     {
       type: 'group',
-      label: 'Approche',
-      fields: [
-        {
-          name: 'approach-title',
-          type: 'text',
-          label: 'Titre de la section Approche',
-        },
-        {
-          name: 'approach-description',
-          type: 'textarea',
-          label: 'Description de la section Approche',
-        },
-        {
-          name: 'approach-steps',
-          type: 'array',
-          label: "Liste des étapes de l'approche",
-          fields: [
-            {
-              name: 'step-title',
-              type: 'text',
-              label: "Titre de l'étape",
-            },
-            {
-              name: 'step-icon',
-              type: 'text',
-              label: "Émoticône de l'étape",
-            },
-            {
-              name: 'step-description',
-              type: 'textarea',
-              label: "Description de l'étape",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: 'group',
       label: 'Formules',
       fields: [
         {
