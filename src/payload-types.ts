@@ -70,6 +70,7 @@ export interface Config {
     'overview-section': OverviewSection;
     'issues-section': IssuesSection;
     'stepper-section': StepperSection;
+    'pricing-section': PricingSection;
   };
   collections: {
     users: User;
@@ -257,6 +258,39 @@ export interface StepperSection {
   id?: string | null;
   blockName?: string | null;
   blockType: 'stepper-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pricing-section".
+ */
+export interface PricingSection {
+  'meta-title'?: string | null;
+  header?: string | null;
+  description?: string | null;
+  plans?:
+    | {
+        recommended?: boolean | null;
+        title?: string | null;
+        description?: string | null;
+        footer?: string | null;
+        'key-points'?:
+          | {
+              'key-point'?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        price?: number | null;
+        'final-price'?: number | null;
+        'final-price-unit'?: string | null;
+        cta?: string | null;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  footer?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pricing-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -600,36 +634,36 @@ export interface Batchcooking {
             blockName?: string | null;
             blockType: 'stepper-section';
           }
+        | {
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: string | null;
+            plans?:
+              | {
+                  recommended?: boolean | null;
+                  title?: string | null;
+                  description?: string | null;
+                  footer?: string | null;
+                  'key-points'?:
+                    | {
+                        'key-point'?: string | null;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  price?: number | null;
+                  'final-price'?: number | null;
+                  'final-price-unit'?: string | null;
+                  cta?: string | null;
+                  link?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            footer?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pricing-section';
+          }
       )[]
-    | null;
-  'approach-title'?: string | null;
-  'approach-description'?: string | null;
-  'approach-steps'?:
-    | {
-        'step-title'?: string | null;
-        'step-icon'?: string | null;
-        'step-description'?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  'formules-title'?: string | null;
-  'formules-description'?: string | null;
-  formules?:
-    | {
-        'formule-title'?: string | null;
-        'formule-description'?: string | null;
-        'formule-key-points'?:
-          | {
-              'key-point'?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        'formule-price'?: number | null;
-        'formule-final-price'?: number | null;
-        'formule-link'?: string | null;
-        'formule-spotlight'?: boolean | null;
-        id?: string | null;
-      }[]
     | null;
   'feedbacks-title'?: string | null;
   feedbacks?:
@@ -742,6 +776,35 @@ export interface Nutrition {
             blockName?: string | null;
             blockType: 'stepper-section';
           }
+        | {
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: string | null;
+            plans?:
+              | {
+                  recommended?: boolean | null;
+                  title?: string | null;
+                  description?: string | null;
+                  footer?: string | null;
+                  'key-points'?:
+                    | {
+                        'key-point'?: string | null;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  price?: number | null;
+                  'final-price'?: number | null;
+                  'final-price-unit'?: string | null;
+                  cta?: string | null;
+                  link?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            footer?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pricing-section';
+          }
       )[]
     | null;
   updatedAt?: string | null;
@@ -837,35 +900,36 @@ export interface BatchcookingSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-      };
-  'approach-title'?: T;
-  'approach-description'?: T;
-  'approach-steps'?:
-    | T
-    | {
-        'step-title'?: T;
-        'step-icon'?: T;
-        'step-description'?: T;
-        id?: T;
-      };
-  'formules-title'?: T;
-  'formules-description'?: T;
-  formules?:
-    | T
-    | {
-        'formule-title'?: T;
-        'formule-description'?: T;
-        'formule-key-points'?:
+        'pricing-section'?:
           | T
           | {
-              'key-point'?: T;
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              plans?:
+                | T
+                | {
+                    recommended?: T;
+                    title?: T;
+                    description?: T;
+                    footer?: T;
+                    'key-points'?:
+                      | T
+                      | {
+                          'key-point'?: T;
+                          id?: T;
+                        };
+                    price?: T;
+                    'final-price'?: T;
+                    'final-price-unit'?: T;
+                    cta?: T;
+                    link?: T;
+                    id?: T;
+                  };
+              footer?: T;
               id?: T;
+              blockName?: T;
             };
-        'formule-price'?: T;
-        'formule-final-price'?: T;
-        'formule-link'?: T;
-        'formule-spotlight'?: T;
-        id?: T;
       };
   'feedbacks-title'?: T;
   feedbacks?:
@@ -952,6 +1016,36 @@ export interface NutritionSelect<T extends boolean = true> {
                     description?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'pricing-section'?:
+          | T
+          | {
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              plans?:
+                | T
+                | {
+                    recommended?: T;
+                    title?: T;
+                    description?: T;
+                    footer?: T;
+                    'key-points'?:
+                      | T
+                      | {
+                          'key-point'?: T;
+                          id?: T;
+                        };
+                    price?: T;
+                    'final-price'?: T;
+                    'final-price-unit'?: T;
+                    cta?: T;
+                    link?: T;
+                    id?: T;
+                  };
+              footer?: T;
               id?: T;
               blockName?: T;
             };

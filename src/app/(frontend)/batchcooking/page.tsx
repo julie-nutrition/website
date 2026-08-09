@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { getPayload } from 'payload'
 import Footer from '../components/Footer'
 import SectionRenderer from '../components/sections/SectionRenderer'
-import { Formule } from './components/Formule'
 
 export default async function Batchcooking() {
   const payloadConfig = await config
@@ -27,23 +26,6 @@ export default async function Batchcooking() {
       {page.sections?.map((section, index) => (
         <SectionRenderer key={index} section={section} />
       ))}
-
-      {page['formules'] && page.formules.length && (
-        <section id="formules" className="full-width text-text-dark bg-white py-100 text-center">
-          <span className="font-light tracking-[0.1875rem] uppercase">Les formules</span>
-          <h3>{page['formules-title']}</h3>
-          <p className="mt-10">{page['formules-description']}</p>
-          <div className="mt-80 flex items-stretch justify-center gap-40">
-            {page['formules'].map((formule, index) => (
-              <Formule key={index} formule={formule} />
-            ))}
-          </div>
-          <p className="mt-40">
-            Les courses restent à votre charge. Déplacement inclus dans un rayon de 15km de Lyon, au
-            delà sur devis.
-          </p>
-        </section>
-      )}
       <section className="full-width text-text-dark bg-background-card py-100 text-center">
         <h3>Je suis agréée &quot;Service à la personne&quot;</h3>
         <p className="mt-10">
