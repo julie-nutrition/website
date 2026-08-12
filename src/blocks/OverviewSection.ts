@@ -55,5 +55,21 @@ export const OverviewSection: Block = {
         },
       ],
     },
+    {
+      name: 'layout',
+      type: 'radio',
+      label: 'Disposition de la section',
+      defaultValue: 'left',
+      options: [
+        {
+          label: 'Images à gauche',
+          value: 'left',
+        },
+        {
+          label: 'Images à droite',
+          value: 'right',
+        },
+      ],
+    },
   ],
 }
