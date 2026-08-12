@@ -1,10 +1,12 @@
 'use client'
 
+import classNames from 'classnames'
+import type { IconName } from 'lucide-react/dynamic'
 import Image from 'next/image'
-import clx from 'classnames'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ComponentProps } from 'react'
+import { Icon } from './Icon'
 
 type HeaderProps = ComponentProps<'header'>
 
@@ -15,7 +17,7 @@ export default function Header(props: HeaderProps) {
   return (
     <header
       {...headerProps}
-      className={clx(
+      className={classNames(
         'content-grid bg-jbn-light-yellow/80 border-jbn-dark-green/10 border-b backdrop-blur-md backdrop-saturate-150',
         className,
       )}
@@ -31,30 +33,48 @@ export default function Header(props: HeaderProps) {
           />
         </Link>
 
-        <nav className="hidden list-none items-center justify-start gap-40 md:flex">
+        <nav className="flex list-none items-center justify-start gap-40">
           <HeaderItem
             label="Batchcooking"
             url="/batchcooking"
+            icon="cooking-pot"
             active={pathname === '/batchcooking'}
           />
-          <HeaderItem label="Nutrition" url="/nutrition" active={pathname === '/nutrition'} />
+          <HeaderItem
+            label="Nutrition"
+            url="/nutrition"
+            icon="video"
+            active={pathname === '/nutrition'}
+          />
         </nav>
       </div>
     </header>
   )
 }
 
-function HeaderItem({ label, url, active }: { label: string; url: string; active?: boolean }) {
+function HeaderItem({
+  label,
+  url,
+  icon,
+  active,
+}: {
+  label: string
+  url: string
+  icon: IconName
+  active?: boolean
+}) {
   return (
     <li>
       <Link
         href={url}
-        className={clx(
-          'text-jbn-jewel-900 hover:text-jbn-jewel-950 active:text-jbn-sprout-950 transition-colors hover:font-semibold',
-          { 'font-semibold': active, 'text-jbn-jewel-950': active },
+        className={classNames(
+          'paragraph hover:text-hover-dark active:text-pressed-dark flex items-center gap-8 transition-colors',
+          { 'text-pressed-dark': active },
+          { 'text-text-dark': !active },
         )}
       >
-        {label}
+        <Icon iconName={icon} width={16} height={16} />
+        <span className="max-sm:hidden">{label}</span>
       </Link>
     </li>
   )

@@ -1,15 +1,24 @@
 import classNames from 'classnames'
 import { ArrowRight } from 'lucide-react'
 import Link, { type LinkProps } from 'next/link'
+import { ComponentProps } from 'react'
 
-type Props = React.ComponentPropsWithoutRef<'a'> &
+type Props = ComponentProps<'a'> &
   LinkProps & {
     variant?: 'light' | 'dark'
     emphasis?: 'bold' | 'subtle'
+    decorative?: boolean
   }
 
 export function JBNLink(props: Props) {
-  const { className, variant = 'light', emphasis = 'bold', ...htmlProps } = props
+  const {
+    className,
+    children,
+    variant = 'light',
+    emphasis = 'bold',
+    decorative = false,
+    ...htmlProps
+  } = props
 
   const classes = [
     'flex items-center justify-center gap-8 rounded-lg px-20 py-8 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2',
@@ -41,9 +50,18 @@ export function JBNLink(props: Props) {
     }
   }
 
+  if (decorative) {
+    return (
+      <div className={classNames(classes, className)}>
+        {children}
+        <ArrowRight width={16} height={16} />
+      </div>
+    )
+  }
+
   return (
     <Link {...htmlProps} className={classNames(classes, className)}>
-      {props.children}
+      {children}
       <ArrowRight width={16} height={16} />
     </Link>
   )

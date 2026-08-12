@@ -18,7 +18,7 @@ export default async function Page() {
   })
 
   return (
-    <section className="bg-jbn-dark-green full-width flex! h-full gap-4">
+    <section className="bg-jbn-dark-green full-width flex! h-full flex-col gap-4 lg:flex-row">
       {homepage['batchcooking-image'] &&
         typeof homepage['batchcooking-image'] !== 'number' &&
         homepage['batchcooking-title'] &&
