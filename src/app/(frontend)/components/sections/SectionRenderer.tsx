@@ -1,5 +1,6 @@
 import type {
   HeroSection as HeroSectionType,
+  InfoSection as InfoSectionType,
   IssuesSection as IssuesSectionType,
   OverviewSection as OverviewSectionType,
   PricingSection as PricingSectionType,
@@ -7,6 +8,7 @@ import type {
 } from '@/payload-types'
 import { IconName } from 'lucide-react/dynamic'
 import { HeroSection } from './HeroSection'
+import { InfoSection } from './InfoSection'
 import { IssuesSection } from './IssuesSection'
 import { OverviewSection } from './OverviewSection'
 import { PricingSection } from './PricingSection'
@@ -19,6 +21,7 @@ type SectionRendererProps = {
     | IssuesSectionType
     | StepperSectionType
     | PricingSectionType
+    | InfoSectionType
 }
 
 export default function SectionRenderer({ section }: SectionRendererProps) {
@@ -73,6 +76,9 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
 
     case 'pricing-section':
       return <PricingSection section={section} />
+
+    case 'info-section':
+      return <InfoSection section={section} />
 
     default:
       return null

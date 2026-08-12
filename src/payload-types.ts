@@ -71,6 +71,7 @@ export interface Config {
     'issues-section': IssuesSection;
     'stepper-section': StepperSection;
     'pricing-section': PricingSection;
+    'info-section': InfoSection;
   };
   collections: {
     users: User;
@@ -291,6 +292,19 @@ export interface PricingSection {
   id?: string | null;
   blockName?: string | null;
   blockType: 'pricing-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "info-section".
+ */
+export interface InfoSection {
+  'meta-title'?: string | null;
+  header?: string | null;
+  description?: string | null;
+  media?: (number | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'info-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -663,6 +677,15 @@ export interface Batchcooking {
             blockName?: string | null;
             blockType: 'pricing-section';
           }
+        | {
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: string | null;
+            media?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'info-section';
+          }
       )[]
     | null;
   'feedbacks-title'?: string | null;
@@ -805,6 +828,15 @@ export interface Nutrition {
             blockName?: string | null;
             blockType: 'pricing-section';
           }
+        | {
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: string | null;
+            media?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'info-section';
+          }
       )[]
     | null;
   updatedAt?: string | null;
@@ -930,6 +962,16 @@ export interface BatchcookingSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'info-section'?:
+          | T
+          | {
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              media?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   'feedbacks-title'?: T;
   feedbacks?:
@@ -1046,6 +1088,16 @@ export interface NutritionSelect<T extends boolean = true> {
                     id?: T;
                   };
               footer?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'info-section'?:
+          | T
+          | {
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              media?: T;
               id?: T;
               blockName?: T;
             };
