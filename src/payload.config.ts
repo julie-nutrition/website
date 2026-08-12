@@ -20,6 +20,7 @@ import { InfoSection } from './blocks/InfoSection'
 import { OverviewSection } from './blocks/OverviewSection'
 import { PricingSection } from './blocks/PricingSection'
 import { StepperSection } from './blocks/StepperSection'
+import { TestimonialSection } from './blocks/TestimonialSection'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -50,6 +51,7 @@ export default buildConfig({
     StepperSection,
     PricingSection,
     InfoSection,
+    TestimonialSection,
   ],
   editor: lexicalEditor(),
   secret: payloadSecret,

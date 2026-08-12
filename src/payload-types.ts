@@ -72,6 +72,7 @@ export interface Config {
     'stepper-section': StepperSection;
     'pricing-section': PricingSection;
     'info-section': InfoSection;
+    'testimonial-section': TestimonialSection;
   };
   collections: {
     users: User;
@@ -305,6 +306,25 @@ export interface InfoSection {
   id?: string | null;
   blockName?: string | null;
   blockType: 'info-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonial-section".
+ */
+export interface TestimonialSection {
+  'meta-title'?: string | null;
+  header?: string | null;
+  testimonials?:
+    | {
+        name?: string | null;
+        service?: string | null;
+        content?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonial-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -686,16 +706,22 @@ export interface Batchcooking {
             blockName?: string | null;
             blockType: 'info-section';
           }
+        | {
+            'meta-title'?: string | null;
+            header?: string | null;
+            testimonials?:
+              | {
+                  name?: string | null;
+                  service?: string | null;
+                  content?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonial-section';
+          }
       )[]
-    | null;
-  'feedbacks-title'?: string | null;
-  feedbacks?:
-    | {
-        'feedback-author'?: string | null;
-        'feedback-service-type'?: string | null;
-        'feedback-content'?: string | null;
-        id?: string | null;
-      }[]
     | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -837,6 +863,21 @@ export interface Nutrition {
             blockName?: string | null;
             blockType: 'info-section';
           }
+        | {
+            'meta-title'?: string | null;
+            header?: string | null;
+            testimonials?:
+              | {
+                  name?: string | null;
+                  service?: string | null;
+                  content?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonial-section';
+          }
       )[]
     | null;
   updatedAt?: string | null;
@@ -972,15 +1013,22 @@ export interface BatchcookingSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-      };
-  'feedbacks-title'?: T;
-  feedbacks?:
-    | T
-    | {
-        'feedback-author'?: T;
-        'feedback-service-type'?: T;
-        'feedback-content'?: T;
-        id?: T;
+        'testimonial-section'?:
+          | T
+          | {
+              'meta-title'?: T;
+              header?: T;
+              testimonials?:
+                | T
+                | {
+                    name?: T;
+                    service?: T;
+                    content?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1098,6 +1146,22 @@ export interface NutritionSelect<T extends boolean = true> {
               header?: T;
               description?: T;
               media?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'testimonial-section'?:
+          | T
+          | {
+              'meta-title'?: T;
+              header?: T;
+              testimonials?:
+                | T
+                | {
+                    name?: T;
+                    service?: T;
+                    content?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

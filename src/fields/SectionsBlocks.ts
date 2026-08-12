@@ -4,6 +4,7 @@ import { IssuesSection } from '@/blocks/IssuesSection'
 import { OverviewSection } from '@/blocks/OverviewSection'
 import { PricingSection } from '@/blocks/PricingSection'
 import { StepperSection } from '@/blocks/StepperSection'
+import { TestimonialSection } from '@/blocks/TestimonialSection'
 import { Field } from 'payload'
 
 export const SectionsBlocks: Field = {
@@ -17,5 +18,6 @@ export const SectionsBlocks: Field = {
     StepperSection,
     PricingSection,
     InfoSection,
+    TestimonialSection,
   ],
 }
