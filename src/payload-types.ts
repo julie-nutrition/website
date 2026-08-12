@@ -217,6 +217,7 @@ export interface OverviewSection {
     [k: string]: unknown;
   } | null;
   images?: (number | Media)[] | null;
+  theme?: ('light' | 'dark') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'overview-section';
@@ -632,6 +633,7 @@ export interface Batchcooking {
               [k: string]: unknown;
             } | null;
             images?: (number | Media)[] | null;
+            theme?: ('light' | 'dark') | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'overview-section';
@@ -789,6 +791,7 @@ export interface Nutrition {
               [k: string]: unknown;
             } | null;
             images?: (number | Media)[] | null;
+            theme?: ('light' | 'dark') | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'overview-section';
@@ -936,6 +939,7 @@ export interface BatchcookingSelect<T extends boolean = true> {
               header?: T;
               description?: T;
               images?: T;
+              theme?: T;
               id?: T;
               blockName?: T;
             };
@@ -1072,6 +1076,7 @@ export interface NutritionSelect<T extends boolean = true> {
               header?: T;
               description?: T;
               images?: T;
+              theme?: T;
               id?: T;
               blockName?: T;
             };

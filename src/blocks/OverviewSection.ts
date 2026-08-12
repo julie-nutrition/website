@@ -39,5 +39,21 @@ export const OverviewSection: Block = {
       hasMany: true,
       maxRows: 3,
     },
+    {
+      name: 'theme',
+      type: 'radio',
+      label: 'Thème de la section',
+      defaultValue: 'light',
+      options: [
+        {
+          label: 'Clair',
+          value: 'light',
+        },
+        {
+          label: 'Sombre',
+          value: 'dark',
+        },
+      ],
+    },
   ],
 }

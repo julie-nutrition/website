@@ -10,7 +10,7 @@ type Props = ComponentProps<'section'> & {
 
 export function OverviewSection(props: Props) {
   const { className, section, ...htmlProps } = props
-  const { 'meta-title': metaTitle, header, description, images } = section
+  const { 'meta-title': metaTitle, header, description, images, theme } = section
 
   const validImages =
     images?.filter(
@@ -31,47 +31,53 @@ export function OverviewSection(props: Props) {
   ]
 
   const classes = classNames(
-    'text-text-dark flex flex-col sm:flex-row items-center py-100',
+    'full-width  py-100',
+    {
+      'text-text-dark': theme === 'light',
+      'bg-background-dark text-text-light': theme === 'dark',
+    },
     className,
   )
   return (
     <section className={classes} {...htmlProps}>
-      <div className="flex flex-col gap-20 p-10 sm:order-1 sm:p-100">
-        {metaTitle || header ? (
-          <div>
-            {metaTitle && <p className="sub-title-md">{metaTitle}</p>}
-            {header && <h3>{header}</h3>}
-          </div>
-        ) : null}
-        {description && <RichText data={description} />}
-      </div>
-      {validImages.length > 0 && (
-        <div
-          className={classNames('mt-40 w-full', {
-            'flex items-start justify-center': validImages.length < 3,
-            'relative aspect-square': validImages.length === 3,
-          })}
-        >
-          {validImages.map((image, index) => (
-            <div
-              key={image.id}
-              className={classNames(
-                'aspect-3/4 shrink-0 overflow-hidden rounded-2xl shadow-lg',
-                { relative: validImages.length < 3 },
-                stackClasses[validImages.length - 1][index],
-              )}
-            >
-              <Image
-                src={image.url!}
-                alt={image.alt}
-                className="object-cover"
-                sizes={validImages.length === 3 ? '42vw' : '55vw'}
-                fill
-              />
+      <div className="flex flex-col items-center sm:flex-row">
+        <div className="flex flex-col gap-20 p-10 sm:order-1 sm:p-100">
+          {metaTitle || header ? (
+            <div>
+              {metaTitle && <p className="sub-title-md">{metaTitle}</p>}
+              {header && <h3>{header}</h3>}
             </div>
-          ))}
+          ) : null}
+          {description && <RichText data={description} />}
         </div>
-      )}
+        {validImages.length > 0 && (
+          <div
+            className={classNames('mt-40 w-full', {
+              'flex items-start justify-center': validImages.length < 3,
+              'relative aspect-square': validImages.length === 3,
+            })}
+          >
+            {validImages.map((image, index) => (
+              <div
+                key={image.id}
+                className={classNames(
+                  'aspect-3/4 shrink-0 overflow-hidden rounded-2xl shadow-lg',
+                  { relative: validImages.length < 3 },
+                  stackClasses[validImages.length - 1][index],
+                )}
+              >
+                <Image
+                  src={image.url!}
+                  alt={image.alt}
+                  className="object-cover"
+                  sizes={validImages.length === 3 ? '42vw' : '55vw'}
+                  fill
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   )
 }
