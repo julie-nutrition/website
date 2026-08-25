@@ -10,9 +10,9 @@ updates:
     schedule:
       interval: 'weekly'
     ignore:
-      - dependency-name: "*"
+      - dependency-name: '*'
         update-types:
-          - "version-update:semver-major"
+          - 'version-update:semver-major'
     groups:
       framework-ecosystem:
         patterns:
@@ -23,6 +23,7 @@ updates:
           - 'next'
           - 'eslint-config-next'
           - '@payloadcms/*'
+          - 'payload'
           - 'cross-env'
           - 'dotenv'
           - 'graphql'
