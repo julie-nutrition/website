@@ -42,7 +42,7 @@ export function HeroSection(props: Props) {
               ))}
             </div>
           )}
-          <h1 className="">{title}</h1>
+          <h1>{title}</h1>
           {description && <RichText data={description} />}
           {actions.length > 0 && (
             <div className="flex w-full items-stretch gap-10 max-md:flex-col">
@@ -56,7 +56,13 @@ export function HeroSection(props: Props) {
         </div>
         {image && (
           <div className={`relative mx-auto aspect-3/4 w-full max-w-500`}>
-            <Image className="rounded-2xl object-cover" src={image.src} alt={image.alt} fill />
+            <Image
+              className="rounded-2xl object-cover"
+              sizes="(max-width: 768px) 100vw, 33vw"
+              src={image.src}
+              alt={image.alt}
+              fill
+            />
           </div>
         )}
       </div>

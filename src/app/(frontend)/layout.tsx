@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
 import React from 'react'
+import Footer from './components/Footer'
 import Header from './components/Header'
 import './styles.css'
 
@@ -31,9 +32,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="fr" className={clx(MarginFont.className, OpenSans.className)}>
-      <body className="bg-background-light grid h-screen grid-rows-[auto_minmax(0,1fr)] overflow-hidden">
+      <body className="bg-background-light grid h-dvh grid-rows-[auto_minmax(0,1fr)] overflow-hidden">
         <Header />
-        <main className="content-grid overflow-auto">{children}</main>
+        <div className="content-grid overflow-auto">
+          <main className="full-width content-grid">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   )
