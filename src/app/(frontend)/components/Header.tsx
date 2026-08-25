@@ -22,7 +22,7 @@ export default function Header(props: HeaderProps) {
         className,
       )}
     >
-      <div className="flex items-center justify-between py-12">
+      <div className="flex items-center justify-between gap-20 py-12">
         <Link href="/" className="transition-opacity hover:opacity-80">
           <Image
             className="h-35"
@@ -64,7 +64,12 @@ function HeaderItem({
   active?: boolean
 }) {
   return (
-    <li>
+    <li className="relative">
+      <div
+        className={classNames('absolute -inset-x-10 -inset-y-5 -z-10 rounded-lg', {
+          'bg-jbn-light-green': active,
+        })}
+      ></div>
       <Link
         href={url}
         className={classNames(

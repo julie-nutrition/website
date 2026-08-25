@@ -1,17 +1,20 @@
 import classnames from 'classnames'
+import type { IconName } from 'lucide-react/dynamic'
 import Link, { type LinkProps } from 'next/link'
 import { ComponentProps } from 'react'
+import { Icon } from './Icon'
 
 type FooterLinkProps = ComponentProps<'a'> &
   LinkProps & {
     variant?: 'light' | 'dark'
+    icon?: IconName
   }
 
 export function FooterLink(props: FooterLinkProps) {
-  const { className, variant = 'light', ...htmlProps } = props
+  const { className, children, icon, variant = 'light', ...htmlProps } = props
 
   const classes = classnames(
-    'paragraph focus-visible:outline-2 rounded-lg outline-offset-2 px-10 py-5 transition-colors hover:font-semibold active:font-semibold',
+    'paragraph flex items-center gap-10 focus-visible:outline-2 rounded-lg outline-offset-2  transition-colors hover:font-semibold active:font-semibold',
     variant === 'light' &&
       'outline-text-light text-text-light hover:text-hover-light active:text-pressed-light',
     variant === 'dark' &&
@@ -19,5 +22,10 @@ export function FooterLink(props: FooterLinkProps) {
     className,
   )
 
-  return <Link {...htmlProps} className={classes} />
+  return (
+    <Link {...htmlProps} className={classes}>
+      {icon && <Icon iconName={icon} className="h-16 w-16" />}
+      {children}
+    </Link>
+  )
 }

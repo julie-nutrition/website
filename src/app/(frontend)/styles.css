@@ -152,6 +152,7 @@ h1,
   font-variant-ligatures: none;
   font-size: 4rem;
   line-height: 3.125rem;
+  overflow-wrap: anywhere;
 }
 
 h2,
