@@ -1,6 +1,5 @@
 import config from '@/payload.config'
 import { getPayload } from 'payload'
-import Footer from '../components/Footer'
 import SectionRenderer from '../components/sections/SectionRenderer'
 
 export default async function Batchcooking() {
@@ -10,12 +9,5 @@ export default async function Batchcooking() {
     slug: 'batchcooking',
   })
 
-  return (
-    <>
-      {page.sections?.map((section, index) => (
-        <SectionRenderer key={index} section={section} />
-      ))}
-      <Footer />
-    </>
-  )
+  return page.sections?.map((section, index) => <SectionRenderer key={index} section={section} />)
 }
