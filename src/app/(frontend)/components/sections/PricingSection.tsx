@@ -29,7 +29,7 @@ export function PricingSection(props: Props) {
           <p>{description}</p>
         </div>
         {!!plans?.length && (
-          <div className="flex flex-col gap-40 lg:flex-row">
+          <div className="flex flex-col gap-40 md:grid md:grid-cols-2 lg:flex lg:flex-row">
             {plans.map((plan) => (
               <PlanCard key={plan.id} plan={plan} />
             ))}
