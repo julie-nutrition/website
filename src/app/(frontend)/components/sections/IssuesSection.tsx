@@ -41,7 +41,7 @@ export function IssuesSection(props: Props) {
         ) : null}
         <div className="flex flex-col items-center gap-10 text-center">
           <h3>{solutionTitle}</h3>
-          <RichText data={solutionContent} />
+          {solutionContent && <RichText data={solutionContent} />}
         </div>
       </div>
     </section>
