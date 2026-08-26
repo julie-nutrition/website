@@ -1,3 +1,4 @@
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { Block } from 'payload'
 
 export const IssuesSection: Block = {
@@ -7,6 +8,11 @@ export const IssuesSection: Block = {
     plural: 'Sections des problématiques',
   },
   fields: [
+    {
+      name: 'section-id',
+      type: 'text',
+      label: 'ID de la section',
+    },
     {
       name: 'header',
       type: 'text',
@@ -42,7 +48,15 @@ export const IssuesSection: Block = {
     {
       name: 'solution-content',
       label: 'Contenu de la solution',
-      type: 'textarea',
+      type: 'richText',
+      editor: lexicalEditor({
+        admin: {
+          hideAddBlockButton: true,
+          hideGutter: true,
+          hideDraggableBlockElement: true,
+          hideInsertParagraphAtEnd: true,
+        },
+      }),
     },
   ],
 }

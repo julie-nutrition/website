@@ -8,6 +8,11 @@ export const TestimonialSection: Block = {
   },
   fields: [
     {
+      name: 'section-id',
+      type: 'text',
+      label: 'ID de la section',
+    },
+    {
       name: 'meta-title',
       type: 'text',
       label: 'Meta title de la section',

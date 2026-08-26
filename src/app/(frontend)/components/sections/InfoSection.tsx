@@ -1,4 +1,5 @@
 import type { InfoSection as InfoSectionType } from '@/payload-types'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 import classNames from 'classnames'
 import Image from 'next/image'
 import { ComponentProps } from 'react'
@@ -10,7 +11,7 @@ type Props = ComponentProps<'section'> & {
 export function InfoSection(props: Props) {
   const { className, section, ...htmlProps } = props
 
-  const { 'meta-title': metaTitle, header, description, media } = section
+  const { 'meta-title': metaTitle, header, description, media, 'section-id': sectionId } = section
 
   const classes = classNames(
     'full-width text-text-dark bg-background-card py-100 text-center',
@@ -18,10 +19,10 @@ export function InfoSection(props: Props) {
   )
 
   return (
-    <section className={classes} {...htmlProps}>
+    <section id={sectionId ?? undefined} className={classes} {...htmlProps}>
       {metaTitle && <p className="sub-title-md">{metaTitle}</p>}
       {header && <h3>{header}</h3>}
-      {description && <p className="mt-10">{description}</p>}
+      {description && <RichText className="mt-10" data={description} />}
       {media && typeof media !== 'number' && media.url && (
         <Image
           className="mx-auto mt-40"

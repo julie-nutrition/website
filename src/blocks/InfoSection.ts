@@ -1,3 +1,4 @@
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { Block } from 'payload'
 
 export const InfoSection: Block = {
@@ -7,6 +8,11 @@ export const InfoSection: Block = {
     plural: "Sections d'information",
   },
   fields: [
+    {
+      name: 'section-id',
+      type: 'text',
+      label: 'ID de la section',
+    },
     {
       name: 'meta-title',
       type: 'text',
@@ -20,7 +26,15 @@ export const InfoSection: Block = {
     {
       name: 'description',
       label: 'Description de la section',
-      type: 'textarea',
+      type: 'richText',
+      editor: lexicalEditor({
+        admin: {
+          hideAddBlockButton: true,
+          hideGutter: true,
+          hideDraggableBlockElement: true,
+          hideInsertParagraphAtEnd: true,
+        },
+      }),
     },
     {
       name: 'media',

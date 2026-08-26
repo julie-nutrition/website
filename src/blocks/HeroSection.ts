@@ -9,6 +9,11 @@ export const HeroSection: Block = {
   },
   fields: [
     {
+      name: 'section-id',
+      type: 'text',
+      label: 'ID de la section',
+    },
+    {
       name: 'tags',
       type: 'array',
       label: {

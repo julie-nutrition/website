@@ -9,7 +9,7 @@ type Props = ComponentProps<'section'> & {
 export function TestimonialSection(props: Props) {
   const { className, section, ...htmlProps } = props
 
-  const { 'meta-title': metaTitle, header, testimonials } = section
+  const { 'meta-title': metaTitle, header, testimonials, 'section-id': sectionId } = section
 
   const classes = classNames(
     'full-width text-text-light bg-background-dark py-100 text-center',
@@ -17,7 +17,7 @@ export function TestimonialSection(props: Props) {
   )
 
   return (
-    <section className={classes} {...htmlProps}>
+    <section id={sectionId ?? undefined} className={classes} {...htmlProps}>
       {metaTitle && <p className="sub-title-md">{metaTitle}</p>}
       {header && <h3>{header}</h3>}
       {!!testimonials?.length && (

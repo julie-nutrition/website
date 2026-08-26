@@ -10,12 +10,12 @@ type Props = ComponentProps<'section'> & {
 export function StepperSection(props: Props) {
   const { className, section, ...htmlProps } = props
 
-  const { 'meta-title': metaTitle, header, description } = section
+  const { 'meta-title': metaTitle, header, description, 'section-id': sectionId } = section
 
   const classes = classNames('full-width bg-background-card text-text-dark', className)
 
   return (
-    <section className={classes} {...htmlProps}>
+    <section id={sectionId ?? undefined} className={classes} {...htmlProps}>
       <div className="flex flex-col items-center gap-80 py-100">
         <div className="text-center">
           <p className="sub-title-md">{metaTitle}</p>

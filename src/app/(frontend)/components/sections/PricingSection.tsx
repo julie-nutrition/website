@@ -10,11 +10,18 @@ type Props = ComponentProps<'section'> & {
 export function PricingSection(props: Props) {
   const { className, section, ...htmlProps } = props
 
-  const { 'meta-title': metaTitle, header, description, plans, footer } = section
+  const {
+    'meta-title': metaTitle,
+    header,
+    description,
+    plans,
+    footer,
+    'section-id': sectionId,
+  } = section
 
   const classes = classNames('flex flex-col text-text-dark', className)
   return (
-    <section className={classes} {...htmlProps}>
+    <section id={sectionId ?? undefined} className={classes} {...htmlProps}>
       <div className="flex flex-col items-center gap-80 py-100">
         <div className="text-center">
           <p className="sub-title-md">{metaTitle}</p>

@@ -10,7 +10,15 @@ type Props = ComponentProps<'section'> & {
 
 export function OverviewSection(props: Props) {
   const { className, section, ...htmlProps } = props
-  const { 'meta-title': metaTitle, header, description, images, theme, layout } = section
+  const {
+    'meta-title': metaTitle,
+    header,
+    description,
+    images,
+    theme,
+    layout,
+    'section-id': sectionId,
+  } = section
 
   const validImages =
     images?.filter(
@@ -39,7 +47,7 @@ export function OverviewSection(props: Props) {
     className,
   )
   return (
-    <section className={classes} {...htmlProps}>
+    <section id={sectionId ?? undefined} className={classes} {...htmlProps}>
       <div
         className={classNames('flex flex-col items-center', {
           'sm:flex-row': layout === 'left',

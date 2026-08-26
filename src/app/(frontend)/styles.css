@@ -50,6 +50,10 @@
   --button-secondary-bg-hover: var(--color-jbn-light-green);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @keyframes fade-in-right {
   from {
     opacity: 0;

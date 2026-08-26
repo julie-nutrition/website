@@ -60,6 +60,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
 
       return (
         <HeroSection
+          id={section['section-id'] ?? undefined}
           title={section.header}
           image={image}
           tags={tags}

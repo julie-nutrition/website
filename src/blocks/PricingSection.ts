@@ -8,6 +8,11 @@ export const PricingSection: Block = {
   },
   fields: [
     {
+      name: 'section-id',
+      type: 'text',
+      label: 'ID de la section',
+    },
+    {
       name: 'meta-title',
       type: 'text',
       label: 'Titre global de la section',

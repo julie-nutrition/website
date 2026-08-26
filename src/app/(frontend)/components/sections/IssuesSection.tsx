@@ -1,4 +1,5 @@
 import { IssuesSection as IssuesSectionType } from '@/payload-types'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 import classNames from 'classnames'
 import { ComponentProps } from 'react'
 
@@ -13,12 +14,13 @@ export function IssuesSection(props: Props) {
     issues,
     'solution-title': solutionTitle,
     'solution-content': solutionContent,
+    'section-id': sectionId,
   } = section
 
   const classes = classNames('full-width bg-background-dark text-text-light', className)
 
   return (
-    <section className={classes} {...htmlProps}>
+    <section id={sectionId ?? undefined} className={classes} {...htmlProps}>
       <div className="flex flex-col items-center gap-80 py-100">
         <h3>{header}</h3>
         {!!issues?.length && issues.length > 0 ? (
@@ -39,7 +41,7 @@ export function IssuesSection(props: Props) {
         ) : null}
         <div className="flex flex-col items-center gap-10 text-center">
           <h3>{solutionTitle}</h3>
-          <p>{solutionContent}</p>
+          <RichText data={solutionContent} />
         </div>
       </div>
     </section>
