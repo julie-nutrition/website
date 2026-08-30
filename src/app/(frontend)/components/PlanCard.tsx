@@ -48,7 +48,7 @@ export function PlanCard(props: Props) {
               </p>
             )}
             <p>
-              <span className="text-h2">{finalPrice}€</span> /session
+              <span className="text-h2">{finalPrice}€</span> {finalPriceUnit}
             </p>
           </div>
         </div>
