@@ -7,20 +7,19 @@ import { isValidElement, PropsWithChildren, ReactElement, ReactNode } from 'reac
  * When `asChild` is truthy, the child is used as the component. The host component no longer accepts the default props, and the component properties are passed directly to the child.
  */
 export type AsChild<DefaultProps = Record<string, unknown>> =
-  | ({ asChild?: false } & DefaultProps)
-  | ({ asChild: true } & PropsWithChildren)
+  ({ asChild?: false } & DefaultProps) | ({ asChild: true } & PropsWithChildren)
 
 /**
  * Type guard to check if we are using the default component (not asChild or actionAsChild).
  * @param discriminant Used to discriminate between default and child rendering (mostly asChild props).
- * @param props The rest of the destructured props intersection. All common props must be extracted from this object.
+ * @param _props The rest of the destructured props intersection. All common props must be extracted from this object.
  * @returns Wether or not we are using the default component.
  */
 export function isDefaultComponent<T extends Record<string, unknown>>(
   discriminant: boolean | undefined,
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  props: {} | T,
-): props is T {
+  _props: {} | T,
+): _props is T {
   return discriminant !== true
 }
 
