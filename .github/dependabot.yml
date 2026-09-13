@@ -22,13 +22,18 @@ updates:
           - '@types/node'
           - 'next'
           - 'eslint-config-next'
-          - '@payloadcms/*'
-          - 'payload'
           - 'cross-env'
           - 'dotenv'
           - 'graphql'
           - 'sharp'
           - 'typescript'
+        update-types:
+          - 'minor'
+          - 'patch'
+      payload-ecosystem:
+        patterns:
+          - 'payload'
+          - '@payloadcms/*'
         update-types:
           - 'minor'
           - 'patch'
