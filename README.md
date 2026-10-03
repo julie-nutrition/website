@@ -39,7 +39,7 @@ To do so, follow these steps:
 With Doppler configured for this directory, install the locked dependencies and build:
 
 ```sh
-doppler run -- pnpm install --frozen-lockfile
+pnpm install --frozen-lockfile
 doppler run -- pnpm build
 ```
 

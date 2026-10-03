@@ -1,3 +1,26 @@
+## Command environment
+
+Use `doppler run -- <command>` from the repository root only for commands that
+run Next.js or Payload, directly or through package scripts. This supplies the
+environment variables needed for builds, development/production servers, Payload
+type generation, and schema/migration commands. Tests that initialize Payload or
+launch Next.js also need this environment.
+
+```sh
+doppler run -- pnpm build
+doppler run -- pnpm generate:types
+doppler run -- pnpm start
+```
+
+Run other commands directly, including Git, dependency installation, linting,
+formatting, standalone TypeScript checks, and tests that do not run Next.js or
+Payload. In command chains, wrap only the commands that need the environment:
+`pnpm install --frozen-lockfile && doppler run -- pnpm build`.
+
+If Doppler configuration or authentication fails for a Next.js or Payload command,
+report the error and ask for setup guidance rather than retrying without Doppler.
+Keep secret values out of logs and documentation.
+
 ## Agent skills
 
 ### Issue tracker
