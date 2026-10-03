@@ -50,7 +50,7 @@
     "jsdom": "^30.0.1",
     "playwright": "^1.63.0",
     "playwright-core": "^1.63.0",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.8",
     "prettier-eslint": "^17.1.2",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "typescript": "^5.9.3",
