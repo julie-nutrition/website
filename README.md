@@ -34,6 +34,21 @@ To do so, follow these steps:
 - Modify the `docker-compose.yml` file's `MONGODB_URI` to match the above `<dbname>`
 - Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
 
+## Production
+
+With Doppler configured for this directory, install the locked dependencies and build:
+
+```sh
+doppler run -- pnpm install --frozen-lockfile
+doppler run -- pnpm build
+```
+
+Run the production server with `doppler run -- pnpm start`.
+
+Keep `payload` and all `@payloadcms/*` dependencies pinned to the same exact
+version and update them together. Mixing versions can cause missing-export errors
+during the build. Commit `pnpm-lock.yaml` alongside dependency changes.
+
 ## How it works
 
 The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
