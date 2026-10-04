@@ -21,7 +21,7 @@ export function TestimonialSection(props: Props) {
       {metaTitle && <p className="sub-title-md">{metaTitle}</p>}
       {header && <h3>{header}</h3>}
       {!!testimonials?.length && (
-        <div className="mt-80 flex flex-wrap justify-center gap-40">
+        <div className="mt-80 flex flex-wrap items-start justify-center gap-40">
           {testimonials.map((testimonial, index) => {
             const { name, service, content } = testimonial
 

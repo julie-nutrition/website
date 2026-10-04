@@ -31,7 +31,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="fr" className={clx(MarginFont.className, OpenSans.className)}>
+    <html
+      lang="fr"
+      className={clx(MarginFont.className, OpenSans.className)}
+      data-scroll-behavior="smooth"
+    >
       <body className="bg-background-light grid h-dvh grid-rows-[auto_minmax(0,1fr)] overflow-hidden">
         <Header />
         <div className="content-grid overflow-auto">
