@@ -78,6 +78,7 @@ export interface Config {
     users: User;
     media: Media;
     offers: Offer;
+    pages: Page;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     offers: OffersSelect<false> | OffersSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -99,13 +101,9 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     homepage: Homepage;
-    batchcooking: Batchcooking;
-    nutrition: Nutrition;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
-    batchcooking: BatchcookingSelect<false> | BatchcookingSelect<true>;
-    nutrition: NutritionSelect<false> | NutritionSelect<true>;
   };
   locale: null;
   widgets: {
@@ -417,6 +415,204 @@ export interface Offer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  /**
+   * The page identity is fixed after creation.
+   */
+  slug?: ('nutrition' | 'batchcooking') | null;
+  sections?:
+    | (
+        | {
+            'section-id'?: string | null;
+            tags?:
+              | {
+                  label: string;
+                  icon?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            header?: string | null;
+            description?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            image?: (number | null) | Media;
+            actions?:
+              | {
+                  label: string;
+                  href: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero-section';
+          }
+        | {
+            'section-id'?: string | null;
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            images?: (number | Media)[] | null;
+            theme?: ('light' | 'dark') | null;
+            layout?: ('left' | 'right') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'overview-section';
+          }
+        | {
+            'section-id'?: string | null;
+            header?: string | null;
+            issues?:
+              | {
+                  icon?: string | null;
+                  issue?: string | null;
+                  description?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            'solution-title'?: string | null;
+            'solution-content'?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'issues-section';
+          }
+        | {
+            'section-id'?: string | null;
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: string | null;
+            steps?:
+              | {
+                  title?: string | null;
+                  icon?: string | null;
+                  description?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stepper-section';
+          }
+        | {
+            'section-id'?: string | null;
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: string | null;
+            plans?:
+              | {
+                  recommended?: boolean | null;
+                  title?: string | null;
+                  description?: string | null;
+                  footer?: string | null;
+                  'key-points'?:
+                    | {
+                        'key-point'?: string | null;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  price?: number | null;
+                  'final-price'?: number | null;
+                  'final-price-unit'?: string | null;
+                  cta?: string | null;
+                  link?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            footer?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pricing-section';
+          }
+        | {
+            'section-id'?: string | null;
+            'meta-title'?: string | null;
+            header?: string | null;
+            description?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            media?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'info-section';
+          }
+        | {
+            'section-id'?: string | null;
+            'meta-title'?: string | null;
+            header?: string | null;
+            testimonials?:
+              | {
+                  name?: string | null;
+                  service?: string | null;
+                  content?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonial-section';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -450,6 +646,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'offers';
         value: number | Offer;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -557,6 +757,151 @@ export interface OffersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  slug?: T;
+  sections?:
+    | T
+    | {
+        'hero-section'?:
+          | T
+          | {
+              'section-id'?: T;
+              tags?:
+                | T
+                | {
+                    label?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              header?: T;
+              description?: T;
+              image?: T;
+              actions?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'overview-section'?:
+          | T
+          | {
+              'section-id'?: T;
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              images?: T;
+              theme?: T;
+              layout?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'issues-section'?:
+          | T
+          | {
+              'section-id'?: T;
+              header?: T;
+              issues?:
+                | T
+                | {
+                    icon?: T;
+                    issue?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              'solution-title'?: T;
+              'solution-content'?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'stepper-section'?:
+          | T
+          | {
+              'section-id'?: T;
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              steps?:
+                | T
+                | {
+                    title?: T;
+                    icon?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'pricing-section'?:
+          | T
+          | {
+              'section-id'?: T;
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              plans?:
+                | T
+                | {
+                    recommended?: T;
+                    title?: T;
+                    description?: T;
+                    footer?: T;
+                    'key-points'?:
+                      | T
+                      | {
+                          'key-point'?: T;
+                          id?: T;
+                        };
+                    price?: T;
+                    'final-price'?: T;
+                    'final-price-unit'?: T;
+                    cta?: T;
+                    link?: T;
+                    id?: T;
+                  };
+              footer?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'info-section'?:
+          | T
+          | {
+              'section-id'?: T;
+              'meta-title'?: T;
+              header?: T;
+              description?: T;
+              media?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'testimonial-section'?:
+          | T
+          | {
+              'section-id'?: T;
+              'meta-title'?: T;
+              header?: T;
+              testimonials?:
+                | T
+                | {
+                    name?: T;
+                    service?: T;
+                    content?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -612,394 +957,6 @@ export interface Homepage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "batchcooking".
- */
-export interface Batchcooking {
-  id: number;
-  sections?:
-    | (
-        | {
-            'section-id'?: string | null;
-            tags?:
-              | {
-                  label: string;
-                  icon?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            header?: string | null;
-            description?: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            image?: (number | null) | Media;
-            actions?:
-              | {
-                  label: string;
-                  href: string;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'hero-section';
-          }
-        | {
-            'section-id'?: string | null;
-            'meta-title'?: string | null;
-            header?: string | null;
-            description?: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            images?: (number | Media)[] | null;
-            theme?: ('light' | 'dark') | null;
-            layout?: ('left' | 'right') | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'overview-section';
-          }
-        | {
-            'section-id'?: string | null;
-            header?: string | null;
-            issues?:
-              | {
-                  icon?: string | null;
-                  issue?: string | null;
-                  description?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            'solution-title'?: string | null;
-            'solution-content'?: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'issues-section';
-          }
-        | {
-            'section-id'?: string | null;
-            'meta-title'?: string | null;
-            header?: string | null;
-            description?: string | null;
-            steps?:
-              | {
-                  title?: string | null;
-                  icon?: string | null;
-                  description?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'stepper-section';
-          }
-        | {
-            'section-id'?: string | null;
-            'meta-title'?: string | null;
-            header?: string | null;
-            description?: string | null;
-            plans?:
-              | {
-                  recommended?: boolean | null;
-                  title?: string | null;
-                  description?: string | null;
-                  footer?: string | null;
-                  'key-points'?:
-                    | {
-                        'key-point'?: string | null;
-                        id?: string | null;
-                      }[]
-                    | null;
-                  price?: number | null;
-                  'final-price'?: number | null;
-                  'final-price-unit'?: string | null;
-                  cta?: string | null;
-                  link?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            footer?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'pricing-section';
-          }
-        | {
-            'section-id'?: string | null;
-            'meta-title'?: string | null;
-            header?: string | null;
-            description?: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            media?: (number | null) | Media;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'info-section';
-          }
-        | {
-            'section-id'?: string | null;
-            'meta-title'?: string | null;
-            header?: string | null;
-            testimonials?:
-              | {
-                  name?: string | null;
-                  service?: string | null;
-                  content?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'testimonial-section';
-          }
-      )[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "nutrition".
- */
-export interface Nutrition {
-  id: number;
-  sections?:
-    | (
-        | {
-            'section-id'?: string | null;
-            tags?:
-              | {
-                  label: string;
-                  icon?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            header?: string | null;
-            description?: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            image?: (number | null) | Media;
-            actions?:
-              | {
-                  label: string;
-                  href: string;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'hero-section';
-          }
-        | {
-            'section-id'?: string | null;
-            'meta-title'?: string | null;
-            header?: string | null;
-            description?: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            images?: (number | Media)[] | null;
-            theme?: ('light' | 'dark') | null;
-            layout?: ('left' | 'right') | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'overview-section';
-          }
-        | {
-            'section-id'?: string | null;
-            header?: string | null;
-            issues?:
-              | {
-                  icon?: string | null;
-                  issue?: string | null;
-                  description?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            'solution-title'?: string | null;
-            'solution-content'?: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'issues-section';
-          }
-        | {
-            'section-id'?: string | null;
-            'meta-title'?: string | null;
-            header?: string | null;
-            description?: string | null;
-            steps?:
-              | {
-                  title?: string | null;
-                  icon?: string | null;
-                  description?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'stepper-section';
-          }
-        | {
-            'section-id'?: string | null;
-            'meta-title'?: string | null;
-            header?: string | null;
-            description?: string | null;
-            plans?:
-              | {
-                  recommended?: boolean | null;
-                  title?: string | null;
-                  description?: string | null;
-                  footer?: string | null;
-                  'key-points'?:
-                    | {
-                        'key-point'?: string | null;
-                        id?: string | null;
-                      }[]
-                    | null;
-                  price?: number | null;
-                  'final-price'?: number | null;
-                  'final-price-unit'?: string | null;
-                  cta?: string | null;
-                  link?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            footer?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'pricing-section';
-          }
-        | {
-            'section-id'?: string | null;
-            'meta-title'?: string | null;
-            header?: string | null;
-            description?: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            media?: (number | null) | Media;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'info-section';
-          }
-        | {
-            'section-id'?: string | null;
-            'meta-title'?: string | null;
-            header?: string | null;
-            testimonials?:
-              | {
-                  name?: string | null;
-                  service?: string | null;
-                  content?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'testimonial-section';
-          }
-      )[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "homepage_select".
  */
 export interface HomepageSelect<T extends boolean = true> {
@@ -1009,296 +966,6 @@ export interface HomepageSelect<T extends boolean = true> {
   'nutrition-image'?: T;
   'nutrition-title'?: T;
   'nutrition-description'?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "batchcooking_select".
- */
-export interface BatchcookingSelect<T extends boolean = true> {
-  sections?:
-    | T
-    | {
-        'hero-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              tags?:
-                | T
-                | {
-                    label?: T;
-                    icon?: T;
-                    id?: T;
-                  };
-              header?: T;
-              description?: T;
-              image?: T;
-              actions?:
-                | T
-                | {
-                    label?: T;
-                    href?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'overview-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              'meta-title'?: T;
-              header?: T;
-              description?: T;
-              images?: T;
-              theme?: T;
-              layout?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'issues-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              header?: T;
-              issues?:
-                | T
-                | {
-                    icon?: T;
-                    issue?: T;
-                    description?: T;
-                    id?: T;
-                  };
-              'solution-title'?: T;
-              'solution-content'?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'stepper-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              'meta-title'?: T;
-              header?: T;
-              description?: T;
-              steps?:
-                | T
-                | {
-                    title?: T;
-                    icon?: T;
-                    description?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'pricing-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              'meta-title'?: T;
-              header?: T;
-              description?: T;
-              plans?:
-                | T
-                | {
-                    recommended?: T;
-                    title?: T;
-                    description?: T;
-                    footer?: T;
-                    'key-points'?:
-                      | T
-                      | {
-                          'key-point'?: T;
-                          id?: T;
-                        };
-                    price?: T;
-                    'final-price'?: T;
-                    'final-price-unit'?: T;
-                    cta?: T;
-                    link?: T;
-                    id?: T;
-                  };
-              footer?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'info-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              'meta-title'?: T;
-              header?: T;
-              description?: T;
-              media?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'testimonial-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              'meta-title'?: T;
-              header?: T;
-              testimonials?:
-                | T
-                | {
-                    name?: T;
-                    service?: T;
-                    content?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "nutrition_select".
- */
-export interface NutritionSelect<T extends boolean = true> {
-  sections?:
-    | T
-    | {
-        'hero-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              tags?:
-                | T
-                | {
-                    label?: T;
-                    icon?: T;
-                    id?: T;
-                  };
-              header?: T;
-              description?: T;
-              image?: T;
-              actions?:
-                | T
-                | {
-                    label?: T;
-                    href?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'overview-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              'meta-title'?: T;
-              header?: T;
-              description?: T;
-              images?: T;
-              theme?: T;
-              layout?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'issues-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              header?: T;
-              issues?:
-                | T
-                | {
-                    icon?: T;
-                    issue?: T;
-                    description?: T;
-                    id?: T;
-                  };
-              'solution-title'?: T;
-              'solution-content'?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'stepper-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              'meta-title'?: T;
-              header?: T;
-              description?: T;
-              steps?:
-                | T
-                | {
-                    title?: T;
-                    icon?: T;
-                    description?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'pricing-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              'meta-title'?: T;
-              header?: T;
-              description?: T;
-              plans?:
-                | T
-                | {
-                    recommended?: T;
-                    title?: T;
-                    description?: T;
-                    footer?: T;
-                    'key-points'?:
-                      | T
-                      | {
-                          'key-point'?: T;
-                          id?: T;
-                        };
-                    price?: T;
-                    'final-price'?: T;
-                    'final-price-unit'?: T;
-                    cta?: T;
-                    link?: T;
-                    id?: T;
-                  };
-              footer?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'info-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              'meta-title'?: T;
-              header?: T;
-              description?: T;
-              media?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'testimonial-section'?:
-          | T
-          | {
-              'section-id'?: T;
-              'meta-title'?: T;
-              header?: T;
-              testimonials?:
-                | T
-                | {
-                    name?: T;
-                    service?: T;
-                    content?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

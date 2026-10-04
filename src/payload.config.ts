@@ -9,10 +9,9 @@ import { HeroSection } from './blocks/HeroSection'
 import { IssuesSection } from './blocks/IssuesSection'
 import { Media } from './collections/Media'
 import { Offer } from './collections/Offer'
+import { Pages } from './collections/Pages'
 import { Users } from './collections/Users'
-import { Batchcooking } from './globals/Batchcooking'
 import { Homepage } from './globals/Homepage'
-import { Nutrition } from './globals/Nutrition'
 
 import { en } from '@payloadcms/translations/languages/en'
 import { fr } from '@payloadcms/translations/languages/fr'
@@ -42,8 +41,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Offer],
-  globals: [Homepage, Batchcooking, Nutrition],
+  collections: [Users, Media, Offer, Pages],
+  globals: [Homepage],
   blocks: [
     HeroSection,
     OverviewSection,

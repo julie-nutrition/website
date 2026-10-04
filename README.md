@@ -57,6 +57,54 @@ The Payload config is tailored specifically to the needs of most websites. It is
 
 See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
 
+- #### Pages
+
+  Nutrition and Batchcooking are separate records in one Pages collection, with
+  a shared ordered Sections schema. Their unique identities are `nutrition` and
+  `batchcooking`; identities cannot change after creation. Authenticated
+  backoffice users can create, edit, or delete either record. Public URLs remain
+  `/nutrition` and `/batchcooking`. A missing record returns 404; a record with no
+  sections renders an empty page. The Homepage remains a separate global.
+
+  Existing installations must apply the `consolidate_pages` migration before
+  starting the updated application. It copies both former globals and their
+  nested section data into the Pages tables, verifies the copied values, and
+  removes the obsolete global tables within Payload's migration transaction.
+  Block and nested-array IDs are namespaced during copying to prevent collisions
+  between the formerly independent globals; content, ordering, and media
+  relationships are preserved.
+
+  Back up the database and stop application writes before migrating. Review and
+  rehearse the migration against a restored backup before approving deployment.
+  With the intended Doppler environment configured:
+
+  ```sh
+  doppler run -- pnpm payload migrate
+  ```
+
+  Do not start `next dev` against an unmigrated existing database: development
+  schema push is not a content migration. Keep the old application stopped until
+  migration finishes successfully. No deployed database is migrated
+  automatically as part of the architecture refactor.
+
+  The down migration copies current Page content back to the former globals,
+  including subsequent content edits and new nested records. A deleted Page is
+  not restored. Run rollback only with application writes stopped and deploy
+  the matching older application afterward.
+
+  The Pages regression tests run without Doppler or an external database:
+
+  ```sh
+  pnpm exec vitest run --config vitest.config.mts \
+    tests/int/content-page.int.spec.ts \
+    tests/int/pages-schema.int.spec.ts \
+    tests/int/pages-migration.int.spec.ts
+  ```
+
+  Migration tests use an isolated in-memory PostgreSQL engine (PGlite), covering
+  content and relationship preservation, identity collisions, transactional
+  failures, deletion isolation, and rollback.
+
 - #### Users (Authentication)
 
   Users are auth-enabled collections that have access to the admin panel.
