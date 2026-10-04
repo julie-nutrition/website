@@ -1,3 +1,4 @@
+import { canReadNutrition } from '@/access/nutrition'
 import { SectionsBlocks } from '@/fields/SectionsBlocks'
 import type { Page } from '@/payload-types'
 import {
@@ -10,6 +11,9 @@ import {
 
 const authenticated = (({ req }: { req: Pick<PayloadRequest, 'user'> }) =>
   Boolean(req.user)) satisfies Access
+
+const readPages = (({ req }: { req: Pick<PayloadRequest, 'user'> }) =>
+  canReadNutrition({ req }) ? true : { slug: { equals: 'batchcooking' } }) satisfies Access
 
 const preserveIdentity = ({
   data,
@@ -33,7 +37,7 @@ export const Pages = {
     useAsTitle: 'slug',
   },
   access: {
-    read: () => true,
+    read: readPages,
     create: authenticated,
     update: authenticated,
     delete: authenticated,

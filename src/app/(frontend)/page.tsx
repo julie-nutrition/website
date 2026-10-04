@@ -1,20 +1,29 @@
+import { NUTRITION_ENABLED } from '@/config/release'
 import config from '@/payload.config'
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import { getPayload } from 'payload'
 import { HomepageNavigation } from './components/HomepageNavigation'
 
 export const revalidate = 60 // ISR - revalidate every 60 seconds
 
 export const metadata: Metadata = {
-  title: 'Julie BAUZA - Nutritionniste',
-  description: "Page d'accueil du site de Julie BAUZA, nutritionniste",
+  title: NUTRITION_ENABLED ? 'Julie BAUZA - Nutritionniste' : 'Julie BAUZA - Batchcooking',
+  description: NUTRITION_ENABLED
+    ? "Page d'accueil du site de Julie BAUZA, nutritionniste"
+    : 'Découvrez le batchcooking à domicile avec Julie BAUZA.',
 }
 
 export default async function Page() {
+  if (!NUTRITION_ENABLED) {
+    redirect('/batchcooking')
+  }
+
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
   const homepage = await payload.findGlobal({
     slug: 'homepage',
+    overrideAccess: false,
   })
 
   return (

@@ -1,3 +1,4 @@
+import { NUTRITION_ENABLED } from '@/config/release'
 import clx from 'classnames'
 import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
@@ -10,9 +11,10 @@ import './styles.css'
 export const revalidate = 3600 // Revalidate every hour
 
 export const metadata: Metadata = {
-  description:
-    'Découvrez les services de Julie BAUZA, nutritionniste. Consultations en ligne personnalisées et cuisine à domicile pour optimiser votre santé et bien-être.',
-  title: 'Julie BAUZA - Nutritionniste',
+  description: NUTRITION_ENABLED
+    ? 'Découvrez les services de Julie BAUZA, nutritionniste. Consultations en ligne personnalisées et cuisine à domicile pour optimiser votre santé et bien-être.'
+    : 'Découvrez le batchcooking avec Julie BAUZA : cuisine à domicile pour des repas équilibrés et savoureux.',
+  title: NUTRITION_ENABLED ? 'Julie BAUZA - Nutritionniste' : 'Julie BAUZA - Batchcooking',
   icons: {
     icon: '/favicon.ico',
   },

@@ -1,8 +1,16 @@
 import { Pages } from '@/collections/Pages'
 import { SectionsBlocks } from '@/fields/SectionsBlocks'
+import { Homepage } from '@/globals/Homepage'
 import type { Page, User } from '@/payload-types'
 import { ValidationError } from 'payload'
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+
+const release = vi.hoisted(() => ({ NUTRITION_ENABLED: false }))
+vi.mock('@/config/release', () => release)
+
+beforeEach(() => {
+  release.NUTRITION_ENABLED = false
+})
 
 const user: User & { collection: 'users' } = {
   id: 1,
@@ -36,8 +44,52 @@ describe('Pages collection', () => {
     expect(Pages.fields[1]).toBe(SectionsBlocks)
   })
 
-  it('allows public reads', () => {
-    expect(Pages.access.read()).toBe(true)
+  it('limits anonymous launch reads to Batchcooking', () => {
+    expect(Pages.access.read({ req: { user: null } })).toEqual({
+      slug: { equals: 'batchcooking' },
+    })
+  })
+
+  it('keeps both Pages readable for authenticated editors during launch', () => {
+    expect(Pages.access.read({ req: { user } })).toBe(true)
+  })
+
+  it('restores anonymous reads of both Pages when Nutrition is released', () => {
+    release.NUTRITION_ENABLED = true
+    expect(Pages.access.read({ req: { user: null } })).toBe(true)
+  })
+
+  describe('Homepage Nutrition teaser access', () => {
+    const fields = Homepage.fields[0].tabs[1].fields
+
+    it('allows public Homepage reads so field access can filter the teaser', () => {
+      expect(Homepage.access.read()).toBe(true)
+    })
+
+    it('preserves all three Nutrition fields with matching read access', () => {
+      expect(fields.map((field) => field.name)).toEqual([
+        'nutrition-image',
+        'nutrition-title',
+        'nutrition-description',
+      ])
+      for (const field of fields) {
+        if (!('access' in field) || !field.access?.read) {
+          throw new Error(`Missing read access for ${field.name}`)
+        }
+        const read = field.access.read
+        expect(read({ req: { user: null } })).toBe(false)
+        expect(read({ req: { user } })).toBe(true)
+        release.NUTRITION_ENABLED = true
+        expect(read({ req: { user: null } })).toBe(true)
+        release.NUTRITION_ENABLED = false
+      }
+    })
+
+    it('does not restrict the Batchcooking teaser fields', () => {
+      for (const field of Homepage.fields[0].tabs[0].fields) {
+        expect('access' in field ? field.access : undefined).toBeUndefined()
+      }
+    })
   })
 
   it.each(['create', 'update', 'delete'] as const)(

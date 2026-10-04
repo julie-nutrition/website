@@ -1,5 +1,6 @@
 'use client'
 
+import { NUTRITION_ENABLED } from '@/config/release'
 import classNames from 'classnames'
 import type { IconName } from 'lucide-react/dynamic'
 import Image from 'next/image'
@@ -40,12 +41,14 @@ export default function Header(props: HeaderProps) {
             icon="cooking-pot"
             active={pathname === '/batchcooking'}
           />
-          <HeaderItem
-            label="Nutrition"
-            url="/nutrition"
-            icon="video"
-            active={pathname === '/nutrition'}
-          />
+          {NUTRITION_ENABLED && (
+            <HeaderItem
+              label="Nutrition"
+              url="/nutrition"
+              icon="video"
+              active={pathname === '/nutrition'}
+            />
+          )}
         </nav>
       </div>
     </header>

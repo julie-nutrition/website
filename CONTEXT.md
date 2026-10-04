@@ -14,5 +14,5 @@ A piece of Page content with its own presentation, such as testimonials, pricing
 or an overview. Its position determines where it appears within the Page.
 
 **Homepage**:
-The site's entry page, introducing Nutrition and Batchcooking and linking to their
-Pages.
+The site's entry experience, guiding visitors to the Pages for the currently
+available offerings.

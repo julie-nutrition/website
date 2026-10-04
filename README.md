@@ -62,9 +62,29 @@ See the [Collections](https://payloadcms.com/docs/configuration/collections) doc
   Nutrition and Batchcooking are separate records in one Pages collection, with
   a shared ordered Sections schema. Their unique identities are `nutrition` and
   `batchcooking`; identities cannot change after creation. Authenticated
-  backoffice users can create, edit, or delete either record. Public URLs remain
-  `/nutrition` and `/batchcooking`. A missing record returns 404; a record with no
-  sections renders an empty page. The Homepage remains a separate global.
+  backoffice users can create, edit, or delete either record. Page URLs are
+  `/nutrition` and `/batchcooking`, subject to the release mode below. A missing
+  record returns 404; a record with no sections renders an empty page. The
+  Homepage remains a separate global.
+
+  **Batchcooking-only launch ([#138](https://github.com/julie-nutrition/website/issues/138)):**
+  `NUTRITION_ENABLED` in [src/config/release.ts](src/config/release.ts) defaults to
+  `false`. `/` temporarily redirects to `/batchcooking`, `/nutrition` returns 404,
+  the Nutrition navigation link is hidden, and titles/descriptions focus on
+  Batchcooking. Identity, contact details, and the existing booking link remain
+  unchanged.
+
+  Anonymous CMS reads are limited to the Batchcooking Page and cannot read the
+  Homepage's Nutrition image reference, title, or description. Authenticated
+  editors retain access to both Pages and all Homepage fields. Nutrition content
+  and schemas are preserved; no migration or deletion is required. Shared media
+  and other collections are unchanged, so this is not asset-level privacy.
+
+  To release Nutrition, set `NUTRITION_ENABLED` to `true` and redeploy. The same
+  setting restores the two-offering homepage, Nutrition navigation and route,
+  public Nutrition Page/teaser reads, and the original nutrition-oriented metadata.
+  Local Payload API calls must use `overrideAccess: false` when acting on behalf
+  of anonymous visitors; Payload's default override bypasses read access rules.
 
   Existing installations must apply the `consolidate_pages` migration before
   starting the updated application. It copies both former globals and their
@@ -98,12 +118,21 @@ See the [Collections](https://payloadcms.com/docs/configuration/collections) doc
   pnpm exec vitest run --config vitest.config.mts \
     tests/int/content-page.int.spec.ts \
     tests/int/pages-schema.int.spec.ts \
+    tests/int/release-mode.int.spec.ts \
     tests/int/pages-migration.int.spec.ts
   ```
 
   Migration tests use an isolated in-memory PostgreSQL engine (PGlite), covering
   content and relationship preservation, identity collisions, transactional
   failures, deletion isolation, and rollback.
+
+  Release-mode tests cover both settings, including routes, navigation, metadata,
+  editor access, and anonymous Page/teaser reads. Browser tests verify the active
+  release mode against a running app:
+
+  ```sh
+  doppler run -- pnpm exec playwright test tests/e2e/frontend.e2e.spec.ts
+  ```
 
   Each Section rendering module accepts its generated Payload block data and
   owns its interpretation and presentation. `SectionRenderer` only dispatches

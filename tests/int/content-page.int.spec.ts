@@ -7,7 +7,8 @@ type PagePayload = {
   find: (args: Parameters<Payload['find']>[0]) => Promise<Pick<PaginatedDocs<Page>, 'docs'>>
 }
 
-const { find, getPayload, notFound } = vi.hoisted(() => ({
+const { find, getPayload, notFound, release } = vi.hoisted(() => ({
+  release: { NUTRITION_ENABLED: true },
   find: vi.fn<PagePayload['find']>(),
   getPayload:
     vi.fn<(options: Parameters<typeof import('payload').getPayload>[0]) => Promise<PagePayload>>(),
@@ -17,6 +18,7 @@ const { find, getPayload, notFound } = vi.hoisted(() => ({
 }))
 
 vi.mock('@/payload.config', () => ({ default: Promise.resolve({}) }))
+vi.mock('@/config/release', () => release)
 vi.mock('payload', () => ({ getPayload }))
 vi.mock('next/navigation', () => ({ notFound }))
 
@@ -34,11 +36,26 @@ const page = (slug: Page['slug'], sections?: Page['sections']): Page => ({
 
 beforeEach(() => {
   vi.clearAllMocks()
+  release.NUTRITION_ENABLED = true
   getPayload.mockResolvedValue({ find })
 })
 afterEach(cleanup)
 
 describe('shared content page flow', () => {
+  it('returns 404 for the hidden Nutrition route without loading its content', async () => {
+    release.NUTRITION_ENABLED = false
+    await expect(Nutrition()).rejects.toThrow('NEXT_HTTP_ERROR_FALLBACK;404')
+    expect(notFound).toHaveBeenCalledOnce()
+    expect(getPayload).not.toHaveBeenCalled()
+    expect(find).not.toHaveBeenCalled()
+  })
+
+  it('keeps the Batchcooking route available during the Nutrition holdback', async () => {
+    release.NUTRITION_ENABLED = false
+    find.mockResolvedValue({ docs: [page('batchcooking', [])] })
+    expect(await Batchcooking()).toEqual([])
+    expect(notFound).not.toHaveBeenCalled()
+  })
   it.each([
     { slug: 'nutrition', route: Nutrition },
     { slug: 'batchcooking', route: Batchcooking },
