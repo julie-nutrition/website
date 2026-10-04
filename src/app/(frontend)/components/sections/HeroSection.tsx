@@ -8,43 +8,35 @@ import { Icon } from '../Icon'
 import { JBNLink } from '../JBNLink'
 
 type Props = ComponentProps<'section'> & {
-  title: string
-  description?: HeroSectionType['description']
-  tags?: Array<{
-    label: string
-    icon?: IconName
-  }>
-  image?: {
-    src: string
-    alt: string
-  }
-  actions?: Array<{
-    label: string
-    href: string
-  }>
+  section: HeroSectionType
 }
 
 export function HeroSection(props: Props) {
-  const { className, tags = [], actions = [], image, title, description, ...htmlProps } = props
+  const { className, section, ...htmlProps } = props
+  const { header, tags, actions, image, description, 'section-id': sectionId } = section
+
+  if (!header) {
+    return null
+  }
 
   const classes = classNames('bg-background-dark text-text-light full-width', className)
   return (
-    <section className={classes} {...htmlProps}>
+    <section id={sectionId ?? undefined} className={classes} {...htmlProps}>
       <div className="flex flex-col items-stretch gap-40 py-20 sm:flex-row sm:items-center sm:gap-100 sm:py-100">
         <div className="flex flex-col items-start gap-20 sm:gap-40">
-          {tags.length > 0 && (
+          {!!tags?.length && (
             <div className="flex flex-wrap gap-10">
               {tags.map((tag, index) => (
                 <p key={index} className="sub-title-sm inline-flex items-center gap-10">
-                  {tag.icon && <Icon iconName={tag.icon} className="h-16 w-16" />}
+                  {tag.icon && <Icon iconName={tag.icon as IconName} className="h-16 w-16" />}
                   {tag.label}
                 </p>
               ))}
             </div>
           )}
-          <h1>{title}</h1>
+          <h1>{header}</h1>
           {description && <RichText data={description} />}
-          {actions.length > 0 && (
+          {!!actions?.length && (
             <div className="flex w-full items-stretch gap-10 max-md:flex-col">
               {actions.map((action, index) => (
                 <JBNLink key={index} href={action.href} emphasis={index > 0 ? 'subtle' : 'bold'}>
@@ -54,17 +46,20 @@ export function HeroSection(props: Props) {
             </div>
           )}
         </div>
-        {image && (
-          <div className={`relative mx-auto aspect-3/4 w-full max-w-500`}>
-            <Image
-              className="rounded-2xl object-cover"
-              sizes="(max-width: 768px) 100vw, 33vw"
-              src={image.src}
-              alt={image.alt}
-              fill
-            />
-          </div>
-        )}
+        {image &&
+          typeof image !== 'number' &&
+          typeof image.url === 'string' &&
+          typeof image.alt === 'string' && (
+            <div className={`relative mx-auto aspect-3/4 w-full max-w-500`}>
+              <Image
+                className="rounded-2xl object-cover"
+                sizes="(max-width: 768px) 100vw, 33vw"
+                src={image.url}
+                alt={image.alt}
+                fill
+              />
+            </div>
+          )}
       </div>
     </section>
   )

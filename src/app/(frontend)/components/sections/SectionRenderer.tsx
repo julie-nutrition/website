@@ -7,7 +7,6 @@ import type {
   StepperSection as StepperSectionType,
   TestimonialSection as TestimonialSectionType,
 } from '@/payload-types'
-import { IconName } from 'lucide-react/dynamic'
 import { HeroSection } from './HeroSection'
 import { InfoSection } from './InfoSection'
 import { IssuesSection } from './IssuesSection'
@@ -30,44 +29,7 @@ type SectionRendererProps = {
 export default function SectionRenderer({ section }: SectionRendererProps) {
   switch (section.blockType) {
     case 'hero-section':
-      if (!section.header) {
-        return null
-      }
-
-      let image
-
-      if (
-        section.image &&
-        typeof section.image !== 'number' &&
-        typeof section.image.url === 'string' &&
-        typeof section.image.alt === 'string'
-      ) {
-        image = {
-          src: section.image.url,
-          alt: section.image.alt,
-        }
-      }
-
-      const tags = section.tags?.map((tag) => ({
-        label: tag.label,
-        icon: (tag.icon as IconName) ?? undefined,
-      }))
-
-      const actions = section.actions?.map((action) => ({
-        label: action.label,
-        href: action.href,
-      }))
-
-      return (
-        <HeroSection
-          id={section['section-id'] ?? undefined}
-          title={section.header}
-          image={image}
-          tags={tags}
-          description={section.description}
-          actions={actions}
-        />
-      )
+      return <HeroSection section={section} />
 
     case 'overview-section':
       return <OverviewSection section={section} />

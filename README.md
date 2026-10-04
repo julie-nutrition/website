@@ -105,6 +105,19 @@ See the [Collections](https://payloadcms.com/docs/configuration/collections) doc
   content and relationship preservation, identity collisions, transactional
   failures, deletion isolation, and rollback.
 
+  Each Section rendering module accepts its generated Payload block data and
+  owns its interpretation and presentation. `SectionRenderer` only dispatches
+  by block type; it does not normalize fields for individual blocks. Hero owns
+  its optional-header behavior, populated-media checks, tags, rich text, and
+  action presentation. No second section schema is maintained.
+
+  Hero rendering regression tests exercise both the module and dispatch
+  interfaces without a database:
+
+  ```sh
+  pnpm exec vitest run --config vitest.config.mts tests/int/hero-section.int.spec.ts
+  ```
+
 - #### Users (Authentication)
 
   Users are auth-enabled collections that have access to the admin panel.
